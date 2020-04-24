@@ -18,7 +18,6 @@ package br.com.zup.beagle.engine.renderer.layout
 
 import android.content.Context
 import android.view.View
-import androidx.core.view.get
 import br.com.zup.beagle.BaseTest
 import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.engine.renderer.RootView
@@ -72,7 +71,7 @@ class LazyComponentViewRendererTest : BaseTest() {
         every { rootView.getContext() } returns context
         every { viewRendererFactory.make(any()) } returns viewRenderer
         every { lazyComponent.initialState } returns initialState
-        every { beagleView[0] } returns initialStateView
+        every { beagleView.getChildAt(0) } returns initialStateView
         every { lazyComponent.path } returns URL
         every { beagleView.addServerDrivenComponent(any(), any()) } just Runs
         every { beagleView.updateView(any(), any(), any()) } just Runs

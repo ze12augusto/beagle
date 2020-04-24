@@ -16,10 +16,10 @@
 
 package br.com.zup.beagle.engine.renderer.layout
 
+import android.support.v4.view.PagerAdapter
+import android.support.v4.view.ViewPager
 import android.view.View
 import android.view.ViewGroup
-import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
 import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.engine.renderer.LayoutViewRenderer
 import br.com.zup.beagle.engine.renderer.RootView

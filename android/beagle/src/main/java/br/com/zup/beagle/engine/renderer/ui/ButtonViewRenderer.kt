@@ -16,8 +16,8 @@
 
 package br.com.zup.beagle.engine.renderer.ui
 
+import android.support.v4.widget.TextViewCompat
 import android.view.View
-import androidx.core.widget.TextViewCompat
 import br.com.zup.beagle.R
 import br.com.zup.beagle.action.ActionExecutor
 import br.com.zup.beagle.engine.renderer.RootView

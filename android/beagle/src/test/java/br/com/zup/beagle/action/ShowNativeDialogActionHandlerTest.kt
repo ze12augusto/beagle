@@ -18,7 +18,7 @@ package br.com.zup.beagle.action
 
 import android.content.Context
 import android.content.DialogInterface
-import androidx.appcompat.app.AlertDialog
+import android.support.v7.app.AlertDialog
 import br.com.zup.beagle.extensions.once
 import br.com.zup.beagle.testutil.RandomData
 import br.com.zup.beagle.view.ViewFactory

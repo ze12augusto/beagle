@@ -21,7 +21,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
+import android.support.v7.widget.Toolbar
 import br.com.zup.beagle.utils.renderScreen
 import br.com.zup.beagle.view.BeagleActivity
 import br.com.zup.beagle.view.ServerDrivenState

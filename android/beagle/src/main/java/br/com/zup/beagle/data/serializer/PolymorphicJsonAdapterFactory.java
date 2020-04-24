@@ -16,14 +16,15 @@
 
 package br.com.zup.beagle.data.serializer;
 
-import androidx.annotation.Nullable;
-
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.JsonDataException;
 import com.squareup.moshi.JsonReader;
 import com.squareup.moshi.JsonWriter;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
+
+import org.jetbrains.annotations.Nullable;
+
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;

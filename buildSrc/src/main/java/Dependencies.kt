@@ -67,7 +67,7 @@ object Versions {
     const val kotlinPoet = "1.5.0"
 
     const val appcompat = "1.1.0"
-    const val viewModel = "2.2.0"
+    const val viewModel = "2.1.0"
     const val recyclerView = "1.0.0"
 
     const val fresco = "2.0.0"
@@ -76,7 +76,7 @@ object Versions {
 
     const val soLoader = "0.8.2"
 
-    const val glide = "4.11.0"
+    const val glide = "4.9.0"
 
     const val junit = "4.13"
     const val junit5 = "5.6.1"
@@ -98,7 +98,7 @@ object Versions {
 
     const val testRunner = "1.2.0"
     const val testExt = "1.1.1"
-    const val archCoreTesting = "2.1.0"
+    const val archCoreTesting = "2.0.1"
     const val espressoCore = "3.2.0"
 
     const val guava = "28.2-jre"
@@ -109,8 +109,16 @@ object Versions {
     const val micronaut = "1.3.3"
 }
 
+object AndroidSupportVersions {
+    const val arch = "1.1.0"
+    const val support = "28.0.0"
+    const val supportTest = "1.0.2"
+    const val archCoreTesting = "1.1.0"
+    const val espressoCore = "3.0.1"
+    const val multidex = "1.0.3"
+}
+
 object GeneralNames {
-    const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val sampleTestInstrumentationRunner = "br.com.zup.beagle.sample.SampleTestRunner"
     const val consumerProguard = "consumer-rules.pro"
 }
@@ -149,14 +157,6 @@ object GoogleLibraries {
     const val materialDesign = "com.google.android.material:material:${Versions.materialDesign}"
 }
 
-object AndroidxLibraries {
-    const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
-    const val coreKtx = "androidx.core:core-ktx:${Versions.appcompat}"
-    const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
-    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel:${Versions.viewModel}"
-    const val viewModelExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.viewModel}"
-}
-
 object MoshiLibraries {
     const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
     const val kotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
@@ -171,11 +171,11 @@ object TestLibraries {
     const val kotlinTest = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlinTest}"
     const val kotlinCoroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinCoroutinesTest}"
     const val googleCompileTesting = "com.google.testing.compile:compile-testing:${Versions.googleCompileTesting}"
-    const val testRunner = "androidx.test:runner:${Versions.testRunner}"
+    /*const val testRunner = "androidx.test:runner:${Versions.testRunner}"
     const val testExt = "androidx.test.ext:junit:${Versions.testExt}"
     const val archCoreTesting = "androidx.arch.core:core-testing:${Versions.archCoreTesting}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
-    const val testRules = "androidx.test:rules:${Versions.testExt}"
+    const val testRules = "androidx.test:rules:${Versions.testExt}"*/
 }
 
 object SpringLibraries {
@@ -189,4 +189,16 @@ object MicronautLibraries {
     const val runtime = "io.micronaut:micronaut-runtime:${Versions.micronaut}"
     const val netty = "io.micronaut:micronaut-http-server-netty:${Versions.micronaut}"
     const val injectJava = "io.micronaut:micronaut-inject-java:${Versions.micronaut}"
+}
+
+object AndroidSupport {
+    const val testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+    const val multidex = "com.android.support:multidex:${AndroidSupportVersions.multidex}"
+    const val design = "com.android.support:design:${AndroidSupportVersions.support}"
+    const val viewModel = "android.arch.lifecycle:viewmodel:${AndroidSupportVersions.arch}"
+    const val extensions = "android.arch.lifecycle:extensions:${AndroidSupportVersions.arch}"
+    const val testRunner = "com.android.support.test:runner:${AndroidSupportVersions.supportTest}"
+    const val archCoreTesting = "android.arch.core:core-testing:${AndroidSupportVersions.archCoreTesting}"
+    const val espressoCore = "com.android.support.test.espresso:espresso-core:${AndroidSupportVersions.espressoCore}"
+    const val testRules = "com.android.support.test:rules:${AndroidSupportVersions.supportTest}"
 }

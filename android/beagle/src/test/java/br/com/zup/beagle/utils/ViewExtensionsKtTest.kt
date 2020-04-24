@@ -20,13 +20,13 @@ import android.app.Activity
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.os.IBinder
+import android.support.v4.app.Fragment
+import android.support.v4.widget.TextViewCompat
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.TextViewCompat
-import androidx.fragment.app.Fragment
 import br.com.zup.beagle.BaseTest
 import br.com.zup.beagle.engine.mapper.ViewMapper
 import br.com.zup.beagle.engine.renderer.ActivityRootView

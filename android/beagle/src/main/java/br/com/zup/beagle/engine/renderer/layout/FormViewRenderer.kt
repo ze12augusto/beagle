@@ -17,10 +17,9 @@
 package br.com.zup.beagle.engine.renderer.layout
 
 import android.content.Context
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.children
 import br.com.zup.beagle.action.ActionExecutor
 import br.com.zup.beagle.action.CustomAction
 import br.com.zup.beagle.action.FormValidationActionHandler
@@ -33,6 +32,7 @@ import br.com.zup.beagle.form.FormValidatorController
 import br.com.zup.beagle.form.ValidatorHandler
 import br.com.zup.beagle.logger.BeagleMessageLogs
 import br.com.zup.beagle.setup.BeagleEnvironment
+import br.com.zup.beagle.utils.getChildren
 import br.com.zup.beagle.utils.hideKeyboard
 import br.com.zup.beagle.view.BeagleActivity
 import br.com.zup.beagle.view.ServerDrivenState
@@ -80,7 +80,7 @@ internal class FormViewRenderer(
     }
 
     private fun fetchFormViews(viewGroup: ViewGroup) {
-        viewGroup.children.forEach { childView ->
+        viewGroup.getChildren().forEach { childView ->
             if (childView.tag != null) {
                 val tag = childView.tag
                 if (tag is FormInput) {

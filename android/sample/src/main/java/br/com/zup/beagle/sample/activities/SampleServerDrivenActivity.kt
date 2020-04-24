@@ -17,14 +17,14 @@
 package br.com.zup.beagle.sample.activities
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
+import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.ProgressBar
-import androidx.appcompat.widget.Toolbar
 import br.com.zup.beagle.annotation.BeagleComponent
 import br.com.zup.beagle.sample.R
 import br.com.zup.beagle.view.BeagleActivity
 import br.com.zup.beagle.view.ServerDrivenState
-import com.google.android.material.snackbar.Snackbar
 
 @BeagleComponent
 class SampleServerDrivenActivity : BeagleActivity() {

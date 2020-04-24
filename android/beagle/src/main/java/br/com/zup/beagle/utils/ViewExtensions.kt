@@ -17,22 +17,20 @@
 package br.com.zup.beagle.utils
 
 import android.app.Activity
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Path
 import android.graphics.RectF
 import android.graphics.drawable.GradientDrawable
+import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.children
-import androidx.core.view.size
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import br.com.zup.beagle.core.AppearanceComponent
 import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.data.BeagleViewModel
@@ -73,9 +71,9 @@ fun ViewGroup.renderScreen(context: Context, screenJson: String) {
 }
 
 fun ViewGroup.setBeagleStateChangedListener(listener: StateChangedListener) {
-    check(size != 0) { "Did you miss to call loadView()?" }
+    check(childCount != 0) { "Did you miss to call loadView()?" }
 
-    val view = children.find { it is BeagleView } as? BeagleView
+    val view = getChildren().find { it is BeagleView } as? BeagleView
 
     if (view != null) {
         view.stateChangedListener = listener
@@ -100,7 +98,7 @@ private fun <T> findChildViewForType(
     if (isAssignableFrom(viewGroup, type))
         elementList.add(viewGroup)
 
-    viewGroup.children.forEach { childView ->
+    viewGroup.getChildren().forEach { childView ->
         when {
             childView is ViewGroup -> findChildViewForType(childView, elementList, type)
             isAssignableFrom(childView, type) -> {
@@ -127,11 +125,11 @@ internal fun RootView.generateViewModelInstance(): BeagleViewModel {
     return when (this) {
         is ActivityRootView -> {
             val activity = this.activity
-            ViewModelProvider(activity).get(BeagleViewModel::class.java)
+            ViewModelProviders.of(activity)[BeagleViewModel::class.java]
         }
         else -> {
             val fragment = (this as FragmentRootView).fragment
-            ViewModelProvider(fragment).get(BeagleViewModel::class.java)
+            ViewModelProviders.of(fragment)[BeagleViewModel::class.java]
         }
     }
 }
@@ -200,4 +198,12 @@ internal fun View.applyBackgroundFromWindowBackgroundTheme(context: Context) {
     } else {
         background = ContextCompat.getDrawable(context, typedValue.resourceId)
     }
+}
+
+fun ViewGroup.getChildren(): List<View> {
+    val children = ArrayList<View>()
+    for (i in 0 until this.childCount) {
+        children.add(this.getChildAt(i))
+    }
+    return children
 }

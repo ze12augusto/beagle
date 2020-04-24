@@ -19,6 +19,9 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.jetbrains.dokka'
 
 def versionName = System.env.VERSION_DEPLOY != null ? System.env.VERSION_DEPLOY : VERSION_NAME ?: ""
+if (ARTIFACT_NAME == "android") {
+    versionName = versionName + "-support"
+}
 group = GROUP_NAME
 version = versionName
 

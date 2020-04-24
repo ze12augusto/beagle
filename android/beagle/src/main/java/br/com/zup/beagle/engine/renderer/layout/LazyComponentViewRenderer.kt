@@ -17,7 +17,6 @@
 package br.com.zup.beagle.engine.renderer.layout
 
 import android.view.View
-import androidx.core.view.get
 import br.com.zup.beagle.engine.renderer.LayoutViewRenderer
 import br.com.zup.beagle.engine.renderer.RootView
 import br.com.zup.beagle.engine.renderer.ViewRendererFactory
@@ -33,7 +32,7 @@ internal class LazyComponentViewRenderer(
     override fun buildView(rootView: RootView): View {
         return viewFactory.makeBeagleView(rootView.getContext()).apply {
             addServerDrivenComponent(component.initialState, rootView)
-            updateView(rootView, component.path, this[0])
+            updateView(rootView, component.path, this.getChildAt(0))
         }
     }
 }

@@ -28,7 +28,7 @@ android {
         versionCode Releases.versionCode
         versionName "${Releases.beagleVersionName}"
 
-        testInstrumentationRunner GeneralNames.testInstrumentationRunner
+        testInstrumentationRunner AndroidSupport.testInstrumentationRunner
         consumerProguardFiles GeneralNames.consumerProguard
     }
 }

@@ -17,8 +17,8 @@
 package br.com.zup.beagle.engine.renderer.ui
 
 import android.content.Context
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import br.com.zup.beagle.BaseTest
 import br.com.zup.beagle.engine.renderer.RootView
 import br.com.zup.beagle.view.BeagleFlexView

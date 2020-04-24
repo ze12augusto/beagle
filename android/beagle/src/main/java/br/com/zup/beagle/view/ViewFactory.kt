@@ -17,13 +17,13 @@
 package br.com.zup.beagle.view
 
 import android.content.Context
+import android.support.v7.app.AlertDialog
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.webkit.WebView
 import android.widget.FrameLayout
 import android.widget.HorizontalScrollView
 import android.widget.ScrollView
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.RecyclerView
 import br.com.zup.beagle.widget.core.Flex
 
 internal class ViewFactory {

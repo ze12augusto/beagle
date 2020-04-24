@@ -16,9 +16,9 @@
 
 package br.com.zup.beagle.view
 
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.view.View
-import androidx.lifecycle.Observer
 import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.data.BeagleViewModel
 import br.com.zup.beagle.data.ViewState

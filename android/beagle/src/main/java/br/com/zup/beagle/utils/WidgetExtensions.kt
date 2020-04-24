@@ -17,8 +17,8 @@
 package br.com.zup.beagle.utils
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import br.com.zup.beagle.core.Appearance
 import br.com.zup.beagle.core.LayoutComponent
 import br.com.zup.beagle.core.ServerDrivenComponent

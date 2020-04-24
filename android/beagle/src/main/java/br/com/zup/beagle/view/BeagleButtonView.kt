@@ -17,7 +17,7 @@
 package br.com.zup.beagle.view
 
 import android.content.Context
-import androidx.appcompat.widget.AppCompatButton
+import android.support.v7.widget.AppCompatButton
 import br.com.zup.beagle.engine.renderer.ui.setData
 import br.com.zup.beagle.interfaces.OnStateUpdatable
 import br.com.zup.beagle.widget.interfaces.StateChangeable

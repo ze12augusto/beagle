@@ -16,7 +16,8 @@
 
 package br.com.zup.beagle.data
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import android.arch.core.executor.testing.InstantTaskExecutorRule
+import android.arch.lifecycle.Observer
 import br.com.zup.beagle.action.Action
 import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.exception.BeagleException
@@ -57,8 +58,10 @@ class BeagleViewModelTest {
     @InjectMockKs
     private lateinit var beagleUIViewModel: BeagleViewModel
 
-    private val viewStateResult: (t: ViewState) -> Unit = {
-        viewModelStates.add(it)
+    private val observer = Observer<ViewState> {
+        it?.run {
+            viewModelStates.add(it)
+        }
     }
 
     private var viewModelStates: MutableList<ViewState> = mutableListOf()
@@ -74,12 +77,12 @@ class BeagleViewModelTest {
 
         viewModelStates.clear()
 
-        beagleUIViewModel.state.observeForever(viewStateResult)
+        beagleUIViewModel.state.observeForever(observer)
     }
 
     @After
     fun tearDown() {
-        beagleUIViewModel.state.removeObserver(viewStateResult)
+        beagleUIViewModel.state.removeObserver(observer)
     }
 
     @Test

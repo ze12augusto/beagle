@@ -20,7 +20,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.support.v4.app.Fragment
 import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.sample.widgets.MutableText
 import br.com.zup.beagle.sample.widgets.TextField

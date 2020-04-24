@@ -17,8 +17,8 @@
 package br.com.zup.beagle.data.serializer.adapter
 
 import android.content.Context
+import android.support.v4.app.Fragment
 import android.view.View
-import androidx.fragment.app.Fragment
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter

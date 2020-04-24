@@ -16,8 +16,8 @@
 
 package br.com.zup.beagle.data
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
 import br.com.zup.beagle.action.Action
 import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.exception.BeagleException

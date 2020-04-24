@@ -17,8 +17,8 @@
 package br.com.zup.beagle.widget.ui
 
 import android.content.Context
+import android.support.v7.app.AppCompatActivity
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import br.com.zup.beagle.engine.renderer.ActivityRootView
 import br.com.zup.beagle.engine.renderer.ui.UndefinedViewRenderer
 import br.com.zup.beagle.widget.form.InputWidget

@@ -17,9 +17,9 @@
 package br.com.zup.beagle.view
 
 import android.content.Context
+import android.support.v4.widget.TextViewCompat
+import android.support.v7.widget.AppCompatTextView
 import android.view.Gravity
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.widget.TextViewCompat
 import br.com.zup.beagle.interfaces.OnStateUpdatable
 import br.com.zup.beagle.setup.BeagleEnvironment
 import br.com.zup.beagle.utils.toAndroidColor

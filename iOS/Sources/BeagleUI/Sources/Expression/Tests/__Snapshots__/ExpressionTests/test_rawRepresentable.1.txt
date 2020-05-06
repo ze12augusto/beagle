@@ -1,0 +1,53 @@
+▿ 10 elements
+  ▿ Optional<Expression>
+    ▿ some: Expression
+      ▿ nodes: 2 elements
+        ▿ Node
+          - property: "client"
+        ▿ Node
+          - property: "name"
+  ▿ Optional<Expression>
+    ▿ some: Expression
+      ▿ nodes: 3 elements
+        ▿ Node
+          - property: "client"
+        ▿ Node
+          - property: "name"
+        ▿ Node
+          - property: "first"
+  ▿ Optional<Expression>
+    ▿ some: Expression
+      ▿ nodes: 3 elements
+        ▿ Node
+          - property: "client"
+        ▿ Node
+          - property: "phones"
+        ▿ Node
+          - arrayItem: 0
+  ▿ Optional<Expression>
+    ▿ some: Expression
+      ▿ nodes: 4 elements
+        ▿ Node
+          - property: "client"
+        ▿ Node
+          - property: "matrix"
+        ▿ Node
+          - arrayItem: 1
+        ▿ Node
+          - arrayItem: 1
+  ▿ Optional<Expression>
+    ▿ some: Expression
+      ▿ nodes: 4 elements
+        ▿ Node
+          - property: "client"
+        ▿ Node
+          - property: "matrix"
+        ▿ Node
+          - arrayItem: 3
+        ▿ Node
+          - arrayItem: 3
+  - Optional<Expression>.none
+  - Optional<Expression>.none
+  - Optional<Expression>.none
+  - Optional<Expression>.none
+  - Optional<Expression>.none

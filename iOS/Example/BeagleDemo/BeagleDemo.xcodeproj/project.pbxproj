@@ -23,6 +23,11 @@
 		A0642DCB23968A020028AFF3 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0642DCA23968A020028AFF3 /* MainScreen.swift */; };
 		A0642DCD23968B500028AFF3 /* LazyComponentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0642DCC23968B500028AFF3 /* LazyComponentScreen.swift */; };
 		A0642DD12396EC670028AFF3 /* PageViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0642DD02396EC670028AFF3 /* PageViewScreen.swift */; };
+		AF3CE33E2465F0EE00F26D58 /* BeagleDemoTestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF924E7724649D0200234E39 /* BeagleDemoTestBase.swift */; };
+		AF3CE33F2465F0F600F26D58 /* BeagleDemoElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF924E7524649CEB00234E39 /* BeagleDemoElements.swift */; };
+		AF3CE3402465F0FA00F26D58 /* BeagleDemoSteps.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF924E7324649CDC00234E39 /* BeagleDemoSteps.swift */; };
+		AF3CE3412465F0FE00F26D58 /* BeagleDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF924E7124649CBC00234E39 /* BeagleDemoTests.swift */; };
+		AF924E822464A7AC00234E39 /* BeagleDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF924E812464A7AC00234E39 /* BeagleDemoUITests.swift */; };
 		C0479F59243282F00040E30C /* AnalyticsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0479F58243282F00040E30C /* AnalyticsMock.swift */; };
 		C0B1AAB323F326A100F94ECA /* BeagleUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9313EB9223A2B388003BC24C /* BeagleUI.framework */; };
 		C0B1AAB423F326A100F94ECA /* BeagleUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9313EB9223A2B388003BC24C /* BeagleUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -33,6 +38,16 @@
 		E756198F2408691A0025E0A9 /* CustomComponentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756198E2408691A0025E0A9 /* CustomComponentScreen.swift */; };
 		E756199124086AA20025E0A9 /* DSCollectionUIComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E756199024086AA20025E0A9 /* DSCollectionUIComponent.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AF924E842464A7AC00234E39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 932925A62327E0E400A61F01 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 932925AD2327E0E400A61F01;
+			remoteInfo = BeagleDemo;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		E5EB34BB2331074900AC246B /* Embed Frameworks */ = {
@@ -69,6 +84,13 @@
 		A0642DCA23968A020028AFF3 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		A0642DCC23968B500028AFF3 /* LazyComponentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyComponentScreen.swift; sourceTree = "<group>"; };
 		A0642DD02396EC670028AFF3 /* PageViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewScreen.swift; sourceTree = "<group>"; };
+		AF924E7124649CBC00234E39 /* BeagleDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeagleDemoTests.swift; sourceTree = "<group>"; };
+		AF924E7324649CDC00234E39 /* BeagleDemoSteps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeagleDemoSteps.swift; sourceTree = "<group>"; };
+		AF924E7524649CEB00234E39 /* BeagleDemoElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeagleDemoElements.swift; sourceTree = "<group>"; };
+		AF924E7724649D0200234E39 /* BeagleDemoTestBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeagleDemoTestBase.swift; sourceTree = "<group>"; };
+		AF924E7F2464A7AC00234E39 /* BeagleDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeagleDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF924E812464A7AC00234E39 /* BeagleDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeagleDemoUITests.swift; sourceTree = "<group>"; };
+		AF924E832464A7AC00234E39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0479F58243282F00040E30C /* AnalyticsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsMock.swift; sourceTree = "<group>"; };
 		C0B1AAB523F326BB00F94ECA /* YogaKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YogaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E75619882408365B0025E0A9 /* DSCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSCollection.swift; sourceTree = "<group>"; };
@@ -87,6 +109,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AF924E7C2464A7AC00234E39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -102,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				932925B02327E0E400A61F01 /* BeagleDemo */,
+				AF924E802464A7AC00234E39 /* BeagleDemoUITests */,
 				932925AF2327E0E400A61F01 /* Products */,
 				93365E3F23624AD40017CB89 /* Frameworks */,
 			);
@@ -111,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				932925AE2327E0E400A61F01 /* BeagleDemo.app */,
+				AF924E7F2464A7AC00234E39 /* BeagleDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,6 +190,51 @@
 			path = Screens;
 			sourceTree = "<group>";
 		};
+		AF924E6D24649C3A00234E39 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				AF924E7124649CBC00234E39 /* BeagleDemoTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		AF924E6E24649C4600234E39 /* Steps */ = {
+			isa = PBXGroup;
+			children = (
+				AF924E7324649CDC00234E39 /* BeagleDemoSteps.swift */,
+			);
+			path = Steps;
+			sourceTree = "<group>";
+		};
+		AF924E6F24649C5500234E39 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				AF924E7724649D0200234E39 /* BeagleDemoTestBase.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		AF924E7024649C7000234E39 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				AF924E7524649CEB00234E39 /* BeagleDemoElements.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
+		AF924E802464A7AC00234E39 /* BeagleDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AF924E6D24649C3A00234E39 /* Tests */,
+				AF924E6E24649C4600234E39 /* Steps */,
+				AF924E7024649C7000234E39 /* Elements */,
+				AF924E6F24649C5500234E39 /* Base */,
+				AF924E812464A7AC00234E39 /* BeagleDemoUITests.swift */,
+				AF924E832464A7AC00234E39 /* Info.plist */,
+			);
+			path = BeagleDemoUITests;
+			sourceTree = "<group>";
+		};
 		E75619862408363E0025E0A9 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,18 +274,40 @@
 			productReference = 932925AE2327E0E400A61F01 /* BeagleDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AF924E7E2464A7AC00234E39 /* BeagleDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF924E862464A7AC00234E39 /* Build configuration list for PBXNativeTarget "BeagleDemoUITests" */;
+			buildPhases = (
+				AF924E7B2464A7AC00234E39 /* Sources */,
+				AF924E7C2464A7AC00234E39 /* Frameworks */,
+				AF924E7D2464A7AC00234E39 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AF924E852464A7AC00234E39 /* PBXTargetDependency */,
+			);
+			name = BeagleDemoUITests;
+			productName = BeagleDemoUITests;
+			productReference = AF924E7F2464A7AC00234E39 /* BeagleDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		932925A62327E0E400A61F01 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Zup IT";
 				TargetAttributes = {
 					932925AD2327E0E400A61F01 = {
 						CreatedOnToolsVersion = 11.0;
+					};
+					AF924E7E2464A7AC00234E39 = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = 932925AD2327E0E400A61F01;
 					};
 				};
 			};
@@ -227,6 +325,7 @@
 			projectRoot = "";
 			targets = (
 				932925AD2327E0E400A61F01 /* BeagleDemo */,
+				AF924E7E2464A7AC00234E39 /* BeagleDemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -239,6 +338,13 @@
 				932925BE2327E0E500A61F01 /* LaunchScreen.storyboard in Resources */,
 				932925BB2327E0E500A61F01 /* Assets.xcassets in Resources */,
 				932925B92327E0E400A61F01 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF924E7D2464A7AC00234E39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +376,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AF924E7B2464A7AC00234E39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF3CE3402465F0FA00F26D58 /* BeagleDemoSteps.swift in Sources */,
+				AF3CE33F2465F0F600F26D58 /* BeagleDemoElements.swift in Sources */,
+				AF3CE3412465F0FE00F26D58 /* BeagleDemoTests.swift in Sources */,
+				AF924E822464A7AC00234E39 /* BeagleDemoUITests.swift in Sources */,
+				AF3CE33E2465F0EE00F26D58 /* BeagleDemoTestBase.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AF924E852464A7AC00234E39 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 932925AD2327E0E400A61F01 /* BeagleDemo */;
+			targetProxy = AF924E842464A7AC00234E39 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		932925B72327E0E400A61F01 /* Main.storyboard */ = {
@@ -446,6 +572,44 @@
 			};
 			name = Release;
 		};
+		AF924E872464A7AC00234E39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = BeagleDemoUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.beagle.BeagleDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BeagleDemo;
+			};
+			name = Debug;
+		};
+		AF924E882464A7AC00234E39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = BeagleDemoUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.beagle.BeagleDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BeagleDemo;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -463,6 +627,15 @@
 			buildConfigurations = (
 				932925C32327E0E500A61F01 /* Debug */,
 				932925C42327E0E500A61F01 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF924E862464A7AC00234E39 /* Build configuration list for PBXNativeTarget "BeagleDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF924E872464A7AC00234E39 /* Debug */,
+				AF924E882464A7AC00234E39 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

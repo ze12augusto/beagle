@@ -24,7 +24,7 @@ import java.util.*
 
 internal class JsonPathFinder {
 
-    tailrec fun find(nextKeys: LinkedList<String>, value: Any?): Any? {
+    tailrec fun findByPath(nextKeys: LinkedList<String>, value: Any?): Any? {
         if (nextKeys.isEmpty()) return value
 
         val currentKey = nextKeys.poll()
@@ -34,7 +34,7 @@ internal class JsonPathFinder {
                 val arrayIndex = JsonPathUtils.getIndexOnArrayBrackets(currentKey)
                 val getValue = value.safeGet(arrayIndex)
                 if (getValue != null) {
-                    return find(nextKeys, getValue)
+                    return findByPath(nextKeys, getValue)
                 } else {
                     null
                 }
@@ -46,13 +46,13 @@ internal class JsonPathFinder {
         }
 
         if (childValue !is JSONObject) {
-            throw JsonPathUtils.createInvalidPathException(currentKey)
+            throw IllegalStateException("Invalid JSON path at key \"$currentKey\"")
         }
 
         if (childValue.isNull(currentKey)) return null
 
         val newValue = childValue.safeGet(currentKey)
-        return find(nextKeys, newValue)
+        return findByPath(nextKeys, newValue)
     }
 
     private fun JSONObject.safeGet(key: String): Any? {

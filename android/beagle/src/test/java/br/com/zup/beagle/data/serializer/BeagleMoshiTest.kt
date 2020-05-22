@@ -22,7 +22,6 @@ import br.com.zup.beagle.action.FormValidation
 import br.com.zup.beagle.action.Navigate
 import br.com.zup.beagle.action.ShowNativeDialog
 import br.com.zup.beagle.core.Bind
-import br.com.zup.beagle.context.ContextData
 import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.mockdata.BindComponent
 import br.com.zup.beagle.mockdata.CustomInputWidget
@@ -56,7 +55,6 @@ import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.mockkObject
 import io.mockk.unmockkObject
-import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.After
 import org.junit.Before
@@ -725,45 +723,5 @@ class BeagleMoshiTest {
 
         // Then
         assertNotNull(JSONObject(json))
-    }
-
-    @Test
-    fun make_should_create_contextData_with_jsonObject() {
-        // Given
-        val contextDataJson = makeContextWithJsonObject()
-
-        // When
-        val contextData =
-            beagleMoshiFactory.moshi.adapter(ContextData::class.java).fromJson(contextDataJson)
-
-        // Then
-        assertTrue(contextData?.value is JSONObject)
-    }
-
-    @Test
-    fun make_should_create_contextData_with_jsonArray() {
-        // Given
-        val contextDataJson = makeContextWithJsonArray()
-
-        // When
-        val contextData =
-            beagleMoshiFactory.moshi.adapter(ContextData::class.java).fromJson(contextDataJson)
-
-        // Then
-        assertTrue(contextData?.value is JSONArray)
-    }
-
-    @Test
-    fun make_should_create_contextData_with_primitive() {
-        // Given
-        val contextDataJson = makeContextWithPrimitive()
-
-        // When
-        val contextData =
-            beagleMoshiFactory.moshi.adapter(ContextData::class.java).fromJson(contextDataJson)
-
-        // Then
-        assertEquals("contextId", contextData?.id)
-        assertEquals(true, contextData?.value)
     }
 }

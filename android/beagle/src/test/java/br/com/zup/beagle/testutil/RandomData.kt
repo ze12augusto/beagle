@@ -20,8 +20,6 @@ import kotlin.random.Random
 
 object RandomData {
 
-    fun boolean(): Boolean = Random.nextBoolean()
-
     fun int(): Int = Random.nextInt(1, 10000)
 
     fun double(): Double = Random.nextDouble(1.0, 10000.0)

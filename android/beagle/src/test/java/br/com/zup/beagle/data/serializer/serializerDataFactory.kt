@@ -266,32 +266,3 @@ fun makeBindComponent() = """
         "value4": {"value1": "hello", "value2": 123}
     }
 """
-
-fun makeContextWithJsonObject() = """
-    {
-        "id": "contextId",
-        "value": {
-            "a": true,
-            "b": "a"
-        }
-    }
-"""
-
-fun makeContextWithJsonArray() = """
-    {
-        "id": "contextId",
-        "value": [
-            {
-                "a": true,
-                "b": "a"
-            }
-        ]
-    }
-"""
-
-fun makeContextWithPrimitive() = """
-    {
-        "id": "contextId",
-        "value": true
-    }
-"""

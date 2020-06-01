@@ -20,10 +20,11 @@ import android.content.Context
 import android.view.View
 import android.widget.EditText
 import androidx.core.widget.doOnTextChanged
+import br.com.zup.beagle.annotation.RegisterWidget
 import br.com.zup.beagle.widget.Widget
 import br.com.zup.beagle.widget.form.InputWidget
 
-//@RegisterWidget
+@RegisterWidget
 data class SampleTextField(val placeholder: String = "") : InputWidget() {
 
     @Transient

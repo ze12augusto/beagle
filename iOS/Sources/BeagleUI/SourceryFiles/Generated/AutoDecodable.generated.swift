@@ -18,7 +18,7 @@
 */
 
 // MARK: Button Decodable
-extension Button {
+extension Button: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case text
@@ -39,7 +39,7 @@ extension Button {
 }
 
 // MARK: Container Decodable
-extension Container {
+extension Container: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case children
@@ -54,7 +54,7 @@ extension Container {
 }
 
 // MARK: Form Decodable
-extension Form {
+extension Form: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case action
@@ -76,7 +76,7 @@ extension Form {
 }
 
 // MARK: FormInput Decodable
-extension FormInput {
+extension FormInput: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case name
@@ -98,7 +98,7 @@ extension FormInput {
 }
 
 // MARK: Image Decodable
-extension Image {
+extension Image: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case name
@@ -115,7 +115,7 @@ extension Image {
 }
 
 // MARK: LazyComponent Decodable
-extension LazyComponent {
+extension LazyComponent: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case path
@@ -131,7 +131,7 @@ extension LazyComponent {
 }
 
 // MARK: ListView Decodable
-extension ListView {
+extension ListView: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case rows
@@ -147,7 +147,7 @@ extension ListView {
 }
 
 // MARK: NavigationBarItem Decodable
-extension NavigationBarItem {
+extension NavigationBarItem: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -169,7 +169,7 @@ extension NavigationBarItem {
 }
 
 // MARK: NetworkImage Decodable
-extension NetworkImage {
+extension NetworkImage: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case path
@@ -186,7 +186,7 @@ extension NetworkImage {
 }
 
 // MARK: ScreenComponent Decodable
-extension ScreenComponent {
+extension ScreenComponent: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case identifier
@@ -210,7 +210,7 @@ extension ScreenComponent {
 }
 
 // MARK: ScrollView Decodable
-extension ScrollView {
+extension ScrollView: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case children
@@ -230,7 +230,7 @@ extension ScrollView {
 }
 
 // MARK: TabItem Decodable
-extension TabItem {
+extension TabItem: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case icon
@@ -248,7 +248,7 @@ extension TabItem {
 }
 
 // MARK: Text Decodable
-extension Text {
+extension Text: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case text
@@ -269,7 +269,7 @@ extension Text {
 }
 
 // MARK: Touchable Decodable
-extension Touchable {
+extension Touchable: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case action
@@ -287,7 +287,7 @@ extension Touchable {
 }
 
 // MARK: WebView Decodable
-extension WebView {
+extension WebView: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case url
@@ -303,7 +303,7 @@ extension WebView {
 }
 
 // MARK: WidgetProperties Decodable
-extension WidgetProperties {
+extension WidgetProperties: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case id

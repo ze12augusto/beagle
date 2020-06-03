@@ -20,7 +20,7 @@
 import BeagleUI
 
 // MARK: DSCollection Decodable
-extension DSCollection {
+extension DSCollection: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case dataSource
@@ -35,7 +35,7 @@ extension DSCollection {
 }
 
 // MARK: DemoTextField Decodable
-extension DemoTextField {
+extension DemoTextField: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case placeholder

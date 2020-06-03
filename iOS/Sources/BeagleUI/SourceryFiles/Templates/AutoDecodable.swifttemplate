@@ -137,7 +137,7 @@ func containerDeclaration(generatedCodingKeys: [String]) -> String {
 <%_ } -%>
 
 // MARK: <%= type.name %> Decodable
-extension <%= type.name %> {
+extension <%= type.name %>: Decodable {
     <%_ if type.containedType["CodingKeys"] as? Enum == nil { -%>
 
     enum CodingKeys: String, CodingKey {

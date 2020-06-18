@@ -23,6 +23,8 @@ import br.com.zup.beagle.android.jsonpath.JsonPathReplacer
 import br.com.zup.beagle.android.logger.BeagleMessageLogs
 import br.com.zup.beagle.android.utils.BeagleConstants
 import br.com.zup.beagle.android.utils.getExpressions
+import br.com.zup.beagle.android.utils.toDynamicObject
+import br.com.zup.beagle.core.DynamicObject
 import com.squareup.moshi.Moshi
 import org.json.JSONArray
 import org.json.JSONObject
@@ -64,7 +66,7 @@ internal class ContextDataManager(
     fun updateContext(setContextInternal: SetContextInternal): Boolean {
         return contexts[setContextInternal.contextId]?.let { contextBinding ->
             val path = setContextInternal.path ?: contextBinding.context.id
-            val setValue = setValue(contextBinding, path, setContextInternal.value)
+            val setValue = setValue(contextBinding, path, setContextInternal.value.toDynamicObject())
             if (setValue) {
                 evaluateContext(setContextInternal.contextId)
             }
@@ -92,7 +94,7 @@ internal class ContextDataManager(
         }
     }
 
-    private fun setValue(contextBinding: ContextBinding, path: String, value: Any): Boolean {
+    private fun setValue(contextBinding: ContextBinding, path: String, value: DynamicObject<*>): Boolean {
         val context = contextBinding.context
         return if (path == context.id) {
             val newContext = context.copy(value = value)
@@ -141,8 +143,8 @@ internal class ContextDataManager(
         val value = getValue(contextData, expression)
 
         return try {
-            if (value is JSONArray || value is JSONObject) {
-                moshi.adapter<Any>(type).fromJson(value.toString()) ?:
+            if (value is DynamicObject.String) {
+                moshi.adapter<Any>(type).fromJson(value.value) ?:
                 throw IllegalStateException("JSON deserialization returned null")
             } else {
                 value ?: throw IllegalStateException("Expression evaluation returned null")

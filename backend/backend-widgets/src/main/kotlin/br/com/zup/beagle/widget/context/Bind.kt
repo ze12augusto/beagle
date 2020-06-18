@@ -16,10 +16,10 @@
 
 package br.com.zup.beagle.widget.context
 
-import br.com.zup.beagle.core.BindAttribute
+import br.com.zup.beagle.core.GenericAttribute
 import java.io.Serializable
 
-sealed class Bind<T> : BindAttribute<T>, Serializable {
+sealed class Bind<T> : GenericAttribute<T>, Serializable {
     data class Expression<T>(override val value: String): Bind<T>()
     data class Value<T: Any>(override val value: T): Bind<T>()
 

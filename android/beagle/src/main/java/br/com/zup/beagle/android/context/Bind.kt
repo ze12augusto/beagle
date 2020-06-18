@@ -16,9 +16,9 @@
 
 package br.com.zup.beagle.android.context
 
-import br.com.zup.beagle.core.BindAttribute
+import br.com.zup.beagle.core.GenericAttribute
 
-sealed class Bind<T> : BindAttribute<T> {
+sealed class Bind<T> : GenericAttribute<T> {
     abstract val type: Class<T>
 
     @Transient

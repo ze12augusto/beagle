@@ -16,10 +16,12 @@
 
 package br.com.zup.beagle.android.context
 
-import br.com.zup.beagle.android.annotation.ContextDataValue
+import br.com.zup.beagle.android.utils.toDynamicObject
+import br.com.zup.beagle.core.DynamicObject
 
 data class ContextData(
     val id: String,
-    @property:ContextDataValue
-    val value: Any // Should be a Number, String, Boolean, JSONObject or JSONArray
-)
+    val value: DynamicObject<*>
+) {
+    constructor(id: String, value: Any) : this(id, value.toDynamicObject())
+}

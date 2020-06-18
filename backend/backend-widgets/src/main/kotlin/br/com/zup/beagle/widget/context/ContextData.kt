@@ -16,7 +16,11 @@
 
 package br.com.zup.beagle.widget.context
 
+import br.com.zup.beagle.core.DynamicObject
+
 data class ContextData(
     val id: String,
-    val value: Any
-)
+    val value: DynamicObject<*>
+) {
+    constructor(id: String, value: Any) : this(id, value.toDynamicObject())
+}

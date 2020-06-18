@@ -16,6 +16,8 @@
 
 package br.com.zup.beagle.android.utils
 
+import br.com.zup.beagle.android.utils.BeagleConstants.EXPRESSION_REGEX
+
 internal fun String.toAndroidColor(): Int = ColorUtils.hexColor(this)
 
 internal fun String.getExpressions(): List<String> {
@@ -25,3 +27,5 @@ internal fun String.getExpressions(): List<String> {
         pattern.substring(0, pattern.indexOfFirst { it == '}' })
     }
 }
+
+internal fun String.hasBind() = this.contains(EXPRESSION_REGEX)

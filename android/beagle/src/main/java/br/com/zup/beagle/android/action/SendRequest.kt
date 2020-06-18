@@ -23,6 +23,8 @@ import br.com.zup.beagle.android.utils.handleEvent
 import br.com.zup.beagle.android.view.viewmodel.ActionRequestViewModel
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.android.context.Bind
+import br.com.zup.beagle.android.utils.toDynamicObject
+import br.com.zup.beagle.core.DynamicObject
 
 @SuppressWarnings("UNUSED_PARAMETER")
 enum class RequestActionMethod {
@@ -38,7 +40,7 @@ data class SendRequest(
     val url: Bind<String>,
     val method: Bind<RequestActionMethod> = Bind.Value(RequestActionMethod.GET),
     val headers: Bind<Map<String, String>>? = null,
-    val data: Bind<String>? = null,
+    val data: DynamicObject<*>? = null,
     val onSuccess: Action? = null,
     val onError: Action? = null,
     val onFinish: Action? = null
@@ -48,7 +50,7 @@ data class SendRequest(
         url: String,
         method: RequestActionMethod = RequestActionMethod.GET,
         headers: Map<String, String>? = null,
-        data: String? = null,
+        data: Any? = null,
         onSuccess: Action? = null,
         onError: Action? = null,
         onFinish: Action? = null
@@ -56,7 +58,7 @@ data class SendRequest(
         Bind.Value(url),
         Bind.Value(method),
         if (headers != null) Bind.Value(headers) else headers,
-        if (data != null) Bind.Value(data) else data,
+        data.toDynamicObject(),
         onSuccess,
         onError,
         onFinish

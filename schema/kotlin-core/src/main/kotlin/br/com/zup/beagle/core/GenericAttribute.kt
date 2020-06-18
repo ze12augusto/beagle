@@ -16,6 +16,6 @@
 
 package br.com.zup.beagle.core
 
-interface BindAttribute<T> {
-    val value: Any
+interface GenericAttribute<T> {
+    val value: Any?
 }

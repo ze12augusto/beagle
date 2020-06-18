@@ -16,6 +16,7 @@
 
 package br.com.zup.beagle.sample.builder
 
+import br.com.zup.beagle.annotation.RegisterWidget
 import br.com.zup.beagle.widget.action.Navigate
 import br.com.zup.beagle.widget.action.Route
 import br.com.zup.beagle.ext.applyFlex
@@ -40,9 +41,16 @@ import br.com.zup.beagle.sample.constants.SCREEN_TAB_VIEW_ENDPOINT
 import br.com.zup.beagle.sample.constants.SCREEN_TEXT_ENDPOINT
 import br.com.zup.beagle.sample.constants.SCREEN_TOUCHABLE_ENDPOINT
 import br.com.zup.beagle.sample.constants.SCREEN_WEB_VIEW_ENDPOINT
+import br.com.zup.beagle.widget.Widget
+import br.com.zup.beagle.widget.action.Action
+import br.com.zup.beagle.widget.action.SetContext
+import br.com.zup.beagle.widget.context.Bind
+import br.com.zup.beagle.widget.context.Bind.Companion.expressionOf
+import br.com.zup.beagle.widget.context.ContextData
 import br.com.zup.beagle.widget.core.EdgeValue
 import br.com.zup.beagle.widget.core.Flex
 import br.com.zup.beagle.widget.core.ScrollAxis
+import br.com.zup.beagle.widget.layout.Container
 import br.com.zup.beagle.widget.layout.NavigationBar
 import br.com.zup.beagle.widget.layout.Screen
 import br.com.zup.beagle.widget.layout.ScreenBuilder
@@ -55,35 +63,32 @@ object ComponentScreenBuilder : ScreenBuilder {
             title = "Choose a Component",
             showBackButton = true
         ),
-        child = ScrollView(
-            scrollDirection = ScrollAxis.VERTICAL,
+        child = Container(
             children = listOf(
-                createMenu("Button", SCREEN_BUTTON_ENDPOINT),
-                createMenu("Text", SCREEN_TEXT_ENDPOINT),
-                createMenu("Image", SCREEN_IMAGE_ENDPOINT),
-                createMenu("NetworkImage", SCREEN_NETWORK_IMAGE_ENDPOINT),
-                createMenu("TabView", SCREEN_TAB_VIEW_ENDPOINT),
-                createMenu("ListView", SCREEN_LIST_VIEW_ENDPOINT),
-                createMenu("ScrollView", SCREEN_SCROLL_VIEW_ENDPOINT),
-                createMenu("PageView", SCREEN_PAGE_VIEW_ENDPOINT),
-                createMenu("Action", SCREEN_ACTION_ENDPOINT),
-                createMenu("ScreenBuilder", SCREEN_BUILDER_ENDPOINT),
-                createMenu("Form", SCREEN_FORM_ENDPOINT),
-                createMenu("LazyComponent", SCREEN_LAZY_COMPONENT_ENDPOINT),
-                createMenu("NavigationBar", SCREEN_NAVIGATION_BAR_ENDPOINT),
-                createMenu("NavigationType", NAVIGATION_TYPE_ENDPOINT),
-                createMenu("Accessibility Screen", ACCESSIBILITY_SCREEN_ENDPOINT),
-                createMenu("Compose Component", SCREEN_COMPOSE_COMPONENT_ENDPOINT),
-                createMenu("Touchable", SCREEN_TOUCHABLE_ENDPOINT),
-                createMenu("Analytics", SCREEN_ANALYTICS_ENDPOINT),
-                createMenu("Web View", SCREEN_WEB_VIEW_ENDPOINT)
+                Input(
+                    hint = expressionOf("@{context[0]}")
+                ),
+                Button(
+                    text = "Ok",
+                    onPress = listOf(
+                        SetContext(
+                            contextId = "context",
+                            value = mapOf("isTapped" to true)
+                        )
+                    )
+                )
+            ),
+            context = ContextData(
+                id = "context",
+                value = listOf("{\"name\": \"Matheus\", \"age\": 24}")
             )
         )
     )
 
     private fun createMenu(text: String, path: String) = Button(
         text = text,
-        onPress = listOf(Navigate.PushView(Route.Remote(path))
+        onPress = listOf(
+            Navigate.PushView(Route.Remote(path))
         ),
         styleId = BUTTON_STYLE_TITLE
     ).applyFlex(
@@ -94,3 +99,14 @@ object ComponentScreenBuilder : ScreenBuilder {
         )
     )
 }
+
+data class Person(
+    val name: String,
+    val age: Int
+)
+
+@RegisterWidget
+data class Input(
+    val hint: Bind<Person>,
+    val onTextChange: List<Action>? = null
+) : Widget()

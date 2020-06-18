@@ -16,11 +16,12 @@
 
 package br.com.zup.beagle.widget.action
 
-import br.com.zup.beagle.widget.context.Bind
+import br.com.zup.beagle.core.DynamicObject
+import br.com.zup.beagle.widget.context.toDynamicObject
 
 data class SetContext(
     val contextId: String,
-    val value: Bind<Any>,
+    val value: DynamicObject<*>,
     val path: String? = null
 ) : Action {
 
@@ -28,5 +29,5 @@ data class SetContext(
         contextId: String,
         value: Any,
         path: String? = null
-    ) : this(contextId, Bind.Value(value), path)
+    ) : this(contextId, value.toDynamicObject(), path)
 }

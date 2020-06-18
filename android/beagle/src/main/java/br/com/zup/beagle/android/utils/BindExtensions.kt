@@ -20,6 +20,7 @@ import br.com.zup.beagle.android.logger.BeagleMessageLogs
 import br.com.zup.beagle.android.view.viewmodel.ScreenContextViewModel
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.android.context.Bind
+import br.com.zup.beagle.core.DynamicObject
 
 fun <T> Bind<T>.get(rootView: RootView, observes: ((value: T) -> Unit)? = null): T? {
     val value = try {
@@ -37,6 +38,18 @@ fun <T> Bind<T>.get(rootView: RootView, observes: ((value: T) -> Unit)? = null):
     }
 
     return value
+}
+
+fun <T> DynamicObject<T>.get(rootView: RootView): Any? {
+    return try {
+        when (this) {
+            is DynamicObject.Expression -> evaluateExpression(rootView, Bind.Expression(this.value, Any::class.java))
+            else -> this.value as T
+        }
+    } catch (ex: Exception) {
+        BeagleMessageLogs.errorWhileTryingToEvaluateBinding(ex)
+        null
+    }
 }
 
 private fun <T> evaluateExpression(

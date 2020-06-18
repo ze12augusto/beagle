@@ -20,7 +20,8 @@ import br.com.zup.beagle.android.utils.generateViewModelInstance
 import br.com.zup.beagle.android.utils.get
 import br.com.zup.beagle.android.view.viewmodel.ScreenContextViewModel
 import br.com.zup.beagle.android.widget.RootView
-import br.com.zup.beagle.android.context.Bind
+import br.com.zup.beagle.android.utils.toDynamicObject
+import br.com.zup.beagle.core.DynamicObject
 
 internal data class SetContextInternal(
     val contextId: String,
@@ -30,7 +31,7 @@ internal data class SetContextInternal(
 
 data class SetContext(
     val contextId: String,
-    val value: Bind<Any>,
+    val value: DynamicObject<*>,
     val path: String? = null
 ) : Action {
 
@@ -38,7 +39,7 @@ data class SetContext(
         contextId: String,
         value: Any,
         path: String? = null
-    ) : this(contextId, Bind.Value(value), path)
+    ) : this(contextId, value.toDynamicObject(), path)
 
     override fun execute(rootView: RootView) {
         val viewModel = rootView.generateViewModelInstance<ScreenContextViewModel>()

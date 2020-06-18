@@ -14,33 +14,9 @@
  * limitations under the License.
  */
 
-package br.com.zup.beagle.android.utils
+package br.com.zup.beagle.widget.context
 
-import br.com.zup.beagle.android.context.Bind
 import br.com.zup.beagle.core.DynamicObject
-import java.lang.reflect.ParameterizedType
-import java.lang.reflect.WildcardType
-
-fun <I, G> Any.implementsGenericTypeOf(
-    interfaceClazz: Class<I>,
-    genericType: Class<G>
-): Boolean {
-    return this::class.java.genericInterfaces.filterIsInstance<ParameterizedType>()
-        .filter {
-            val rawType = it.rawType as Class<*>
-            rawType == interfaceClazz
-        }.any {
-            val types = it.actualTypeArguments
-            val paramType = types[0]
-            val type = if (paramType is WildcardType) {
-                paramType.upperBounds[0]
-            } else {
-                paramType
-            }
-            val typeClass = type as Class<*>
-            genericType == typeClass
-        }
-}
 
 internal fun Any?.toDynamicObject() : DynamicObject<*> {
     return when (this) {
@@ -48,7 +24,7 @@ internal fun Any?.toDynamicObject() : DynamicObject<*> {
         is Boolean -> DynamicObject.Boolean(this)
         is Int -> DynamicObject.Int(this)
         is Double -> DynamicObject.Double(this)
-        is String -> if (this.hasBind()) {
+        is String -> if (this.contains(Regex("^\\@\\{([^)]+)\\}\$"))) {
             DynamicObject.Expression(this)
         } else {
             DynamicObject.String(this)

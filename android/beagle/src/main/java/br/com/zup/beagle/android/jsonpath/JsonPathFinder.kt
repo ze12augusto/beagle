@@ -16,6 +16,7 @@
 
 package br.com.zup.beagle.android.jsonpath
 
+import br.com.zup.beagle.core.DynamicObject
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -24,50 +25,35 @@ import java.util.*
 internal class JsonPathFinder {
 
     @Suppress("ReturnCount")
-    tailrec fun find(nextKeys: LinkedList<String>, value: Any?): Any? {
-        if (nextKeys.isEmpty()) return value
+    tailrec fun find(nextKeys: LinkedList<String>, value: DynamicObject<*>?): Any? {
+        if (nextKeys.isEmpty()) return value?.value
 
         val currentKey = nextKeys.poll()
 
-        val childValue = if (currentKey.endsWith("]")) {
-            if (value is JSONArray) {
-                val arrayIndex = JsonPathUtils.getIndexOnArrayBrackets(currentKey)
-                val getValue = value.safeGet(arrayIndex)
-                if (getValue != null) {
+        if (currentKey != null) {
+            if (currentKey.endsWith("]")) {
+                if (value is DynamicObject.Array) {
+                    val arrayIndex = JsonPathUtils.getIndexOnArrayBrackets(currentKey)
+                    val getValue = value.value[arrayIndex]
                     return find(nextKeys, getValue)
                 } else {
-                    null
+                    throw IllegalStateException("Expected Array but received Object")
                 }
             } else {
-                throw IllegalStateException("Expected Array but received Object")
+                return when (value) {
+                    is DynamicObject.Empty -> null
+                    is DynamicObject.String -> find(nextKeys, value)
+                    is DynamicObject.Int -> find(nextKeys, value)
+                    is DynamicObject.Double -> find(nextKeys, value)
+                    is DynamicObject.Boolean -> find(nextKeys, value)
+                    is DynamicObject.Dictionary -> find(nextKeys, value.value[currentKey])
+                    else -> {
+                        return find(nextKeys, DynamicObject.String(value.toString()))
+                    }
+                }
             }
         } else {
-            value
-        }
-
-        if (childValue !is JSONObject) {
-            throw JsonPathUtils.createInvalidPathException(currentKey)
-        }
-
-        if (childValue.isNull(currentKey)) return null
-
-        val newValue = childValue.safeGet(currentKey)
-        return find(nextKeys, newValue)
-    }
-
-    private fun JSONObject.safeGet(key: String): Any? {
-        return try {
-            this[key]
-        } catch (ex: JSONException) {
-            null
-        }
-    }
-
-    private fun JSONArray.safeGet(index: Int): Any? {
-        return try {
-            this[index]
-        } catch (ex: JSONException) {
-            null
+            return null
         }
     }
 }

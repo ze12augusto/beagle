@@ -16,6 +16,7 @@
 
 package br.com.zup.beagle.android.jsonpath
 
+import br.com.zup.beagle.android.utils.toDynamicObject
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
@@ -30,7 +31,7 @@ internal class JsonPathReplacer(
             keys.size == 1 -> replaceValue(keys.poll(), newValue, root)
             else -> {
                 val lastKey = keys.pollLast()
-                val foundValue = jsonPathFinder.find(keys, root)
+                val foundValue = jsonPathFinder.find(keys, root.toDynamicObject())
                 return replaceValue(lastKey, newValue, foundValue)
             }
         }

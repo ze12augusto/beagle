@@ -29,7 +29,7 @@ abstract class ComposeComponent : WidgetView() {
 
     override fun buildView(rootView: RootView): View {
         return viewFactory.makeBeagleFlexView(rootView.getContext()).apply {
-            addServerDrivenComponent(build(), rootView)
+            addServerDrivenComponent(build(), rootView, this@ComposeComponent)
         }
     }
 

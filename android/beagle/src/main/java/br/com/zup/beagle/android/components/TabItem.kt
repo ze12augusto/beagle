@@ -33,7 +33,7 @@ data class TabItem(
 
     override fun buildView(rootView: RootView): View {
         return viewFactory.makeBeagleFlexView(rootView.getContext()).also {
-            it.addServerDrivenComponent(child, rootView)
+            it.addServerDrivenComponent(child, rootView, this@TabItem)
         }
     }
 }

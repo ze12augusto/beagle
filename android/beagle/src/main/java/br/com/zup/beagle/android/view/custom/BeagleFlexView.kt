@@ -45,7 +45,8 @@ internal open class BeagleFlexView(
         super.addView(child, flexMapper.makeYogaNode(flex))
     }
 
-    fun addServerDrivenComponent(serverDrivenComponent: ServerDrivenComponent, rootView: RootView) {
+    fun addServerDrivenComponent(serverDrivenComponent: ServerDrivenComponent, rootView: RootView, parent: ServerDrivenComponent? = null) {
+        serverDrivenComponent.parent = parent
         val component = if (serverDrivenComponent is GhostComponent) {
             serverDrivenComponent.child
         } else {

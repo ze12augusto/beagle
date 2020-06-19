@@ -39,7 +39,7 @@ data class ListView(
         recyclerView.apply {
             val orientation = toRecyclerViewOrientation()
             layoutManager = LinearLayoutManager(context, orientation, false)
-            adapter = ListViewRecyclerAdapter(children, viewFactory, orientation, rootView)
+            adapter = ListViewRecyclerAdapter(children, viewFactory, orientation, rootView, this@ListView)
         }
 
         return recyclerView
@@ -57,7 +57,8 @@ internal class ListViewRecyclerAdapter(
     private val children: List<ServerDrivenComponent>,
     private val viewFactory: ViewFactory,
     private val orientation: Int,
-    private val rootView: RootView
+    private val rootView: RootView,
+    private val parent: ServerDrivenComponent
 ) : RecyclerView.Adapter<ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int = position
@@ -69,7 +70,7 @@ internal class ListViewRecyclerAdapter(
                 ViewGroup.LayoutParams.WRAP_CONTENT
             val layoutParams = ViewGroup.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT)
             it.layoutParams = layoutParams
-            it.addServerDrivenComponent(children[position], rootView)
+            it.addServerDrivenComponent(children[position], rootView, this@ListViewRecyclerAdapter.parent)
         }
         return ViewHolder(view)
     }

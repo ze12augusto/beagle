@@ -17,6 +17,7 @@
 package br.com.zup.beagle.ext
 
 import br.com.zup.beagle.core.Accessibility
+import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.core.Style
 import br.com.zup.beagle.widget.Widget
 import br.com.zup.beagle.widget.core.Flex

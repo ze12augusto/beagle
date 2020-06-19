@@ -16,6 +16,9 @@
 
 package br.com.zup.beagle.android.widget
 
+import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.widget.Widget
 
-abstract class WidgetView : Widget(), ViewConvertable
+abstract class WidgetView : Widget(), ViewConvertable {
+    override var parent: ServerDrivenComponent? = null
+}

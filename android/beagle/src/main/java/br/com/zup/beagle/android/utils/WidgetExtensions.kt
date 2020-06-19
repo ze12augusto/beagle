@@ -38,5 +38,5 @@ fun ServerDrivenComponent.toView(fragment: Fragment) = this.toView(FragmentRootV
 
 internal fun ServerDrivenComponent.toView(rootView: RootView): View =
     viewFactory.makeBeagleFlexView(rootView.getContext()).apply {
-        addServerDrivenComponent(this@toView, rootView)
+        addServerDrivenComponent(this@toView, rootView, null)
     }

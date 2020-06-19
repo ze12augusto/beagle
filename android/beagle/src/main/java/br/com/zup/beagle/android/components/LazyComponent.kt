@@ -33,7 +33,7 @@ data class LazyComponent(
 
     override fun buildView(rootView: RootView): View {
         return viewFactory.makeBeagleView(rootView.getContext()).apply {
-            addServerDrivenComponent(initialState, rootView)
+            addServerDrivenComponent(initialState, rootView, this@LazyComponent)
             updateView(rootView, path, this[0])
         }
     }

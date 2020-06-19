@@ -32,6 +32,7 @@ import br.com.zup.beagle.android.utils.dp
 import br.com.zup.beagle.android.view.ViewFactory
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.android.widget.WidgetView
+import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.widget.core.Flex
 import com.google.android.material.tabs.TabLayout
 
@@ -57,7 +58,8 @@ data class TabView(
             adapter = ContentAdapter(
                 viewFactory = viewFactory,
                 children = children,
-                rootView = rootView
+                rootView = rootView,
+                parent = this@TabView
             )
         }
 
@@ -160,7 +162,8 @@ data class TabView(
 internal class ContentAdapter(
     private val children: List<TabItem>,
     private val viewFactory: ViewFactory,
-    private val rootView: RootView
+    private val rootView: RootView,
+    private val parent: ServerDrivenComponent
 ) : PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean = view === `object`
@@ -169,7 +172,7 @@ internal class ContentAdapter(
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = viewFactory.makeBeagleFlexView(container.context).also {
-            it.addServerDrivenComponent(children[position].child, rootView)
+            it.addServerDrivenComponent(children[position].child, rootView, parent)
         }
         container.addView(view)
         return view

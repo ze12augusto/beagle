@@ -16,22 +16,31 @@
 
 import UIKit
 
-public struct Form: ServerDrivenComponent {
+public struct Form: ServerDrivenComponent, AutoInitiableAndDecodable {
     
     // MARK: - Public Properties
 
     public let action: Action
     public let child: ServerDrivenComponent
+    public let group: String?
+    public let additionalData: [String: String]?
+    public var shouldStoreFields: Bool = false
     
-    // MARK: - Initialization
-    
+// sourcery:inline:auto:Form.Init
     public init(
         action: Action,
-        child: ServerDrivenComponent
+        child: ServerDrivenComponent,
+        group: String? = nil,
+        additionalData: [String: String]? = nil,
+        shouldStoreFields: Bool = false
     ) {
         self.action = action
         self.child = child
+        self.group = group
+        self.additionalData = additionalData
+        self.shouldStoreFields = shouldStoreFields
     }
+// sourcery:end
 }
 
 extension Form: Renderable {
@@ -42,7 +51,7 @@ extension Form: Renderable {
         func registerFormSubmit(view: UIView) {
             if view.beagleFormElement is FormSubmit {
                 hasFormSubmit = true
-                context.register(form: self, formView: childView, submitView: view, validatorHandler: dependencies.validatorProvider)
+                context.formManager.register(form: self, formView: childView, submitView: view, validatorHandler: dependencies.validatorProvider)
             }
             for subview in view.subviews {
                 registerFormSubmit(view: subview)
@@ -55,19 +64,6 @@ extension Form: Renderable {
         }
         return childView
     }    
-}
-
-extension Form: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case action
-        case child
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.action = try container.decode(forKey: .action)
-        self.child = try container.decode(forKey: .child)
-    }
 }
 
 extension UIView {
@@ -84,6 +80,7 @@ extension UIView {
     }
     
     var beagleFormElement: ServerDrivenComponent? {
+        // swiftlint:disable implicit_getter
         get {
             return (objc_getAssociatedObject(self, &AssociatedKeys.FormElement) as? ObjectWrapper)?.object
         }

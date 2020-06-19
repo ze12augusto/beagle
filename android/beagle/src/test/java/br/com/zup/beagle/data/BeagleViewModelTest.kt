@@ -25,6 +25,8 @@ import br.com.zup.beagle.extensions.once
 import br.com.zup.beagle.testutil.RandomData
 import br.com.zup.beagle.utils.CoroutineDispatchers
 import br.com.zup.beagle.view.ScreenRequest
+import br.com.zup.beagle.widget.layout.Screen
+import br.com.zup.beagle.widget.layout.ScreenComponent
 import io.mockk.MockKAnnotations
 import io.mockk.Runs
 import io.mockk.coEvery
@@ -32,6 +34,7 @@ import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.just
+import io.mockk.mockk
 import io.mockk.spyk
 import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
@@ -73,6 +76,7 @@ class BeagleViewModelTest {
         MockKAnnotations.init(this)
 
         CoroutineDispatchers.Main = Dispatchers.Unconfined
+        CoroutineDispatchers.Default = Dispatchers.Unconfined
 
         coEvery { componentRequester.fetchComponent(any()) } returns component
         coEvery { actionRequester.fetchAction(any()) } returns action
@@ -119,6 +123,20 @@ class BeagleViewModelTest {
         assertLoading(viewModelStates[0], true)
         assertEquals(ViewState.Error(exception), viewModelStates[1])
         assertLoading(viewModelStates[2], false)
+    }
+
+    @Test
+    fun fetchComponent_with_screen_should_render_ViewState() {
+        // Given
+        val screenRequest = ScreenRequest("")
+        val screen = mockk<ScreenComponent>()
+        every { screen.identifier } returns "stub"
+
+        // When
+        beagleUIViewModel.fetchComponent(screenRequest, screen)
+
+        // Then
+        assertEquals(screen, (viewModelStates[0] as ViewState.DoRender).component)
     }
 
     @Test

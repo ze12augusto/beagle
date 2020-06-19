@@ -39,11 +39,12 @@ class FlexMapper {
         setDirection(makeYogaDirection(flex.direction) ?: YogaDirection.LTR)
         wrap = makeYogaWrap(flex.flexWrap) ?: YogaWrap.NO_WRAP
         justifyContent = makeYogaJustify(flex.justifyContent) ?: YogaJustify.FLEX_START
-        alignItems = makeYogaAlign(flex.alignItems) ?: YogaAlign.STRETCH
-        alignSelf = makeYogaAlign(flex.alignSelf) ?: YogaAlign.AUTO
-        alignContent = makeYogaAlign(flex.alignContent) ?: YogaAlign.FLEX_START
-        flexGrow = flex.grow?.toFloat() ?: 0.0f
-        flexShrink = flex.shrink?.toFloat() ?: 1.0f
+        alignItems = makeYogaAlignItems(flex.alignItems) ?: YogaAlign.STRETCH
+        alignSelf = makeYogaAlignSelf(flex.alignSelf) ?: YogaAlign.AUTO
+        alignContent = makeYogaAlignContent(flex.alignContent) ?: YogaAlign.FLEX_START
+        flex.grow?.toFloat()?.let { flexGrow = it }
+        flex.flex?.toFloat()?.let { setFlex(it) }
+        flex.shrink?.toFloat()?.let { flexShrink = it }
         display = makeYogaDisplay(flex.display) ?: YogaDisplay.FLEX
         positionType = makeYogaPositionType(flex.positionType) ?: YogaPositionType.RELATIVE
         applyAttributes(flex, this)
@@ -147,8 +148,8 @@ class FlexMapper {
         }
     }
 
-    private fun setPadding(margin: EdgeValue?, yogaNode: YogaNode) {
-        applyEdgeValue(margin) { yogaEdge, unitValue ->
+    private fun setPadding(padding: EdgeValue?, yogaNode: YogaNode) {
+        applyEdgeValue(padding) { yogaEdge, unitValue ->
             if (unitValue.type == UnitType.REAL) {
                 yogaNode.setPadding(yogaEdge, unitValue.value.dp().toFloat())
             } else if (unitValue.type == UnitType.PERCENT) {

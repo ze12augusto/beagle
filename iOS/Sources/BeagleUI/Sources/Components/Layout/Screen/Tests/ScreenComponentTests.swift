@@ -38,12 +38,10 @@ final class ScreenComponentTests: XCTestCase {
                 children: [
                     Container(
                         children: [Text("Line 0,\nLine 1,\nLine 2,\nLine 3,\nLine 4.")],
-                        flex: .init(alignSelf: .center, size: .init(width: 50%, height: 75%)),
-                        appearance: .init(backgroundColor: "#FF0000")
+                        widgetProperties: .init(appearance: .init(backgroundColor: "#FF0000"), flex: .init(alignSelf: .center, size: .init(width: 50%, height: 75%)))
                     )
                 ],
-                flex: .init(justifyContent: .center),
-                appearance: .init(backgroundColor: "#00FF00")
+                widgetProperties: .init(appearance: .init(backgroundColor: "#00FF00"), flex: .init(justifyContent: .center))
             )
         )
 
@@ -88,15 +86,16 @@ final class ScreenComponentTests: XCTestCase {
         // Given
         let action = ActionDummy()
         let barItem = NavigationBarItem(text: "shuttle", action: action)
-        let context = BeagleContextSpy()
+        let actionManager = ActionManagerSpy()
+        let context = BeagleContextSpy(actionManager: actionManager)
         
         // When
         let resultingView = barItem.toBarButtonItem(context: context, dependencies: BeagleScreenDependencies())
         _ = resultingView.target?.perform(resultingView.action)
         
         // Then
-        XCTAssertTrue(context.didCallDoAction)
-        XCTAssertEqual(context.actionCalled as? ActionDummy, action)
+        XCTAssertTrue(actionManager.didCallDoAction)
+        XCTAssertEqual(actionManager.actionCalled as? ActionDummy, action)
     }
     
     func test_shouldPrefetchNavigateAction() {
@@ -104,7 +103,7 @@ final class ScreenComponentTests: XCTestCase {
         let dependencies = BeagleScreenDependencies(preFetchHelper: prefetch)
         
         let navigatePath = "button-item-prefetch"
-        let navigate = Navigate.addView(.init(path: navigatePath, shouldPrefetch: true))
+        let navigate = Navigate.pushView(.remote(navigatePath, shouldPrefetch: true))
         let barItem = NavigationBarItem(text: "Item", action: navigate)
         let screen = ScreenComponent(
             navigationBar: NavigationBar(title: "Prefetch", navigationBarItems: [barItem]),

@@ -16,34 +16,23 @@
 
 import UIKit
 
-public struct NetworkImage: Widget {
+public struct NetworkImage: Widget, AutoInitiableAndDecodable {
     
     public let path: String
     public let contentMode: ImageContentMode?
-    
-    public var id: String?
-    public let appearance: Appearance?
-    public let flex: Flex?
-    public let accessibility: Accessibility?
-    
-    // MARK: - Initialization
-    
+    public var widgetProperties: WidgetProperties
+
+// sourcery:inline:auto:NetworkImage.Init
     public init(
         path: String,
         contentMode: ImageContentMode? = nil,
-        id: String? = nil,
-        appearance: Appearance? = nil,
-        flex: Flex? = nil,
-        accessibility: Accessibility? = nil
+        widgetProperties: WidgetProperties = WidgetProperties()
     ) {
         self.path = path
         self.contentMode = contentMode
-        self.id = id
-        self.appearance = appearance
-        self.flex = flex
-        self.accessibility = accessibility
+        self.widgetProperties = widgetProperties
     }
-    
+// sourcery:end
 }
 
 extension NetworkImage: Renderable {
@@ -54,14 +43,13 @@ extension NetworkImage: Renderable {
 
         imageView.beagle.setup(self)
         
-        dependencies.repository.fetchImage(url: path, additionalData: nil) { [weak imageView, weak context] result in
+        dependencies.repository.fetchImage(url: path, additionalData: nil) { [weak imageView] result in
             guard let imageView = imageView else { return }
             guard case .success(let data) = result else { return }
             let image = UIImage(data: data)
             DispatchQueue.main.async {
                 imageView.image = image
                 imageView.flex.markDirty()
-                context?.applyLayout()
             }
         }
                 

@@ -264,8 +264,6 @@ public final class PolymorphicJsonAdapterFactory<T> implements JsonAdapter.Facto
 
         /** Single-element options containing the label's key only. */
         final JsonReader.Options labelKeyOptions;
-        /** Corresponds to subtypes. */
-        final JsonReader.Options labelOptions;
 
         PolymorphicJsonAdapter(String labelKey,
                                List<String> labels,
@@ -281,7 +279,6 @@ public final class PolymorphicJsonAdapterFactory<T> implements JsonAdapter.Facto
             this.defaultValueSet = defaultValueSet;
 
             this.labelKeyOptions = JsonReader.Options.of(labelKey);
-            this.labelOptions = JsonReader.Options.of(labels.toArray(new String[0]));
         }
 
         @Override public Object fromJson(JsonReader reader) throws IOException {
@@ -308,8 +305,8 @@ public final class PolymorphicJsonAdapterFactory<T> implements JsonAdapter.Facto
                     reader.skipValue();
                     continue;
                 }
-
-                int labelIndex = reader.selectString(labelOptions);
+                String name = reader.nextString().toLowerCase();
+                int labelIndex = labels.indexOf(name);
                 if (labelIndex == -1 && !defaultValueSet) {
                     throw new JsonDataException("Expected one of "
                             + labels

@@ -34,7 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         deepLinkHandler[.LIST_VIEW_ENDPOINT] = ListViewScreen.self
         deepLinkHandler[.WEB_VIEW_ENDPOINT] = WebViewScreen.self
         deepLinkHandler["componentInteractionText"] = ComponentInteractionText.self
-
+        deepLinkHandler[.TEXT_ENDPOINT] = TextScreen.self
+        deepLinkHandler[.BUTTON_ENDPOINT] = ButtonScreen.self
+        
         let validator = ValidatorProviding()
         validator[FormScreen.textValidatorName] = FormScreen.textValidator
         

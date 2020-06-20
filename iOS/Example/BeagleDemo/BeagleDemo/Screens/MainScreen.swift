@@ -35,6 +35,14 @@ struct MainScreen: DeeplinkScreen {
         return ScrollView(
             children: [
                 Button(
+                    text: "Text",
+                    action: Navigate.openNativeRoute(.TEXT_ENDPOINT)
+                ),
+                Button(
+                    text: "Button",
+                    action: Navigate.openNativeRoute(.BUTTON_ENDPOINT)
+                ),
+                Button(
                     text: "Navigator",
                     action: Navigate.pushView(.remote(.NAVIGATE_ENDPOINT, shouldPrefetch: true))
                 ),

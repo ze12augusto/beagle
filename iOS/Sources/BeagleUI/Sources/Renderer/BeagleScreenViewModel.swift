@@ -15,88 +15,28 @@
  */
 
 import UIKit
+import BeagleSchema
 
-public protocol RemoteScreenAdditionalData {
-    typealias Http = HttpAdditionalData
-    
-    var headers: [String: String] { get set }
-}
-
-public class BeagleScreenViewModel: ScreenEvent {
-    
-    // MARK: Analytics Events
-    internal enum ScreenAnalyticsEvents: String {
-        case screenAppeared = "Screen Appeared"
-        case screenDisapeared = "Screen Disappeared"
+class BeagleScreenViewModel {
+        
+    var screenType: ScreenType {
+        didSet { screen = nil }
+    }
+    var screen: Screen?
+    var state: State {
+        didSet { stateObserver?.didChangeState(state) }
     }
     
-    public var screenAnalyticsEvent: AnalyticsScreen? {
-        return screen?.screenAnalyticsEvent
-    }
-    
-    // MARK: ScreenType
-
-    var screenType: ScreenType
-    
-    public enum ScreenType {
-        case remote(Remote)
-        case declarative(Screen)
-        case declarativeText(String)
-
-        public struct Remote {
-            let url: String
-            let fallback: Screen?
-            let additionalData: RemoteScreenAdditionalData?
-
-            public init(
-                url: String,
-                fallback: Screen? = nil,
-                additionalData: RemoteScreenAdditionalData? = nil
-            ) {
-                self.url = url
-                self.fallback = fallback
-                self.additionalData = additionalData
-            }
-        }
-    }
-
-    // MARK: State
-
-    public var state: State {
-        didSet { didChangeState() }
-    }
-    
-    private(set) var screen: Screen?
-
     public enum State {
+        case initialized
         case loading
         case success
-        case failure(Error)
-        case rendered
-
-        public enum Error {
-            case remoteScreen(Request.Error)
-            case action(Swift.Error)
-            case lazyLoad(Request.Error)
-            case submitForm(Request.Error)
-            case declarativeText
-        }
+        case failure(ServerDrivenState.Error)
     }
 
-    // MARK: Dependencies
+    var dependencies: BeagleDependenciesProtocol
 
-    var dependencies: Dependencies
-
-    public typealias Dependencies =
-        DependencyActionExecutor
-        & DependencyRepository
-        & DependencyAnalyticsExecutor
-        & RenderableDependencies
-        & DependencyComponentDecoding
-
-    // MARK: Delegate and Observer
-
-    public weak var delegate: BeagleScreenDelegate?
+    // MARK: Observer
 
     public weak var stateObserver: BeagleScreenStateObserver? {
         didSet { stateObserver?.didChangeState(state) }
@@ -106,53 +46,26 @@ public class BeagleScreenViewModel: ScreenEvent {
 
     public init(
         screenType: ScreenType,
-        dependencies: Dependencies = Beagle.dependencies,
-        delegate: BeagleScreenDelegate? = nil
+        dependencies: BeagleDependenciesProtocol = Beagle.dependencies
     ) {
         self.screenType = screenType
         self.dependencies = dependencies
-        self.delegate = delegate
-
-        switch screenType {
-        case .declarative(let screen):
-            self.screen = screen
-            state = .success
-        case .declarativeText(let text):
-            state = .loading
-            self.tryToLoadScreenFromText(text)
-        case .remote(let remote):
-            state = .loading
-            loadRemoteScreen(remote)
-        }
+        self.state = .initialized
     }
-
-    public func reloadScreen(with screenType: ScreenType) {
-        state = .loading
-        self.screenType = screenType
+    
+    public func loadScreen() {
         switch screenType {
+        case .remote(let remote):
+            loadRemoteScreen(remote)
         case .declarative(let screen):
             self.screen = screen
             state = .success
         case .declarativeText(let text):
-            state = .loading
-            self.tryToLoadScreenFromText(text)
-        case .remote(let remote):
-            state = .loading
-            loadRemoteScreen(remote)
+            tryToLoadScreenFromText(text)
         }
     }
 
     // MARK: Core
-
-    func sendScreenAnalyticsEvent(_ eventType: ScreenAnalyticsEvents) {
-        guard let event = screenAnalyticsEvent else { return }
-        switch eventType {
-        case .screenAppeared:
-            dependencies.analytics?.trackEventOnScreenAppeared(event)
-        case .screenDisapeared:
-            dependencies.analytics?.trackEventOnScreenDisappeared(event)
-        }
-    }
     
     func tryToLoadScreenFromText(_ text: String) {
         guard let loadedScreen = loadScreenFromText(text) else {
@@ -168,11 +81,12 @@ public class BeagleScreenViewModel: ScreenEvent {
         guard let data = text.data(using: .utf8) else { return nil }
         let component = try? self.dependencies.decoder.decodeComponent(from: data)
 
+        // TODO: verify if we can handle any component
         guard let screen = component as? ScreenComponent else {
             return nil
         }
 
-        return Screen(child: screen)
+        return screen.toScreen()
     }
 
     func loadRemoteScreen(_ remote: ScreenType.Remote) {
@@ -193,49 +107,22 @@ public class BeagleScreenViewModel: ScreenEvent {
         }
     }
     
-    func didRenderComponent() {
-        state = .rendered
-    }
-
-    func handleError(_ error: State.Error) {
-        delegate?.beagleScreen(viewModel: self, didFailToLoadWithError: error)
-    }
-    
-    // MARK: - Private
-
-    private func didChangeState() {
-        stateObserver?.didChangeState(state)
-
-        if case .failure(let error) = state {
-            handleError(error)
-        }
-    }
-    
     private func handleRemoteScreenSuccess(_ component: ServerDrivenComponent) {
         screen = component.toScreen()
         state = .success
     }
     
     private func handleRemoteScreenFailure(_ error: Request.Error) {
-        if case let .remote(remote) = self.screenType, let screen = remote.fallback {
-            self.screen = screen
+        if case let .remote(remote) = screenType, let fallback = remote.fallback {
+            screen = fallback
         }
-        self.state = .failure(.remoteScreen(error))
+        state = .failure(.remoteScreen(error))
     }
 }
 
-// MARK: - Delegate and Observer
+// MARK: - Observer
 
-public protocol BeagleScreenDelegate: AnyObject {
-    typealias ViewModel = BeagleScreenViewModel
-
-    func beagleScreen(
-        viewModel: ViewModel,
-        didFailToLoadWithError error: ViewModel.State.Error
-    )
-}
-
-public protocol BeagleScreenStateObserver: AnyObject {
+protocol BeagleScreenStateObserver: AnyObject {
     typealias ViewModel = BeagleScreenViewModel
 
     func didChangeState(_ state: ViewModel.State)

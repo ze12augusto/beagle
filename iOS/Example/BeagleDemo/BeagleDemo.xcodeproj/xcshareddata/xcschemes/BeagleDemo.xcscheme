@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1120"
+   LastUpgradeVersion = "1140"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AF924E7E2464A7AC00234E39"
-               BuildableName = "BeagleDemoUITests.xctest"
-               BlueprintName = "BeagleDemoUITests"
+               BlueprintIdentifier = "C09F410D249BDEE8002605EE"
+               BuildableName = "BeagleDemoTests.xctest"
+               BlueprintName = "BeagleDemoTests"
                ReferencedContainer = "container:BeagleDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>

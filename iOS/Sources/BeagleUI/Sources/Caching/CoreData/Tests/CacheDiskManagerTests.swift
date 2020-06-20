@@ -23,7 +23,7 @@ class CacheDiskManagerTests: XCTestCase {
     {
       "_beagleType_": "beagle:component:text",
       "text": "cache",
-      "appearance": {
+      "style": {
         "backgroundColor": "#4000FFFF"
       }
     }
@@ -189,5 +189,5 @@ class CacheDiskManagerTests: XCTestCase {
 }
 
 struct CacheDiskManagerDependencies: DefaultCacheDiskManager.Dependencies {
-    var logger: BeagleLoggerType = BeagleLogger()
+    var logger: BeagleLoggerType = BeagleLoggerDefault()
 }

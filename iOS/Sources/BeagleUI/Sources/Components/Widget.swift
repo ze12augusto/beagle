@@ -14,20 +14,9 @@
  * limitations under the License.
  */
 
-public protocol AppearanceComponent: ServerDrivenComponent {
-    var appearance: Appearance? { get }
-}
+import UIKit
+import BeagleSchema
 
-public protocol FlexComponent: ServerDrivenComponent {
-    var flex: Flex? { get }
-}
+// MARK: - Widget
 
-public protocol AccessibilityComponent: ServerDrivenComponent {
-    var accessibility: Accessibility? { get }
-}
-
-public protocol IdentifiableComponent: ServerDrivenComponent {
-    var id: String? { get }
-}
-
-public protocol Widget: AppearanceComponent, FlexComponent, AccessibilityComponent, IdentifiableComponent { }
+public protocol Widget: ServerDrivenComponent, RawWidget { }

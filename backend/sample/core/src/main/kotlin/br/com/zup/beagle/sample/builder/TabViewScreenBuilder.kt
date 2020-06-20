@@ -16,9 +16,10 @@
 
 package br.com.zup.beagle.sample.builder
 
-import br.com.zup.beagle.action.ShowNativeDialog
+import br.com.zup.beagle.widget.action.Alert
+import br.com.zup.beagle.ext.applyFlex
 import br.com.zup.beagle.sample.constants.BEACH_NETWORK_IMAGE
-import br.com.zup.beagle.widget.core.Alignment
+import br.com.zup.beagle.widget.core.AlignContent
 import br.com.zup.beagle.widget.core.Flex
 import br.com.zup.beagle.widget.layout.Container
 import br.com.zup.beagle.widget.layout.NavigationBar
@@ -33,44 +34,44 @@ import br.com.zup.beagle.widget.ui.Text
 object TabViewScreenBuilder : ScreenBuilder {
     private val tab1 = TabItem(
         title = "Tab 1",
-        content = Container(
+        child = Container(
             children = listOf(
                 Text("Text1 Tab 2"),
                 NetworkImage(BEACH_NETWORK_IMAGE),
                 Text("Text2 Tab 2")
             )
-        ).applyFlex(Flex(alignContent = Alignment.CENTER))
+        ).applyFlex(Flex(alignContent = AlignContent.CENTER))
     )
 
     private val tab2 = TabItem(
         title = "Tab 2",
-        content = Container(
+        child = Container(
             children = listOf(
                 Text("Text1 Tab 2"),
                 Text("Text2 Tab 2")
             )
-        ).applyFlex(Flex(alignContent = Alignment.CENTER))
+        ).applyFlex(Flex(alignContent = AlignContent.CENTER))
     )
 
     private val tab3 = TabItem(
         title = "Tab 3",
-        content = Container(
+        child = Container(
             children = listOf(
                 Text("Text1 Tab 3"),
                 Text("Text2 Tab 3")
             )
-        ).applyFlex(Flex(alignContent = Alignment.CENTER))
+        ).applyFlex(Flex(alignContent = AlignContent.CENTER))
     )
 
     private val tab4 = TabItem(
         title = "Tab 4",
         icon = "beagle",
-        content = Container(
+        child = Container(
             children = listOf(
                 Text("Text1 Tab 4"),
                 Text("Text2 Tab 4")
             )
-        ).applyFlex(Flex(alignContent = Alignment.CENTER))
+        ).applyFlex(Flex(alignContent = AlignContent.CENTER))
     )
 
     override fun build() = Screen(
@@ -81,17 +82,17 @@ object TabViewScreenBuilder : ScreenBuilder {
                 NavigationBarItem(
                     text = "",
                     image = "informationImage",
-                    action = ShowNativeDialog(
+                    action = Alert(
                         title = "TabView",
                         message = " Is a component that will make the navigation between views. It may happen by " +
                             "sliding through screens or by clicking at the tabs shown. ",
-                        buttonText = "OK"
+                        labelOk = "OK"
                     )
                 )
             )
         ),
         child = TabView(
-            tabItems = listOf(tab1, tab2, tab3, tab4)
+            children = listOf(tab1, tab2, tab3, tab4)
         )
     )
 }

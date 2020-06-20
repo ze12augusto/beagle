@@ -15,14 +15,15 @@
  */
 
 import Foundation
+import BeagleSchema
 
 public struct Request {
-    public let url: String
+    public let url: URL
     public let type: RequestType
     public let additionalData: RemoteScreenAdditionalData?
 
     public init(
-        url: String,
+        url: URL,
         type: RequestType,
         additionalData: RemoteScreenAdditionalData?
     ) {
@@ -35,6 +36,7 @@ public struct Request {
         case fetchComponent
         case submitForm(FormData)
         case fetchImage
+        case rawRequest(RequestData)
     }
 
     public struct FormData {
@@ -49,10 +51,27 @@ public struct Request {
             self.values = values
         }
     }
+    
+    public struct RequestData {
+        public let method: String?
+        public let headers: [String: String]?
+        public let body: Any?
+        
+        public init(
+            method: String? = "GET",
+            headers: [String: String]? = [:],
+            body: Any? = nil
+        ) {
+            self.method = method
+            self.headers = headers
+            self.body = body
+        }
+    }
 
     public enum Error: Swift.Error {
         case networkError(Swift.Error)
         case decoding(Swift.Error)
         case loadFromTextError
+        case urlBuilderError
     }
 }

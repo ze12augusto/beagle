@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-
 import XCTest
 import SnapshotTesting
 @testable import BeagleUI
+import BeagleSchema
 
 final class UnitValueExtensionTests: XCTestCase {
     

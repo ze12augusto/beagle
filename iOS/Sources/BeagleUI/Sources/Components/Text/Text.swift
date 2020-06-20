@@ -16,37 +16,27 @@
 
 import UIKit
 
-public struct Text: Widget {
+public struct Text: Widget, AutoDecodable {
     
     // MARK: - Public Properties
-    
-    public let text: String
+    public var text: Expression<String>
     public let style: String?
     public let alignment: Alignment?
     public let textColor: String?
-    public var id: String?
-    public let appearance: Appearance?
-    public let flex: Flex?
-    public let accessibility: Accessibility?
-    
+    public var widgetProperties: WidgetProperties
+
     public init(
-        _ text: String,
+        _ text: Expression<String>,
         style: String? = nil,
         alignment: Alignment? = nil,
         textColor: String? = nil,
-        id: String? = nil,
-        appearance: Appearance? = nil,
-        flex: Flex? = nil,
-        accessibility: Accessibility? = nil
+        widgetProperties: WidgetProperties = WidgetProperties()
     ) {
         self.text = text
         self.style = style
         self.alignment = alignment
         self.textColor = textColor
-        self.id = id
-        self.appearance = appearance
-        self.flex = flex
-        self.accessibility = accessibility
+        self.widgetProperties = widgetProperties
     }
 }
 
@@ -54,6 +44,7 @@ extension Text: Renderable {
 
     public func toView(context: BeagleContext, dependencies: RenderableDependencies) -> UIView {
         let textView = UITextView()
+        textView.text = get(text, with: textView, controller: context) { textView.text = $0 }
         textView.isEditable = false
         textView.isSelectable = false
         textView.isScrollEnabled = false
@@ -64,7 +55,6 @@ extension Text: Renderable {
         textView.backgroundColor = .clear
         
         textView.textAlignment = alignment?.toUIKit() ?? .natural
-        textView.text = text
         
         if let style = style {
             dependencies.theme.applyStyle(for: textView, withId: style)

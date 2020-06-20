@@ -16,14 +16,14 @@
 
 package br.com.zup.beagle.sample.widgets
 
-import android.content.Context
 import android.graphics.Color
 import android.text.InputType
 import android.widget.EditText
 import androidx.core.widget.doOnTextChanged
+import br.com.zup.beagle.android.components.form.InputWidget
+import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.annotation.RegisterWidget
 import br.com.zup.beagle.sample.utils.MaskApplier
-import br.com.zup.beagle.widget.form.InputWidget
 
 enum class TextFieldInputType {
     NUMBER,
@@ -40,11 +40,12 @@ data class TextField(
     val inputType: TextFieldInputType? = null
 ) : InputWidget() {
 
+    @Transient
     private lateinit var textFieldView: EditText
 
-    override fun toView(context: Context) = EditText(context).apply {
+    override fun buildView(rootView: RootView) = EditText(rootView.getContext()).apply {
         textFieldView = this
-        bind()
+        bind(this@TextField)
 
         doOnTextChanged { _, _, _, _ -> notifyChanges() }
     }
@@ -55,25 +56,27 @@ data class TextField(
 
     override fun getValue() = textFieldView.text.toString()
 
-    private fun bind() {
-        val color = Color.parseColor(getColorWithHashTag(color))
-        textFieldView.setText(description)
-        textFieldView.hint = hint
-        textFieldView.setTextColor(color)
-        textFieldView.setHintTextColor(color)
+    private fun bind(textField: TextField) {
+        textField.apply {
+            val color = Color.parseColor(getColorWithHashTag(color))
+            textFieldView.setText(description)
+            textFieldView.hint = hint
+            textFieldView.setTextColor(color)
+            textFieldView.setHintTextColor(color)
 
-        inputType?.let {
-            if (it == TextFieldInputType.NUMBER) {
-                textFieldView.inputType = InputType.TYPE_CLASS_NUMBER or
-                    InputType.TYPE_NUMBER_FLAG_SIGNED
-            } else if (it == TextFieldInputType.PASSWORD) {
-                textFieldView.inputType = InputType.TYPE_CLASS_TEXT or
-                    InputType.TYPE_TEXT_VARIATION_PASSWORD
+            inputType?.let {
+                if (it == TextFieldInputType.NUMBER) {
+                    textFieldView.inputType = InputType.TYPE_CLASS_NUMBER or
+                        InputType.TYPE_NUMBER_FLAG_SIGNED
+                } else if (it == TextFieldInputType.PASSWORD) {
+                    textFieldView.inputType = InputType.TYPE_CLASS_TEXT or
+                        InputType.TYPE_TEXT_VARIATION_PASSWORD
+                }
             }
-        }
 
-        mask?.let {
-            MaskApplier(textFieldView, it)
+            mask?.let {
+                MaskApplier(textFieldView, it)
+            }
         }
     }
 

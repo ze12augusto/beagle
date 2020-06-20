@@ -16,6 +16,7 @@
 
 import XCTest
 @testable import BeagleUI
+import BeagleSchema
 
 final class ThemeTests: XCTestCase {
     
@@ -106,7 +107,7 @@ final class ThemeTests: XCTestCase {
         // Given
         let backgroundColor: UIColor = .clear
         let indicatorColor: UIColor = .blue
-        let tabItem = TabItem(title: "Tab 1", content: Text("Tab content"))
+        let tabItem = TabItem(title: "Tab 1", child: Text("Tab content"))
         let view = TabViewUIComponent(model: TabViewUIComponent.Model(tabIndex: 0, tabViewItems: [tabItem, tabItem]))
         
         // When

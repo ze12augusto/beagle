@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-
 import Foundation
 import UIKit
+import BeagleSchema
 
 postfix operator %
 

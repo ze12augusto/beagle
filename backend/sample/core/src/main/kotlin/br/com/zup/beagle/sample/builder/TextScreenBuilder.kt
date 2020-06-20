@@ -16,8 +16,10 @@
 
 package br.com.zup.beagle.sample.builder
 
-import br.com.zup.beagle.action.ShowNativeDialog
-import br.com.zup.beagle.core.Appearance
+import br.com.zup.beagle.widget.action.Alert
+import br.com.zup.beagle.core.Style
+import br.com.zup.beagle.ext.applyFlex
+import br.com.zup.beagle.ext.applyStyle
 import br.com.zup.beagle.ext.unitReal
 import br.com.zup.beagle.sample.constants.SCREEN_TEXT_STYLE
 import br.com.zup.beagle.sample.constants.STEEL_BLUE
@@ -39,11 +41,11 @@ object TextScreenBuilder : ScreenBuilder {
                 NavigationBarItem(
                     text = "",
                     image = "informationImage",
-                    action = ShowNativeDialog(
+                    action = Alert(
                         title = "Text",
                         message = "This widget will define a text view natively using the server driven " +
                             "information received through Beagle.",
-                        buttonText = "OK"
+                        labelOk = "OK"
                     )
                 )
             )
@@ -51,11 +53,11 @@ object TextScreenBuilder : ScreenBuilder {
         child = Container(
             children = listOf(
                 beagleText(text = "hello world without style"),
-                beagleText(text = "hello world with style", style = SCREEN_TEXT_STYLE),
+                beagleText(text = "hello world with style", styleId = SCREEN_TEXT_STYLE),
                 beagleText(text = "hello world with Appearance", appearanceColor = STEEL_BLUE),
                 beagleText(
                     text = "hello world with style and Appearance",
-                    style = SCREEN_TEXT_STYLE,
+                    styleId = SCREEN_TEXT_STYLE,
                     appearanceColor = STEEL_BLUE
                 )
             )
@@ -64,20 +66,20 @@ object TextScreenBuilder : ScreenBuilder {
 
     private fun beagleText(
         text: String,
-        style: String? = null,
+        styleId: String? = null,
         appearanceColor: String? = null
     ) =
-        Text(text = text, style = style)
+        Text(text = text, styleId = styleId)
             .applyFlex(
                 flex = Flex(
                     margin = EdgeValue(
                         top = 16.unitReal(),
-                        start = 16.unitReal(),
-                        end = 16.unitReal()
+                        left = 16.unitReal(),
+                        right = 16.unitReal()
                     )
                 )
-            ).applyAppearance(
-                appearance = Appearance(
+            ).applyStyle(
+                style = Style(
                     backgroundColor = appearanceColor
                 )
             )

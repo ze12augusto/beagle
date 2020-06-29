@@ -26,12 +26,11 @@ import br.com.zup.beagle.android.context.Bind
 import br.com.zup.beagle.android.context.valueOf
 import br.com.zup.beagle.android.engine.mapper.ViewMapper
 import br.com.zup.beagle.android.setup.BeagleEnvironment
+import br.com.zup.beagle.android.utils.accessibilityRequired
 import br.com.zup.beagle.android.utils.observeBindChanges
 import br.com.zup.beagle.android.view.ViewFactory
-import br.com.zup.beagle.android.view.custom.BeagleFlexView
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.android.widget.WidgetView
-import br.com.zup.beagle.core.Style
 import br.com.zup.beagle.widget.core.ImageContentMode
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -41,14 +40,17 @@ import com.bumptech.glide.request.transition.Transition
 data class Image(
     val path: Bind<PathType>,
     val mode: ImageContentMode? = null,
-    val placeholder: PathType.Local? = null) : WidgetView() {
+    val placeholder: PathType.Local? = null,
+    val description: String? = null) : WidgetView() {
     constructor(
         path: PathType,
         mode: ImageContentMode? = null,
-        placeholder: PathType.Local? = null) : this(
+        placeholder: PathType.Local? = null,
+        description: String? = null) : this(
         valueOf(path),
         mode,
-        placeholder
+        placeholder,
+        description
     )
 
     @Transient
@@ -74,6 +76,9 @@ data class Image(
                 }
             }
         }
+
+        accessibilityRequired(!description.isNullOrEmpty() ) { "Description is required for image accessibility" }
+
         return imageView
     }
 

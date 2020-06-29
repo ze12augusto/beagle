@@ -14,23 +14,10 @@
  * limitations under the License.
  */
 
-package br.com.zup.beagle.android.setup
+package br.com.zup.beagle.android.utils
 
-enum class Environment {
-    DEBUG,
-    PRODUCTION
-}
+import br.com.zup.beagle.android.setup.BeagleEnvironment
 
-data class Cache(
-    val enabled: Boolean,
-    val maxAge: Long,
-    val memoryMaximumCapacity: Int
-)
-
-interface BeagleConfig {
-    val environment: Environment
-    val baseUrl: String
-    val cache: Cache
-    val isLoggingEnabled: Boolean
-    val accessibilityRequired: Boolean
+fun accessibilityRequired(value: Boolean, lazyMessage: () -> Any) {
+    require(value && BeagleEnvironment.beagleSdk.config.accessibilityRequired) { lazyMessage() }
 }

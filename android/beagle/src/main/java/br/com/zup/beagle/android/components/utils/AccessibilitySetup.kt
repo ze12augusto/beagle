@@ -17,6 +17,9 @@
 package br.com.zup.beagle.android.components.utils
 
 import android.view.View
+import br.com.zup.beagle.android.logger.BeagleMessageLogs
+import br.com.zup.beagle.android.setup.BeagleEnvironment
+import br.com.zup.beagle.core.Accessibility
 import br.com.zup.beagle.core.AccessibilityComponent
 import br.com.zup.beagle.core.ServerDrivenComponent
 
@@ -24,19 +27,22 @@ class AccessibilitySetup {
 
     fun applyAccessibility(view: View, component: ServerDrivenComponent) {
         (component as? AccessibilityComponent)?.let { accessibilityComponent ->
-            accessibilityComponent.accessibility?.accessible?.let { isAccessible ->
-                view.applyImportantForAccessibility(isAccessible)
+
+            accessibilityComponent.accessibility?.let {accessibilityLet->
+                view.applyAccessibility(accessibilityLet)
+            }?: run {
+                if(BeagleEnvironment.beagleSdk.config.isAccessibilityWarningsEnabled)
+                    BeagleMessageLogs.accessibilityComponentIsRequiredWarning(component)
             }
 
-            accessibilityComponent.accessibility?.accessibilityLabel?.let { accessibilityLabel ->
-                view.contentDescription = accessibilityLabel
-            }
         }
     }
+
 }
 
-internal fun View.applyImportantForAccessibility(isAccessible: Boolean) {
-    this.importantForAccessibility = if (isAccessible)
+internal fun View.applyAccessibility(accessibility: Accessibility) {
+    accessibility.accessibilityLabel?.let { this.contentDescription = it}
+    this.importantForAccessibility = if (accessibility.accessible)
         View.IMPORTANT_FOR_ACCESSIBILITY_YES
     else
         View.IMPORTANT_FOR_ACCESSIBILITY_NO

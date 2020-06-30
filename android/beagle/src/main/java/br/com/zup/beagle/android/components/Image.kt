@@ -26,7 +26,6 @@ import br.com.zup.beagle.android.context.Bind
 import br.com.zup.beagle.android.context.valueOf
 import br.com.zup.beagle.android.engine.mapper.ViewMapper
 import br.com.zup.beagle.android.setup.BeagleEnvironment
-import br.com.zup.beagle.android.utils.accessibilityRequired
 import br.com.zup.beagle.android.utils.observeBindChanges
 import br.com.zup.beagle.android.view.ViewFactory
 import br.com.zup.beagle.android.widget.RootView
@@ -40,17 +39,14 @@ import com.bumptech.glide.request.transition.Transition
 data class Image(
     val path: Bind<PathType>,
     val mode: ImageContentMode? = null,
-    val placeholder: PathType.Local? = null,
-    val description: String? = null) : WidgetView() {
+    val placeholder: PathType.Local? = null) : WidgetView() {
     constructor(
         path: PathType,
         mode: ImageContentMode? = null,
-        placeholder: PathType.Local? = null,
-        description: String? = null) : this(
+        placeholder: PathType.Local? = null) : this(
         valueOf(path),
         mode,
-        placeholder,
-        description
+        placeholder
     )
 
     @Transient
@@ -76,9 +72,6 @@ data class Image(
                 }
             }
         }
-
-        accessibilityRequired(!description.isNullOrEmpty() ) { "Description is required for image accessibility" }
-
         return imageView
     }
 

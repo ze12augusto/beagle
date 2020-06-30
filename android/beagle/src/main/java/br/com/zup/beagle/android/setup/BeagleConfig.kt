@@ -32,5 +32,5 @@ interface BeagleConfig {
     val baseUrl: String
     val cache: Cache
     val isLoggingEnabled: Boolean
-    val accessibilityRequired: Boolean
+    val isAccessibilityWarningsEnabled: Boolean
 }

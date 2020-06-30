@@ -105,4 +105,11 @@ internal object BeagleMessageLogs {
         val errorMessage = "You are trying to use multiple expressions in a type that is not string!"
         BeagleLoggerProxy.warning(errorMessage)
     }
+
+    fun accessibilityComponentIsRequiredWarning(component: ServerDrivenComponent) {
+        val message = """
+            Did you miss to applyAccessibility for Widget ${component::class.java.simpleName}
+        """.trimIndent()
+        BeagleLoggerProxy.warning(message)
+    }
 }

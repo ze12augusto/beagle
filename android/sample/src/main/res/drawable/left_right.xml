@@ -1,0 +1,39 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="NewApi">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="25dp"
+            android:height="25dp"
+            android:viewportWidth="515"
+            android:viewportHeight="515">
+            <path
+                android:name="dot_worm"
+                android:fillColor="#000"
+                android:pathData="M 496.679 212.208 C 521.846 237.375 521.846 278.179 496.679 303.346 C 471.512 328.513 430.708 328.513 405.541 303.346 C 380.374 278.179 380.374 237.375 405.541 212.208 C 430.708 187.041 471.512 187.041 496.679 212.208"
+                android:strokeWidth="1" />
+        </vector>
+    </aapt:attr>
+    <target android:name="dot_worm">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="200"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"
+                    android:propertyName="pathData"
+                    android:valueFrom="M 36.888 199.502 C 47.339 194.561 58.844 192.588 70.137 193.583 C 77.942 194.271 85.646 196.377 92.83 199.901 C 99.036 202.945 104.853 207.047 110.014 212.208 C 111.946 214.14 113.73 216.164 115.365 218.266 C 125.866 231.764 130.252 248.479 128.522 264.663 C 127.013 278.792 120.843 292.517 110.014 303.346 C 102.362 310.998 93.265 316.323 83.601 319.322 C 78.914 320.777 74.093 321.684 69.239 322.044 C 60.662 322.68 51.982 321.607 43.753 318.824 C 34.662 315.75 26.121 310.591 18.876 303.346 C 15.825 300.295 13.145 297.015 10.834 293.561 C 3.612 282.766 0.001 270.272 0.001 257.777 C 0.001 241.284 6.293 224.792 18.876 212.208 C 24.265 206.819 30.372 202.583 36.888 199.502"
+                    android:valueTo="M 154.391 196.19 C 187.124 196.19 219.857 196.19 252.59 196.19 C 288.96 196.19 325.33 196.19 361.7 196.19 C 392.605 196.19 423.509 196.19 454.414 196.19 C 454.414 196.19 454.414 196.19 454.414 196.19 C 487.73 196.19 515 224.172 515 257.5 C 515 290.828 487.73 318.81 454.414 318.81 C 424.419 318.81 394.423 318.81 364.428 318.81 C 329.876 318.81 295.325 318.81 260.773 318.81 C 226.222 318.81 191.67 318.81 157.119 318.81 C 124.941 318.81 92.764 318.81 60.586 318.81 C 43.928 318.81 28.782 311.815 17.799 300.653 C 6.817 289.491 0 274.164 0 257.5 C 0 224.172 27.27 196.19 60.586 196.19 C 91.854 196.19 123.123 196.19 154.391 196.19"
+                    android:valueType="pathType" />
+                <objectAnimator
+                    android:duration="200"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"
+                    android:propertyName="fillColor"
+                    android:valueFrom="#dcdcdc"
+                    android:valueTo="#ff5592"
+                    android:valueType="colorType" />
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>

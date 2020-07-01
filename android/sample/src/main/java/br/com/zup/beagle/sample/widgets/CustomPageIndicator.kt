@@ -17,7 +17,6 @@
 package br.com.zup.beagle.sample.widgets
 
 import br.com.zup.beagle.annotation.RegisterWidget
-import android.view.View
 import br.com.zup.beagle.android.components.page.PageIndicatorComponent
 import br.com.zup.beagle.android.components.page.PageIndicatorOutput
 import br.com.zup.beagle.android.widget.RootView
@@ -25,8 +24,8 @@ import br.com.zup.beagle.sample.components.CustomPageIndicatorView
 
 @RegisterWidget
 data class CustomPageIndicator(
-    val showContinue: Boolean,
-    val showSkip: Boolean
+    val skipName: String? = null,
+    val continueName: String? = null
 ) : PageIndicatorComponent {
 
     @Transient
@@ -47,23 +46,15 @@ data class CustomPageIndicator(
     }
 
     override fun buildView(rootView: RootView) = CustomPageIndicatorView(rootView.getContext()).apply {
+        skipName?.let {
+            setSkipName(it)
+        }
+        continueName?.let {
+            setContinueName(it)
+        }
         customPageIndicatorView = this
         setIndexChangedListener { index ->
             output.swapToPage(index)
-            setContinueButtonVisibility(
-                if (showContinue) {
-                    View.VISIBLE
-                } else {
-                    View.INVISIBLE
-                }
-            )
-            setBackButtonVisibility(
-                if (showSkip) {
-                    View.VISIBLE
-                } else {
-                    View.INVISIBLE
-                }
-            )
         }
     }
 }

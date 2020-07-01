@@ -22,12 +22,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.com.zup.beagle.android.components.Text
-import br.com.zup.beagle.android.components.page.PageIndicator
 import br.com.zup.beagle.android.utils.toView
 import br.com.zup.beagle.widget.core.AlignSelf
 import br.com.zup.beagle.widget.core.Flex
 import br.com.zup.beagle.android.components.page.PageView
 import br.com.zup.beagle.ext.applyFlex
+import br.com.zup.beagle.sample.widgets.CustomPageIndicator
 import br.com.zup.beagle.widget.core.TextAlignment
 
 class PageViewFragment : Fragment() {
@@ -37,10 +37,7 @@ class PageViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val declarative = PageView(
-            pageIndicator = PageIndicator(
-                selectedColor = "#000000",
-                unselectedColor = "#888888"
-            ),
+            pageIndicator = CustomPageIndicator(),
             children = listOf(
                 Text("Page 1", alignment = TextAlignment.CENTER).applyFlex(
                     Flex(

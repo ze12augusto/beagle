@@ -17,30 +17,39 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingStart="5dp"
-    android:paddingEnd="5dp">
+    android:layout_height="50dp"
+    android:animateLayoutChanges="true">
 
-    <Button
-        android:id="@+id/btBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Voltar" />
+    <TextView
+        android:id="@+id/tvSkip"
+        android:layout_width="90dp"
+        android:layout_height="match_parent"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:text="@string/skip"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:id="@+id/llPageIndicator"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_toStartOf="@+id/btContinue"
-        android:layout_toEndOf="@+id/btBack"
+        android:layout_height="match_parent"
+        android:layout_toStartOf="@+id/tvContinue"
+        android:layout_toEndOf="@+id/tvSkip"
         android:gravity="center"
         android:orientation="horizontal" />
 
-    <Button
-        android:id="@+id/btContinue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/tvContinue"
+        android:layout_width="90dp"
+        android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
-        android:text="Avançar" />
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:text="@string/keep_going"
+        android:textColor="@color/colorOrange"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

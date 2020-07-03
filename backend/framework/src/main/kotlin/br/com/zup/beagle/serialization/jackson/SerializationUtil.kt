@@ -16,9 +16,50 @@
 
 package br.com.zup.beagle.serialization.jackson
 
+import br.com.zup.beagle.annotation.RegisterAction
+import br.com.zup.beagle.annotation.RegisterWidget
+import br.com.zup.beagle.core.ServerDrivenComponent
+import br.com.zup.beagle.widget.action.Action
+import br.com.zup.beagle.widget.layout.Screen
+import br.com.zup.beagle.widget.ui.ImagePath
 import kotlin.reflect.KClass
 
 internal fun getClass(
     clazz: KClass<*>,
     classLoader: ClassLoader
 ) = Class.forName(clazz.qualifiedName, false, classLoader)
+
+internal fun getBeagleType(beanClass: Class<out Any>, classLoader: ClassLoader) =
+    beanClass.simpleName?.decapitalize()?.let {
+        when {
+            isSubclass(beanClass, Action::class, classLoader) ->
+                ACTION_TYPE to getBeagleTypeWithNamespace(
+                    beanClass,
+                    it,
+                    getClass(RegisterAction::class, classLoader)
+                )
+            isSubclass(beanClass, Screen::class, classLoader) ->
+                COMPONENT_TYPE to "$BEAGLE_NAMESPACE:$SCREEN_COMPONENT"
+            isSubclass(beanClass, ServerDrivenComponent::class, classLoader) ->
+                COMPONENT_TYPE to getBeagleTypeWithNamespace(
+                    beanClass,
+                    it,
+                    getClass(RegisterWidget::class, classLoader)
+                )
+            isSubclass(beanClass, ImagePath::class, classLoader) ->
+                IMAGE_PATH_TYPE to it
+            else -> null
+        }
+    }
+
+private fun isSubclass(
+    beanClass: Class<out Any>,
+    kClass: KClass<*>,
+    classLoader: ClassLoader
+) = getClass(kClass, classLoader).isAssignableFrom(beanClass)
+
+private fun getBeagleTypeWithNamespace(beanClass: Class<out Any>, name: String, annotation: Class<*>) =
+    if ((annotation as? Class<out Annotation>)?.let { beanClass.isAnnotationPresent(it) } == true)
+        "$CUSTOM_BEAGLE_NAMESPACE:$name"
+    else "$BEAGLE_NAMESPACE:$name"
+

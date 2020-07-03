@@ -76,6 +76,8 @@
     <style name="DesignSystem.Button.Black" parent="DesignSystem.Button.Default">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="background">@color/colorBlack</item>
+        <item name="android:autoLink">all</item>
+        <item name="android:textColorLink">@color/colorWhite</item>
     </style>
 
     <style name="DesignSystem.Button.Text" parent="Widget.AppCompat.Button">
@@ -89,6 +91,12 @@
     <style name="DesignSystem.Text.Default" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextInput">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColorHint">@color/colorGreen</item>
     </style>
 
     <style name="DesignSystem.Text.H2" parent="DesignSystem.Text.Default">
@@ -128,6 +136,7 @@
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:textSize">40sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:autoLink">all</item>
     </style>
 
     <style name="DesignSystem.Form.Submit" parent="DesignSystem.Text.Default">

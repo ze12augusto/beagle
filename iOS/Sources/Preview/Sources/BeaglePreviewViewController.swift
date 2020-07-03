@@ -16,7 +16,7 @@
 
 import UIKit
 
-import BeagleUI
+import Beagle
 
 class BeaglePreviewViewController: UIViewController, HasDependencies, WSConnectionHandlerDelegate {
 
@@ -46,7 +46,7 @@ class BeaglePreviewViewController: UIViewController, HasDependencies, WSConnecti
 
     // MARK: HasDependencies
 
-    typealias DependencyType = WSConnetionHandlerDependency
+    typealias DependencyType = WSConnectionHandlerDependency
 
     var dependencies: DependencyType
 

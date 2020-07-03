@@ -19,22 +19,27 @@
 package br.com.zup.beagle.android.view
 
 import android.content.Context
+import android.os.Build
 import android.view.View
 import android.webkit.WebView
+import android.widget.Button
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.HorizontalScrollView
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
+import br.com.zup.beagle.core.Style
 import br.com.zup.beagle.android.components.utils.RoundedImageView
 import br.com.zup.beagle.android.view.custom.BeagleFlexView
 import br.com.zup.beagle.android.view.custom.BeaglePageIndicatorView
 import br.com.zup.beagle.android.view.custom.BeaglePageView
 import br.com.zup.beagle.android.view.custom.BeagleTabLayout
 import br.com.zup.beagle.android.view.custom.BeagleView
-import br.com.zup.beagle.widget.core.Flex
 
 internal class ViewFactory {
 
@@ -46,8 +51,8 @@ internal class ViewFactory {
     fun makeBeagleFlexView(context: Context) =
         BeagleFlexView(context = context)
 
-    fun makeBeagleFlexView(context: Context, flex: Flex) =
-        BeagleFlexView(context = context, flex = flex)
+    fun makeBeagleFlexView(context: Context, style: Style) =
+        BeagleFlexView(context = context, style = style)
 
     fun makeScrollView(context: Context) =
         ScrollView(context).apply {
@@ -59,9 +64,17 @@ internal class ViewFactory {
             isFillViewport = true
         }
 
-    fun makeButton(context: Context) = AppCompatButton(context)
+    fun makeButton(context: Context) = Button(context)
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    fun makeButton(context: Context, id: Int) = Button(context, null, 0, id)
 
     fun makeTextView(context: Context) = TextView(context)
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    fun makeTextView(context: Context, id: Int) = TextView(context, null, 0, id)
+
+    fun makeInputText(context: Context) = EditText(context)
 
     fun makeAlertDialogBuilder(context: Context) = AlertDialog.Builder(context)
 
@@ -73,7 +86,8 @@ internal class ViewFactory {
 
     fun makeTabLayout(context: Context) = BeagleTabLayout(context)
 
-    fun makeWebView(context: Context) = WebView(context)
+    //we use the context.applicationContext to prevent a crash on android 21
+    fun makeWebView(context: Context) = WebView(context.applicationContext)
 
     fun makeImageView(context: Context, cornerRadius: Double = 0.0) = RoundedImageView(context, cornerRadius)
 

@@ -1,17 +1,9 @@
 ▿ Navigate
   ▿ pushStack: Route
     ▿ declarative: Screen
-      ▿ child: Text
-        - alignment: Optional<Alignment>.none
-        - styleId: Optional<String>.none
-        ▿ text: Expression<String>
-          - value: "child"
-        - textColor: Optional<String>.none
-        ▿ widgetProperties: WidgetProperties
-          - accessibility: Optional<Accessibility>.none
-          - flex: Optional<Flex>.none
-          - id: Optional<String>.none
-          - style: Optional<Style>.none
+      ▿ child: UnknownComponent
+        - type: "custom:beagleschematestscomponent"
+      - context: Optional<Context>.none
       - id: Optional<String>.none
       - navigationBar: Optional<NavigationBar>.none
       ▿ safeArea: Optional<SafeArea>

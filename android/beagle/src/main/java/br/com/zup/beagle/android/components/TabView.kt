@@ -26,12 +26,13 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import br.com.zup.beagle.R
-import br.com.zup.beagle.android.context.Bind
+import br.com.zup.beagle.android.context.ContextComponent
+import br.com.zup.beagle.android.context.ContextData
 import br.com.zup.beagle.android.setup.BeagleEnvironment
 import br.com.zup.beagle.android.utils.StyleManager
 import br.com.zup.beagle.android.utils.dp
-import br.com.zup.beagle.android.utils.get
 import br.com.zup.beagle.android.view.ViewFactory
+import br.com.zup.beagle.core.Style
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.android.widget.WidgetView
 import br.com.zup.beagle.widget.core.Flex
@@ -42,17 +43,15 @@ internal var styleManagerFactory = StyleManager()
 
 data class TabView(
     val children: List<TabItem>,
-    val styleId: Bind<String>? = null
-) : WidgetView() {
-    constructor(
-        children: List<TabItem>,
-        styleId: String
-    ) : this(children, Bind.valueOf(styleId))
+    val styleId: String? = null,
+    override val context: ContextData? = null
+) : WidgetView(), ContextComponent {
+
     @Transient
     private val viewFactory: ViewFactory = ViewFactory()
 
     override fun buildView(rootView: RootView): View {
-        val containerFlex = Flex(grow = 1.0)
+        val containerFlex = Style(flex = Flex(grow = 1.0))
 
         val container = viewFactory.makeBeagleFlexView(rootView.getContext(), containerFlex)
 
@@ -97,12 +96,7 @@ data class TabView(
     }
 
     private fun TabLayout.setData(rootView: RootView) {
-        var bindString: String? = null
-        styleId?.get(rootView) { bind ->
-            bindString = bind
-        }
-        val typedArray = styleManagerFactory.getTabBarTypedArray(context, bindString)
-        typedArray?.let {
+        styleManagerFactory.getTabBarTypedArray(context, styleId)?.let {
             setTabTextColors(
                 it.getColor(R.styleable.BeagleTabBarStyle_tabTextColor, Color.BLACK),
                 it.getColor(R.styleable.BeagleTabBarStyle_tabSelectedTextColor, Color.GRAY)
@@ -124,7 +118,7 @@ data class TabView(
             addTab(newTab().apply {
                 text = children[i].title
                 children[i].icon?.let {
-                    icon = getIconFromResources(context, it)
+                    icon = getIconFromResources(context, it.mobileId)
                 }
             })
         }

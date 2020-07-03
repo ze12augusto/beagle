@@ -68,15 +68,27 @@ final public class ComponentDecoder: ComponentDecoding {
     }
     
     public func decodeComponent(from data: Data) throws -> RawComponent {
-        return try decode(from: data)
+        return try decodeAndLog(from: data)
     }
     
     public func decodeAction(from data: Data) throws -> RawAction {
-        return try decode(from: data)
+        return try decodeAndLog(from: data)
     }
     
     // MARK: - Private Functions
-    
+
+    private func decodeAndLog<T>(from data: Data) throws -> T {
+        do {
+            return try decode(from: data)
+        } catch let error as DecodingError {
+            dependencies.schemaLogger?.logDecodingError(type: String(describing: error))
+            throw error
+        } catch {
+            dependencies.schemaLogger?.logDecodingError(type: error.localizedDescription)
+            throw error
+        }
+    }
+
     private func decode<T>(from data: Data) throws -> T {
         let container = try jsonDecoder.decode(AnyDecodableContainer.self, from: data)
         guard let content = container.content as? T else {
@@ -140,7 +152,6 @@ final public class ComponentDecoder: ComponentDecoding {
     private func registerUITypes() {
         registerComponent(Button.self, key: key(name: "Button", namespace: .beagle))
         registerComponent(Image.self, key: key(name: "Image", namespace: .beagle))
-        registerComponent(NetworkImage.self, key: key(name: "NetworkImage", namespace: .beagle))
         registerComponent(ListView.self, key: key(name: "ListView", namespace: .beagle))
         registerComponent(Text.self, key: key(name: "Text", namespace: .beagle))
         registerComponent(PageView.self, key: key(name: "PageView", namespace: .beagle))
@@ -148,6 +159,7 @@ final public class ComponentDecoder: ComponentDecoding {
         registerComponent(PageIndicator.self, key: key(name: "PageIndicator", namespace: .beagle))
         registerComponent(LazyComponent.self, key: key(name: "LazyComponent", namespace: .beagle))
         registerComponent(WebView.self, key: key(name: "WebView", namespace: .beagle))
+        registerComponent(TextInput.self, key: key(name: "TextInput", namespace: .beagle))
     }
     
     private func registerComponent<T: Decodable>(_ type: T.Type, key: String) {

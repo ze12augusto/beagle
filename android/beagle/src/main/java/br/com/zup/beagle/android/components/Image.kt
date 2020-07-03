@@ -16,19 +16,37 @@
 
 package br.com.zup.beagle.android.components
 
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
+import br.com.zup.beagle.android.components.utils.RoundedImageView
+import br.com.zup.beagle.android.context.Bind
+import br.com.zup.beagle.android.context.valueOf
 import br.com.zup.beagle.android.engine.mapper.ViewMapper
 import br.com.zup.beagle.android.setup.BeagleEnvironment
+import br.com.zup.beagle.android.utils.observeBindChanges
 import br.com.zup.beagle.android.view.ViewFactory
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.android.widget.WidgetView
 import br.com.zup.beagle.widget.core.ImageContentMode
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 
 data class Image(
-    val name: String,
-    val contentMode: ImageContentMode? = null
+    val path: Bind<PathType>,
+    val mode: ImageContentMode? = null
 ) : WidgetView() {
+    constructor(
+        path: PathType,
+        mode: ImageContentMode? = null
+    ) : this(
+        valueOf(path),
+        mode
+    )
 
     @Transient
     private val viewMapper: ViewMapper = ViewMapper()
@@ -37,17 +55,64 @@ data class Image(
     private val viewFactory = ViewFactory()
 
     override fun buildView(rootView: RootView): View {
-        val imageView = viewFactory.makeImageView(rootView.getContext(), style?.cornerRadius?.radius ?: 0.0)
-        imageView.setData(this, viewMapper)
+        val imageView: RoundedImageView = getImageView(rootView)
+        observeBindChanges(rootView, path) { pathType ->
+            when (pathType) {
+                is PathType.Local -> {
+                    imageView.apply {
+                        BeagleEnvironment.beagleSdk.designSystem?.image(pathType.mobileId)?.let {
+                            this.setImageResource(it)
+                        }
+                    }
+                }
+                is PathType.Remote -> {
+                    val placeholder = pathType.placeholder?.mobileId
+                    val requestOptions = getGlideRequestOptions(placeholder)
+                    imageView.loadImage(pathType, requestOptions)
+                }
+            }
+        }
         return imageView
     }
 
-    private fun ImageView.setData(widget: Image, viewMapper: ViewMapper) {
-        val contentMode = widget.contentMode ?: ImageContentMode.FIT_CENTER
-        scaleType = viewMapper.toScaleType(contentMode)
-        val designSystem = BeagleEnvironment.beagleSdk.designSystem
-        designSystem?.image(widget.name)?.let {
-            this.setImageResource(it)
-        }
+    private fun getImageView(rootView: RootView) = viewFactory.makeImageView(rootView.getContext(),
+        style?.cornerRadius?.radius ?: 0.0).apply {
+        scaleType = viewMapper.toScaleType(mode ?: ImageContentMode.FIT_CENTER)
     }
+
+    private fun ImageView.loadImage(
+        path: PathType.Remote,
+        requestOptions: RequestOptions) {
+        Glide.with(this)
+            .setDefaultRequestOptions(requestOptions)
+            .asBitmap()
+            .load(path.url)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    this@loadImage.setImageBitmap(resource)
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {}
+            })
+    }
+
+    @SuppressLint("CheckResult")
+    private fun getGlideRequestOptions(placeholder: String?): RequestOptions {
+        val requestOptions = RequestOptions()
+        getPlaceholder(placeholder)?.let {
+            requestOptions.placeholder(it)
+        }
+        return requestOptions
+    }
+
+    private fun getPlaceholder(placeholder: String?): Int? =
+        placeholder?.let {
+            BeagleEnvironment.beagleSdk.designSystem?.image(it)
+        }
+
+}
+
+sealed class PathType {
+    data class Local(val mobileId: String) : PathType()
+    data class Remote(val url: String, val placeholder: Local? = null) : PathType()
 }

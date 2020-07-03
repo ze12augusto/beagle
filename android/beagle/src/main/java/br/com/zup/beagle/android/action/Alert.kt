@@ -17,7 +17,9 @@
 package br.com.zup.beagle.android.action
 
 import br.com.zup.beagle.android.context.Bind
-import br.com.zup.beagle.android.utils.get
+import br.com.zup.beagle.android.context.valueOf
+import br.com.zup.beagle.android.context.valueOfNullable
+import br.com.zup.beagle.android.utils.evaluateExpression
 import br.com.zup.beagle.android.utils.handleEvent
 import br.com.zup.beagle.android.view.ViewFactory
 import br.com.zup.beagle.android.widget.RootView
@@ -34,8 +36,8 @@ data class Alert(
         onPressOk: Action? = null,
         labelOk: String? = null
     ) : this(
-        title = Bind.valueOfNullable(title),
-        message = Bind.valueOf(message),
+        title = valueOfNullable(title),
+        message = valueOf(message),
         onPressOk = onPressOk,
         labelOk = labelOk
     )
@@ -45,8 +47,8 @@ data class Alert(
 
     override fun execute(rootView: RootView) {
         viewFactory.makeAlertDialogBuilder(rootView.getContext())
-            .setTitle(title?.get(rootView = rootView) ?: "")
-            .setMessage(message.get(rootView = rootView))
+            .setTitle(title?.let { evaluateExpression(rootView, it) } ?: "")
+            .setMessage(evaluateExpression(rootView, message))
             .setPositiveButton(labelOk ?: rootView.getContext().getString(android.R.string.ok)) { dialog, _ ->
                 dialog.dismiss()
                 onPressOk?.let {

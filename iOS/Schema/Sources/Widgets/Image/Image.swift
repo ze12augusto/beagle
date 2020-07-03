@@ -1,4 +1,3 @@
-//
 /*
  * Copyright 2020 ZUP IT SERVICOS EM TECNOLOGIA E INOVACAO SA
  *
@@ -17,23 +16,73 @@
 
 import Foundation
 
-public struct Image: RawWidget, AutoInitiableAndDecodable {
-    
+public struct Image: RawWidget, AutoDecodable {
+
     // MARK: - Public Properties
-    
-    public let name: String
-    public let contentMode: ImageContentMode?
+    public let path: Expression<PathType>
+    public let mode: ImageContentMode?
     public var widgetProperties: WidgetProperties
     
-// sourcery:inline:auto:Image.Init
     public init(
-        name: String,
-        contentMode: ImageContentMode? = nil,
+        _ path: Expression<PathType>,
+        mode: ImageContentMode? = nil,
         widgetProperties: WidgetProperties = WidgetProperties()
     ) {
-        self.name = name
-        self.contentMode = contentMode
+        self.path = path
+        self.mode = mode
         self.widgetProperties = widgetProperties
     }
-// sourcery:end
+    
+    indirect public enum PathType: Decodable {
+        case remote(Remote)
+        case local(String)
+
+        enum CodingKeys: String, CodingKey {
+            case type = "_beagleImagePath_"
+            case mobileId
+        }
+        
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+
+            let type = try container.decode(String.self, forKey: .type)
+            switch type {
+            case "local":
+                let mobileId = try container.decode(String.self, forKey: .mobileId)
+                self = .local(mobileId)
+            case "remote":
+                self = .remote(try Remote(from: decoder))
+            default:
+                throw DecodingError.dataCorruptedError(forKey: .type, in: container, debugDescription: "Invalid image type")
+            }
+        }
+    }
+}
+
+public extension Image {
+    struct Remote: Decodable {
+        public let url: String
+        public let placeholder: String?
+
+        public init(url: String, placeholder: String? = nil) {
+            self.url = url
+            self.placeholder = placeholder
+        }
+
+        enum CodingKeys: String, CodingKey {
+            case url
+            case placeholder
+        }
+        
+        enum LocalImageCodingKey: String, CodingKey {
+            case mobileId
+        }
+
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let nestedContainer = try? container.nestedContainer(keyedBy: LocalImageCodingKey.self, forKey: .placeholder)
+            url = try container.decode(String.self, forKey: .url)
+            placeholder = try nestedContainer?.decodeIfPresent(String.self, forKey: .mobileId)
+        }
+    }
 }

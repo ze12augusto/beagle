@@ -42,7 +42,7 @@ public struct NavigationBar: Decodable, AutoInitiable {
 // sourcery:end
 }
 
-public struct NavigationBarItem: AutoInitiableAndDecodable, AccessibilityComponent, IdentifiableComponent {
+public struct NavigationBarItem: Decodable, AccessibilityComponent, IdentifiableComponent {
     
     public let id: String?
     public let image: String?
@@ -50,7 +50,6 @@ public struct NavigationBarItem: AutoInitiableAndDecodable, AccessibilityCompone
     public let action: RawAction
     public let accessibility: Accessibility?
 
-// sourcery:inline:auto:NavigationBarItem.Init
     public init(
         id: String? = nil,
         image: String? = nil,
@@ -64,5 +63,29 @@ public struct NavigationBarItem: AutoInitiableAndDecodable, AccessibilityCompone
         self.action = action
         self.accessibility = accessibility
     }
-// sourcery:end
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case image
+        case text
+        case action
+        case accessibility
+    }
+
+    enum LocalImageCodingKey: String, CodingKey {
+        case mobileId
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        id = try container.decodeIfPresent(String.self, forKey: .id)
+        text = try container.decode(String.self, forKey: .text)
+        action = try container.decode(forKey: .action)
+        accessibility = try container.decodeIfPresent(Accessibility.self, forKey: .accessibility)
+        
+        let nestedContainer = try? container.nestedContainer(keyedBy: LocalImageCodingKey.self, forKey: .image)
+        image = try nestedContainer?.decodeIfPresent(String.self, forKey: .mobileId)
+    }
+
 }

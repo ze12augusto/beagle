@@ -15,38 +15,31 @@
  * limitations under the License.
  */
 
-import XCTest
+import Foundation
 
-class BeagleDemoUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
-                XCUIApplication().launch()
-            }
+class CucumberishInitializer: NSObject {
+    
+    @objc class func CucumberishSwiftInit()
+    {
+        //Using XCUIApplication only available in XCUI test targets not the normal Unit test targets.
+        var application : XCUIApplication!
+        //A closure that will be executed only before executing any of your features
+        beforeStart { () -> Void in
+            //Any global initialization can go here
         }
+        //A Given step definition
+        Given("the app is running") { (args, userInfo) -> Void in
+            
+        }
+        //Another step definition
+        And("all data cleared") { (args, userInfo) -> Void in
+            //Assume you defined an "I tap on \"(.*)\" button" step previousely, you can call it from your code as well.
+            let testCase = userInfo?[kXCTestCaseKey] as? XCTestCase
+            SStep(testCase, "I tap the \"Clear All Data\" button")
+        }
+        //Create a bundle for the folder that contains your "Features" folder. In this example, the CucumberishInitializer.swift file is in the same directory as the "Features" folder.
+        let bundle = Bundle(for: CucumberishInitializer.self)
+
+        Cucumberish.executeFeatures(inDirectory: "Features", from: bundle, includeTags: nil, excludeTags: nil)
     }
 }

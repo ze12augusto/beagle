@@ -29,8 +29,6 @@ android {
 
         versionCode Releases.versionCode
         versionName "${Releases.beagleVersionName}"
-
-        consumerProguardFiles GeneralNames.consumerProguard
     }
 
     buildTypes {
@@ -51,7 +49,6 @@ dependencies {
 
     implementation project(Modules.beagleAndroid)
 
-    // Unit Testing
     testImplementation TestLibraries.junit
     testImplementation TestLibraries.kotlinTest
     testImplementation TestLibraries.mockk

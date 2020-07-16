@@ -35,8 +35,10 @@ import java.net.URI
 private val PATH = RandomData.httpUrl()
 private val SCREEN_REQUEST = ScreenRequest(PATH, body = "body",
     headers = mapOf("header" to "teste"))
-private val EXPECTED_RESULT = RequestData(uri = URI(""), body = "body",
-    headers = mapOf("header" to "teste"))
+private val EXPECTED_RESULT = RequestData(
+    uri = URI(""), body = "body",
+    headers = mapOf("header" to "teste")
+)
 
 class ScreenRequestMapperTest {
 

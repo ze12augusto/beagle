@@ -31,7 +31,9 @@ import br.com.zup.beagle.android.widget.UndefinedWidget
 internal class BeagleFragment : Fragment() {
 
     private val screen: ServerDrivenComponent by lazy {
-        val json = arguments?.getString(JSON_SCREEN_KEY) ?: beagleSerializer.serializeComponent(UndefinedWidget())
+        val json = arguments?.getString(JSON_SCREEN_KEY) ?: beagleSerializer.serializeComponent(
+            UndefinedWidget()
+        )
         beagleSerializer.deserializeComponent(json)
     }
 

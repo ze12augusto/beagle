@@ -30,7 +30,8 @@ class RequestDataTest {
 
     @Before
     fun setUp() {
-        requestData = RequestData(URI(RandomData.httpUrl()))
+        requestData =
+            RequestData(URI(RandomData.httpUrl()))
     }
 
     @Test

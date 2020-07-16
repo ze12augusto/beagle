@@ -29,7 +29,8 @@ import br.com.zup.beagle.android.components.layout.Screen
 import java.lang.Thread.sleep
 
 @BeagleComponent
-class AppFormLocalActionHandler : FormLocalActionHandler {
+class AppFormLocalActionHandler :
+    FormLocalActionHandler {
 
     override fun handle(context: Context, action: FormLocalAction, listener: ActionListener) {
         listener.onStart()

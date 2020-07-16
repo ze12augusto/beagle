@@ -18,12 +18,12 @@ package br.com.zup.beagle.sample.validators
 
 import br.com.zup.beagle.android.annotation.RegisterValidator
 import br.com.zup.beagle.android.components.TextInput
-import br.com.zup.beagle.android.components.form.core.Validator
-import br.com.zup.beagle.sample.widgets.TextField
+import br.com.zup.beagle.android.form.core.Validator
 import java.util.Locale
 
 @RegisterValidator("Charade")
-class CharadeValidator : Validator<String, TextInput> {
+class CharadeValidator :
+    Validator<String, TextInput> {
     override fun isValid(input: String, widget: TextInput): Boolean {
         return input.toLowerCase(Locale.getDefault()) == "mary"
     }

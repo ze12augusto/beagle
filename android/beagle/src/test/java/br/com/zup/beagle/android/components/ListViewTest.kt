@@ -35,7 +35,7 @@ class ListViewTest : BaseComponentTest() {
 
     private val layoutManagerSlot = slot<LinearLayoutManager>()
 
-    private lateinit var listView: ListView
+    private lateinit var listView: _root_ide_package_.br.com.zup.beagle.android.components.ListView
 
     override fun setUp() {
         super.setUp()
@@ -45,7 +45,10 @@ class ListViewTest : BaseComponentTest() {
         every { recyclerView.layoutManager = capture(layoutManagerSlot) } just Runs
         every { recyclerView.adapter = any() } just Runs
 
-        listView = ListView(listOf(), ListDirection.VERTICAL)
+        listView = _root_ide_package_.br.com.zup.beagle.android.components.ListView(
+            listOf(),
+            ListDirection.VERTICAL
+        )
     }
 
     @Test

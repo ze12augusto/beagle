@@ -50,13 +50,19 @@ class ListViewRecyclerAdapterTest {
     @RelaxedMockK
     private lateinit var view: BeagleFlexView
 
-    private lateinit var listViewRecyclerAdapter: ListViewRecyclerAdapter
+    private lateinit var listViewRecyclerAdapter: _root_ide_package_.br.com.zup.beagle.android.components.ListViewRecyclerAdapter
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
 
-        listViewRecyclerAdapter = ListViewRecyclerAdapter(ROWS, viewFactory, RecyclerView.VERTICAL, rootView)
+        listViewRecyclerAdapter =
+            _root_ide_package_.br.com.zup.beagle.android.components.ListViewRecyclerAdapter(
+                ROWS,
+                viewFactory,
+                RecyclerView.VERTICAL,
+                rootView
+            )
 
         every { viewFactory.makeBeagleFlexView(any()) } returns view
         every { rootView.getContext() } returns context
@@ -91,7 +97,7 @@ class ListViewRecyclerAdapterTest {
     @Test
     fun onBindViewHolder_should_do_nothing() {
         // Given
-        val viewHolder = mockk<ViewHolder>()
+        val viewHolder = mockk<_root_ide_package_.br.com.zup.beagle.android.components.ViewHolder>()
         val position = 0
 
         // When

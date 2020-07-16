@@ -20,7 +20,6 @@ import br.com.zup.beagle.android.BaseTest
 import br.com.zup.beagle.android.action.Action
 import br.com.zup.beagle.android.action.Navigate
 import br.com.zup.beagle.android.action.Route
-import br.com.zup.beagle.android.components.Button
 import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.android.exception.BeagleException
 import br.com.zup.beagle.android.logger.BeagleMessageLogs
@@ -75,7 +74,8 @@ class BeagleSerializerTest: BaseTest() {
     fun serializeWidget_should_return_a_String_when_pass_a_valid_Widget() {
         // Given
         val json = "{}"
-        val button = Button(RandomData.string())
+        val button =
+            _root_ide_package_.br.com.zup.beagle.android.components.Button(RandomData.string())
         every { jsonAdapter.toJson(button) } returns json
 
         // When
@@ -88,7 +88,8 @@ class BeagleSerializerTest: BaseTest() {
     @Test
     fun serializeWidget_should_return_a_BeagleException_when_toJson_returns_null() {
         // Given
-        val button = Button(RandomData.string())
+        val button =
+            _root_ide_package_.br.com.zup.beagle.android.components.Button(RandomData.string())
         every { jsonAdapter.toJson(button) } returns null
 
         // When
@@ -105,7 +106,8 @@ class BeagleSerializerTest: BaseTest() {
         every { jsonAdapter.toJson(any()) } throws exception
 
         // When
-        val button = Button(RandomData.string())
+        val button =
+            _root_ide_package_.br.com.zup.beagle.android.components.Button(RandomData.string())
         val actual = assertFails { beagleSerializer.serializeComponent(button) }
 
         // Then
@@ -116,7 +118,8 @@ class BeagleSerializerTest: BaseTest() {
     fun deserializeWidget_should_return_a_Widget_when_pass_a_valid_json_representation() {
         // Given
         val json = "{}"
-        val button = Button(RandomData.string())
+        val button =
+            _root_ide_package_.br.com.zup.beagle.android.components.Button(RandomData.string())
         every { jsonAdapter.fromJson(json) } returns button
 
         // When

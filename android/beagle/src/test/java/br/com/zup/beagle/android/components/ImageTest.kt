@@ -17,17 +17,13 @@
 package br.com.zup.beagle.android.components
 
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
-import android.view.View
 import android.widget.ImageView
-import br.com.zup.beagle.android.components.utils.ComponentStylization
 import br.com.zup.beagle.android.components.utils.RoundedImageView
 import br.com.zup.beagle.android.data.formatUrl
 import br.com.zup.beagle.android.extensions.once
 import br.com.zup.beagle.android.setup.BeagleEnvironment
 import br.com.zup.beagle.android.testutil.RandomData
 import br.com.zup.beagle.android.view.ViewFactory
-import br.com.zup.beagle.android.view.custom.BeagleFlexView
 import br.com.zup.beagle.core.Style
 import br.com.zup.beagle.ext.applyStyle
 import br.com.zup.beagle.ext.unitReal
@@ -41,10 +37,8 @@ import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
-import io.mockk.mockkConstructor
 import io.mockk.mockkStatic
 import io.mockk.slot
-import io.mockk.unmockkAll
 import io.mockk.verify
 import org.junit.Assert
 import org.junit.Test
@@ -63,8 +57,8 @@ class ImageViewRendererTest : BaseComponentTest() {
     private val style = Style(size = Size(width = 100.unitReal(), height = 100.unitReal()))
     private val onRequestListenerSlot = slot<CustomTarget<Bitmap>>()
 
-    private lateinit var imageLocal: Image
-    private lateinit var imageRemote: Image
+    private lateinit var imageLocal: _root_ide_package_.br.com.zup.beagle.android.components.Image
+    private lateinit var imageRemote: _root_ide_package_.br.com.zup.beagle.android.components.Image
     private val scaleType = ImageView.ScaleType.FIT_CENTER
 
     override fun setUp() {
@@ -81,8 +75,12 @@ class ImageViewRendererTest : BaseComponentTest() {
         every { beagleSdk.designSystem } returns mockk()
         every { beagleSdk.designSystem!!.image(any()) } returns IMAGE_RES
 
-        imageLocal = Image(PathType.Local("imageName"))
-        imageRemote = Image(PathType.Remote(DEFAULT_URL)).applyStyle(style)
+        imageLocal = _root_ide_package_.br.com.zup.beagle.android.components.Image(
+            _root_ide_package_.br.com.zup.beagle.android.components.PathType.Local("imageName")
+        )
+        imageRemote = _root_ide_package_.br.com.zup.beagle.android.components.Image(
+            _root_ide_package_.br.com.zup.beagle.android.components.PathType.Remote(DEFAULT_URL)
+        ).applyStyle(style)
     }
 
     @Test
@@ -97,7 +95,9 @@ class ImageViewRendererTest : BaseComponentTest() {
     @Test
     fun build_should_return_a_beagle_image_view_instance_and_set_data_when_path_is_remote() {
         //Given
-        imageRemote = Image(PathType.Remote(""))
+        imageRemote = _root_ide_package_.br.com.zup.beagle.android.components.Image(
+            _root_ide_package_.br.com.zup.beagle.android.components.PathType.Remote("")
+        )
 
         // When
         val view = imageRemote.buildView(rootView)

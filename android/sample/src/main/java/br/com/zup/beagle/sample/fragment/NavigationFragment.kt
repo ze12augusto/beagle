@@ -69,7 +69,8 @@ class NavigationFragment : Fragment() {
     private fun buildChildren(): List<ServerDrivenComponent> {
         return listOf(
             Touchable(
-                child = Button(text = "Click to navigate").applyStyle(
+                child = _root_ide_package_.br.com.zup.beagle.android.components.Button(text = "Click to navigate")
+                    .applyStyle(
                     Style(size = Size(width = UnitValue(80.0, UnitType.PERCENT)))
                 ),
                 onPress = listOf(Navigate.PushView(Route.Remote("https://t001-2751a.firebaseapp.com/flow/step1.json"))),

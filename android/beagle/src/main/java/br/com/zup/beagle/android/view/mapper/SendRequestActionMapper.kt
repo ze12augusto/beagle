@@ -24,8 +24,6 @@ import br.com.zup.beagle.android.networking.HttpMethod
 import br.com.zup.beagle.android.networking.RequestData
 import br.com.zup.beagle.android.networking.ResponseData
 import br.com.zup.beagle.android.view.viewmodel.Response
-import org.json.JSONArray
-import org.json.JSONObject
 import java.lang.Exception
 import java.net.URI
 

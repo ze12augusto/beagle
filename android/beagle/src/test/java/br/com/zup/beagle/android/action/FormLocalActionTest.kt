@@ -60,7 +60,8 @@ class FormLocalActionTest : BaseTest() {
     @Test
     fun doAction_should_not_handle_CustomAction_action_when_handler_is_null() {
         // Given
-        val formLocalAction = FormLocalAction("Stub", emptyMap())
+        val formLocalAction =
+            FormLocalAction("Stub", emptyMap())
         val listener = mockk<ActionListener>()
 
         // When
@@ -73,7 +74,8 @@ class FormLocalActionTest : BaseTest() {
     @Test
     fun do_customAction_and_listen_onStart() {
         // Given
-        val formLocalAction = FormLocalAction("Stub", emptyMap())
+        val formLocalAction =
+            FormLocalAction("Stub", emptyMap())
         val expectedStates = listOf<ServerDrivenState>(
             ServerDrivenState.Loading(true)
         )
@@ -92,7 +94,8 @@ class FormLocalActionTest : BaseTest() {
     @Test
     fun do_customAction_and_listen_onSuccess() {
         // Given
-        val formLocalAction = FormLocalAction("Stub", emptyMap())
+        val formLocalAction =
+            FormLocalAction("Stub", emptyMap())
         val expectedState = listOf<ServerDrivenState>(
             ServerDrivenState.Loading(false)
         )
@@ -112,7 +115,8 @@ class FormLocalActionTest : BaseTest() {
     @Test
     fun do_customAction_and_listen_onError() {
         // Given
-        val formLocalAction = FormLocalAction("Stub", emptyMap())
+        val formLocalAction =
+            FormLocalAction("Stub", emptyMap())
         val error = mockk<Throwable>()
         val expectedState = listOf(
             ServerDrivenState.Loading(false),

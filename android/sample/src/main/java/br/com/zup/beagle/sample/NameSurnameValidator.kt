@@ -17,11 +17,12 @@
 package br.com.zup.beagle.sample
 
 import br.com.zup.beagle.android.annotation.RegisterValidator
-import br.com.zup.beagle.android.components.form.core.Validator
+import br.com.zup.beagle.android.form.core.Validator
 import br.com.zup.beagle.sample.widgets.TextField
 
 @RegisterValidator("nameSurname")
-class NameSurnameValidator : Validator<String, TextField> {
+class NameSurnameValidator :
+    Validator<String, TextField> {
 
     override fun isValid(input: String, widget: TextField): Boolean =
         input.split(" ").size > 2

@@ -23,7 +23,6 @@ import br.com.zup.beagle.android.mockdata.ComponentModel
 import br.com.zup.beagle.android.testutil.RandomData
 import com.squareup.moshi.Moshi
 import io.mockk.Runs
-import io.mockk.called
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
@@ -42,7 +41,8 @@ import kotlin.test.assertTrue
 
 private val CONTEXT_ID = RandomData.string()
 private val CONTEXT_DATA = ContextData(CONTEXT_ID, RandomData.string())
-private val BIND = expressionOf<ComponentModel>("@{$CONTEXT_ID.a}")
+private val BIND =
+    expressionOf<ComponentModel>("@{$CONTEXT_ID.a}")
 
 internal class ContextDataEvaluationTest {
 
@@ -75,7 +75,8 @@ internal class ContextDataEvaluationTest {
     @Test
     fun evaluateContextBindings_should_get_value_from_root_of_context() {
         // Given
-        val bind = expressionOf<Int>("@{${CONTEXT_DATA.id}}")
+        val bind =
+            expressionOf<Int>("@{${CONTEXT_DATA.id}}")
 
         // When
         val actualValue = contextDataEvaluation.evaluateBindExpression(CONTEXT_DATA, bind)
@@ -157,7 +158,8 @@ internal class ContextDataEvaluationTest {
     @Test
     fun evaluateAllContext_should_evaluate_text_string_text_expression() {
         // Given
-        val bind = expressionOf<String>("This is an expression @{$CONTEXT_ID.exp1} and this @{$CONTEXT_ID.exp2}")
+        val bind =
+            expressionOf<String>("This is an expression @{$CONTEXT_ID.exp1} and this @{$CONTEXT_ID.exp2}")
         every { jsonPathFinder.find(any(), any()) } returns "hello"
 
         // When
@@ -171,7 +173,8 @@ internal class ContextDataEvaluationTest {
     @Test
     fun evaluateAllContext_should_evaluate_text_string_with_json_expression() {
         // Given
-        val bind = expressionOf<String>("""{"key": "@{value}"}""")
+        val bind =
+            expressionOf<String>("""{"key": "@{value}"}""")
         every { jsonPathFinder.find(any(), any()) } returns JSONObject().apply {
             put("key", "hello")
         }
@@ -186,7 +189,8 @@ internal class ContextDataEvaluationTest {
     @Test
     fun evaluateAllContext_should_not_evaluate_multiple_expressions_that_is_not_text() {
         // Given
-        val bind = expressionOf<Int>("This is an expression @{$CONTEXT_ID.exp1} and this @{$CONTEXT_ID.exp2}")
+        val bind =
+            expressionOf<Int>("This is an expression @{$CONTEXT_ID.exp1} and this @{$CONTEXT_ID.exp2}")
         every { BeagleMessageLogs.multipleExpressionsInValueThatIsNotString() } just Runs
 
         // When

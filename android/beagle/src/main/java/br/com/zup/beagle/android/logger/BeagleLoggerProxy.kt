@@ -18,7 +18,8 @@ package br.com.zup.beagle.android.logger
 
 import br.com.zup.beagle.android.setup.BeagleEnvironment
 
-internal object BeagleLoggerProxy : BeagleLogger {
+internal object BeagleLoggerProxy :
+    BeagleLogger {
 
     private val logger: BeagleLogger by lazy { BeagleLoggerFactory().make() }
 

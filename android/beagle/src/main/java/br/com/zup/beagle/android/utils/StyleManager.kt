@@ -24,7 +24,6 @@ import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.View
 import br.com.zup.beagle.R
-import br.com.zup.beagle.android.components.Button
 import br.com.zup.beagle.android.components.TabView
 import br.com.zup.beagle.android.components.Text
 import br.com.zup.beagle.android.components.utils.applyViewBackgroundAndCorner
@@ -48,7 +47,7 @@ class StyleManager(
             is Text -> {
                 applyStyleId(context, component.styleId?:"", view, component)
             }
-            is Button -> {
+            is _root_ide_package_.br.com.zup.beagle.android.components.Button -> {
                 applyStyleId(context, component.styleId?:"", view, component)
             }
             is TabView -> {

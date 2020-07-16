@@ -66,7 +66,7 @@ class FormFragment : Fragment() {
                         )
                     ),
                     FormSubmit(
-                        child = Button(
+                        child = _root_ide_package_.br.com.zup.beagle.android.components.Button(
                             styleId = "DesignSystem.Button.Text",
                             text = "submit"
                         ).applyStyle(Style(margin = EdgeValue(top = UnitValue(30.0, UnitType.REAL))))
@@ -111,7 +111,7 @@ class FormFragment : Fragment() {
                             )
                         ),
                         FormSubmit(
-                            child = Button(
+                            child = _root_ide_package_.br.com.zup.beagle.android.components.Button(
                                 styleId = "DesignSystem.Button.Text",
                                 text = "submit"
                             ).applyStyle(Style(margin = EdgeValue(top = UnitValue(30.0, UnitType.REAL))))

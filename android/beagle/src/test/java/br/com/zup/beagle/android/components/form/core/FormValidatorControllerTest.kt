@@ -21,6 +21,8 @@ import br.com.zup.beagle.android.components.form.FormInput
 import br.com.zup.beagle.android.components.form.FormSubmit
 import br.com.zup.beagle.android.components.form.InputWidget
 import br.com.zup.beagle.android.extensions.once
+import br.com.zup.beagle.android.form.core.Validator
+import br.com.zup.beagle.android.form.core.ValidatorHandler
 import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK

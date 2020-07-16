@@ -26,7 +26,8 @@ import br.com.zup.beagle.android.view.ScreenRequest
 import java.net.URI
 
 internal fun ScreenRequest.toRequestData(urlBuilder: UrlBuilder = UrlBuilderFactory().make(),
-                                         beagleEnvironment: BeagleEnvironment = BeagleEnvironment): RequestData {
+                                         beagleEnvironment: BeagleEnvironment = BeagleEnvironment
+): RequestData {
     return ScreenRequestMapper.toRequestData(urlBuilder = urlBuilder,
         beagleEnvironment = beagleEnvironment, screenRequest = this)
 }

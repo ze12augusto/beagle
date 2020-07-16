@@ -83,7 +83,9 @@ internal fun Action.evaluateExpression(
     expressionData: String
 ): Any? {
     return try {
-        val value = expressionOf<Any>(expressionData).evaluateForAction(rootView, this)
+        val value = expressionOf<Any>(
+            expressionData
+        ).evaluateForAction(rootView, this)
         contextDataValueResolver.parse(value)
     } catch (ex: Exception) {
         BeagleMessageLogs.errorWhileTryingToEvaluateBinding(ex)

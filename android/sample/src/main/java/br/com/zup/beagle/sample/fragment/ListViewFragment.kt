@@ -53,7 +53,7 @@ class ListViewFragment : Fragment() {
         return context?.let { declarative.toView(this) }
     }
 
-    private fun buildListView() = ListView(
+    private fun buildListView() = _root_ide_package_.br.com.zup.beagle.android.components.ListView(
         direction = ListDirection.HORIZONTAL,
         children = listOf(
             Text("0000"),
@@ -61,7 +61,7 @@ class ListViewFragment : Fragment() {
             Text("0002"),
             Text("0003"),
             Text("0004"),
-            LazyComponent(
+            _root_ide_package_.br.com.zup.beagle.android.components.LazyComponent(
                 path = "http://www.mocky.io/v2/5e4e91c02f00001f2016a8f2",
                 initialState = Text("Loading LazyComponent...")
             ),
@@ -74,12 +74,16 @@ class ListViewFragment : Fragment() {
             Text("0011"),
             Text("0012"),
             Text("0013"),
-            Image(PathType.Local("beagle")),
+            _root_ide_package_.br.com.zup.beagle.android.components.Image(
+                _root_ide_package_.br.com.zup.beagle.android.components.PathType.Local(
+                    "beagle"
+                )
+            ),
             Text("0014"),
             Text("0015"),
             Text("0016"),
-            Image(
-                PathType.Remote(
+            _root_ide_package_.br.com.zup.beagle.android.components.Image(
+                _root_ide_package_.br.com.zup.beagle.android.components.PathType.Remote(
                     "https://www.petlove.com.br/images/breeds/193436/profile/original/beagle-p.jpg?1532538271"
                 )
             ),

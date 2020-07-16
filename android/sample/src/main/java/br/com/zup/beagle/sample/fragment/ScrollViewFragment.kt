@@ -70,8 +70,8 @@ class ScrollViewFragment : Fragment() {
                     buildPager()
                 )
             ).applyStyle(Style(size = Size(height = UnitValue(100.0, UnitType.REAL)))),
-            Image(
-                PathType.Remote(
+            _root_ide_package_.br.com.zup.beagle.android.components.Image(
+                _root_ide_package_.br.com.zup.beagle.android.components.PathType.Remote(
                     "https://www.petlove.com.br/images/breeds/193436/profile/original/beagle-p.jpg?1532538271"
                 )
             ).applyStyle(Style(
@@ -87,7 +87,10 @@ class ScrollViewFragment : Fragment() {
             Text("Text 6").applyStyle(style),
             Text("Text 7").applyStyle(style),
             Text("Text 8").applyStyle(style),
-            Button("12345678901", "DesignSystem.Button.Black").applyStyle(style),
+            _root_ide_package_.br.com.zup.beagle.android.components.Button(
+                "12345678901",
+                "DesignSystem.Button.Black"
+            ).applyStyle(style),
             Text("Text 10").applyStyle(style)
         )
     )

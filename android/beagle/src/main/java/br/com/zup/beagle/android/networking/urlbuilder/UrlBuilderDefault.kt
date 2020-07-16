@@ -16,7 +16,8 @@
 
 package br.com.zup.beagle.android.networking.urlbuilder
 
-internal class UrlBuilderDefault : UrlBuilder {
+internal class UrlBuilderDefault :
+    UrlBuilder {
 
     override fun format(endpoint: String?, path: String): String? {
         return when {

@@ -26,12 +26,6 @@ import br.com.zup.beagle.android.action.FormRemoteAction
 import br.com.zup.beagle.android.action.FormValidation
 import br.com.zup.beagle.android.action.Navigate
 import br.com.zup.beagle.android.action.UndefinedAction
-import br.com.zup.beagle.android.components.Button
-import br.com.zup.beagle.android.components.Image
-import br.com.zup.beagle.android.components.PathType
-import br.com.zup.beagle.android.components.LazyComponent
-import br.com.zup.beagle.android.components.ListView
-import br.com.zup.beagle.android.components.TabItem
 import br.com.zup.beagle.android.components.TabView
 import br.com.zup.beagle.android.components.Text
 import br.com.zup.beagle.android.components.form.Form
@@ -54,7 +48,6 @@ import br.com.zup.beagle.android.widget.UndefinedWidget
 import br.com.zup.beagle.android.widget.WidgetView
 import br.com.zup.beagle.core.ServerDrivenComponent
 import com.squareup.moshi.Moshi
-import io.mockk.clearStaticMockk
 import io.mockk.every
 import io.mockk.mockk
 import org.json.JSONArray
@@ -176,13 +169,15 @@ class BeagleMoshiTest : BaseTest() {
 
         // Then
         assertNotNull(actual)
-        assertTrue(actual is Image)
+        assertTrue(actual is _root_ide_package_.br.com.zup.beagle.android.components.Image)
     }
 
     @Test
     fun make_should_return_moshi_to_serialize_a_Image_Local() {
         // Given
-        val component = Image(PathType.Local(RandomData.string()))
+        val component = _root_ide_package_.br.com.zup.beagle.android.components.Image(
+            _root_ide_package_.br.com.zup.beagle.android.components.PathType.Local(RandomData.string())
+        )
 
         // When
         val actual = moshi.adapter(ServerDrivenComponent::class.java).toJson(component)
@@ -201,13 +196,15 @@ class BeagleMoshiTest : BaseTest() {
 
         // Then
         assertNotNull(actual)
-        assertTrue(actual is Image)
+        assertTrue(actual is _root_ide_package_.br.com.zup.beagle.android.components.Image)
     }
 
     @Test
     fun make_should_return_moshi_to_serialize_a_NetworkImage() {
         // Given
-        val component = Image(PathType.Remote(RandomData.string()))
+        val component = _root_ide_package_.br.com.zup.beagle.android.components.Image(
+            _root_ide_package_.br.com.zup.beagle.android.components.PathType.Remote(RandomData.string())
+        )
 
         // When
         val actual = moshi.adapter(ServerDrivenComponent::class.java).toJson(component)
@@ -226,13 +223,13 @@ class BeagleMoshiTest : BaseTest() {
 
         // Then
         assertNotNull(actual)
-        assertTrue(actual is Button)
+        assertTrue(actual is _root_ide_package_.br.com.zup.beagle.android.components.Button)
     }
 
     @Test
     fun make_should_return_moshi_to_serialize_a_Button() {
         // Given
-        val component = Button("")
+        val component = _root_ide_package_.br.com.zup.beagle.android.components.Button("")
 
         // When
         val actual = moshi.adapter(ServerDrivenComponent::class.java).toJson(component)
@@ -251,13 +248,13 @@ class BeagleMoshiTest : BaseTest() {
 
         // Then
         assertNotNull(actual)
-        assertTrue(actual is ListView)
+        assertTrue(actual is _root_ide_package_.br.com.zup.beagle.android.components.ListView)
     }
 
     @Test
     fun make_should_return_moshi_to_serialize_a_ListView() {
         // Given
-        val component = ListView(listOf())
+        val component = _root_ide_package_.br.com.zup.beagle.android.components.ListView(listOf())
 
         // When
         val actual = moshi.adapter(ServerDrivenComponent::class.java).toJson(component)
@@ -326,13 +323,16 @@ class BeagleMoshiTest : BaseTest() {
 
         // Then
         assertNotNull(actual)
-        assertTrue(actual is LazyComponent)
+        assertTrue(actual is _root_ide_package_.br.com.zup.beagle.android.components.LazyComponent)
     }
 
     @Test
     fun make_should_return_moshi_to_serialize_a_LazyComponent() {
         // Given
-        val component = LazyComponent("", UndefinedWidget())
+        val component = _root_ide_package_.br.com.zup.beagle.android.components.LazyComponent(
+            "",
+            UndefinedWidget()
+        )
 
         // When
         val actual = moshi.adapter(ServerDrivenComponent::class.java).toJson(component)
@@ -512,7 +512,7 @@ class BeagleMoshiTest : BaseTest() {
     @Test
     fun make_should_return_moshi_to_serialize_a_UndefinedAction() {
         // Given
-        val component = Button(
+        val component = _root_ide_package_.br.com.zup.beagle.android.components.Button(
             text = "",
             onPress = listOf(
                 UndefinedAction()

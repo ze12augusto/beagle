@@ -145,7 +145,7 @@ class StyleManagerTest : BaseTest() {
     @Test
     fun test_getBackgroundColor_when_button_has_a_color_drawable_background() {
         //Given
-        serverDrivenComponent = Button("")
+        serverDrivenComponent = _root_ide_package_.br.com.zup.beagle.android.components.Button("")
         every { context.obtainStyledAttributes(any<Int>(), any()) } returns typedArray
         every { typedArray.getDrawable(R.styleable.BackgroundStyle_background) } returns colorDrawable
         every { colorDrawable.color } returns Color.WHITE
@@ -164,7 +164,7 @@ class StyleManagerTest : BaseTest() {
     @Test
     fun test_getBackgroundColor_when_Button_not_is_color_drawable() {
         //Given
-        serverDrivenComponent = Button("")
+        serverDrivenComponent = _root_ide_package_.br.com.zup.beagle.android.components.Button("")
         every { context.obtainStyledAttributes(any<Int>(), any()) } returns typedArray
         every { typedArray.getDrawable(R.styleable.BackgroundStyle_background) } returns drawable
 

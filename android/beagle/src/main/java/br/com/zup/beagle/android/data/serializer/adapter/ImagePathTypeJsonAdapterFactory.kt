@@ -22,9 +22,9 @@ import br.com.zup.beagle.android.data.serializer.PolymorphicJsonAdapterFactory
 private const val BEAGLE_IMAGE_TYPE = "_beagleImagePath_"
 
 internal object ImagePathTypeJsonAdapterFactory {
-    fun make(): PolymorphicJsonAdapterFactory<PathType> =
-        PolymorphicJsonAdapterFactory.of(PathType::class.java, BEAGLE_IMAGE_TYPE)
-            .withSubtype(PathType.Local::class.java, "local")
-            .withSubtype(PathType.Remote::class.java, "remote")
+    fun make(): PolymorphicJsonAdapterFactory<_root_ide_package_.br.com.zup.beagle.android.components.PathType> =
+        PolymorphicJsonAdapterFactory.of(_root_ide_package_.br.com.zup.beagle.android.components.PathType::class.java, BEAGLE_IMAGE_TYPE)
+            .withSubtype(_root_ide_package_.br.com.zup.beagle.android.components.PathType.Local::class.java, "local")
+            .withSubtype(_root_ide_package_.br.com.zup.beagle.android.components.PathType.Remote::class.java, "remote")
 
 }

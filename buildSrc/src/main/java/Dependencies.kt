@@ -34,6 +34,8 @@ object Modules {
     const val beagleAndroidInternalProcessor = ":android:android-internal-processor"
     const val beagleAndroidAnnotation = ":android:android-annotation"
     const val beagleAndroidPreview = ":android:android-preview"
+    const val beagleAndroidUiKit = ":android:android-ui-kit"
+    const val beagleAndroidCommon = ":android:android-common"
     const val beagleAnnotation = ":common:annotation"
     const val beagleCommonProcessorUtils = ":common:processor-utils"
     const val beagleBackendProcessor = ":backend:processor"
@@ -75,7 +77,7 @@ object Versions {
 
     const val moshi = "1.9.3"
 
-    const val soLoader = "0.8.2"
+    const val soLoader = "0.9.0"
 
     const val glide = "4.11.0"
 
@@ -118,7 +120,6 @@ object Versions {
 object GeneralNames {
     const val testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     const val sampleTestInstrumentationRunner = "br.com.zup.beagle.sample.SampleTestRunner"
-    const val consumerProguard = "consumer-rules.pro"
 }
 
 object GlideLibraries {

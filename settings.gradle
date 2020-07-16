@@ -24,6 +24,8 @@ include Modules.beagleAndroidProcessor
 include Modules.beagleAndroidInternalProcessor
 include Modules.beagleAndroidAnnotation
 include Modules.beagleAndroidPreview
+include Modules.beagleAndroidUiKit
+include Modules.beagleAndroidCommon
 include Modules.beagleAnnotation
 include Modules.beagleCommonProcessorUtils
 include Modules.beagleBackendSpringStarter

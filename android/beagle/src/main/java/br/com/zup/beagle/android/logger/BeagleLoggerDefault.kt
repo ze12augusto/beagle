@@ -20,7 +20,8 @@ import android.util.Log
 
 private const val BEAGLE_TAG = "BeagleSDK"
 
-internal class BeagleLoggerDefault : BeagleLogger {
+internal class BeagleLoggerDefault :
+    BeagleLogger {
 
     override fun warning(message: String) {
         Log.w(BEAGLE_TAG, message)

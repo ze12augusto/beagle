@@ -34,6 +34,7 @@ internal fun String.toRequestData(urlBuilder: UrlBuilder = UrlBuilderFactory().m
 }
 
 internal fun String.formatUrl(urlBuilder: UrlBuilder = UrlBuilderFactory().make(),
-                              beagleEnvironment: BeagleEnvironment = BeagleEnvironment): String? {
+                              beagleEnvironment: BeagleEnvironment = BeagleEnvironment
+): String? {
     return urlBuilder.format(beagleEnvironment.beagleSdk.config.baseUrl, this)
 }

@@ -22,9 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.com.zup.beagle.core.ServerDrivenComponent
-import br.com.zup.beagle.ext.applyFlex
 import br.com.zup.beagle.core.Style
-import br.com.zup.beagle.ext.applyStyle
 import br.com.zup.beagle.widget.core.AlignItems
 import br.com.zup.beagle.widget.core.EdgeValue
 import br.com.zup.beagle.widget.core.Flex
@@ -32,14 +30,8 @@ import br.com.zup.beagle.widget.core.JustifyContent
 import br.com.zup.beagle.widget.core.UnitType
 import br.com.zup.beagle.widget.core.UnitValue
 import br.com.zup.beagle.android.components.layout.Container
-import br.com.zup.beagle.android.components.Button
-import br.com.zup.beagle.android.components.Image
-import br.com.zup.beagle.android.components.PathType
-import br.com.zup.beagle.android.components.TabItem
 import br.com.zup.beagle.android.components.TabView
 import br.com.zup.beagle.android.components.Text
-import br.com.zup.beagle.android.utils.toView
-import br.com.zup.beagle.android.context.Bind
 import br.com.zup.beagle.widget.core.TextAlignment
 
 class TabViewFragment : Fragment() {
@@ -64,9 +56,14 @@ class TabViewFragment : Fragment() {
                                 )
                             )
                         ),
-                        Image(PathType.Local("imageBeagle"))
+                        _root_ide_package_.br.com.zup.beagle.android.components.Image(
+                            _root_ide_package_.br.com.zup.beagle.android.components.PathType.Local("imageBeagle")
+                        )
                     ))),
-                buildTabView(title = "Title 2", child = Button("button")),
+                buildTabView(title = "Title 2", child = _root_ide_package_.br.com.zup.beagle.android.components.Button(
+                    "button"
+                )
+                ),
                 buildTabView(
                     title = "Title 3",
                     child = Container(
@@ -101,11 +98,11 @@ class TabViewFragment : Fragment() {
         return context?.let { declarative.toView(this) }
     }
 
-    private fun buildTabView(title: String, child: ServerDrivenComponent): TabItem {
-        return TabItem(
+    private fun buildTabView(title: String, child: ServerDrivenComponent): _root_ide_package_.br.com.zup.beagle.android.components.TabItem {
+        return _root_ide_package_.br.com.zup.beagle.android.components.TabItem(
             title = title,
             child = child,
-            icon = PathType.Local("ic_launcher_foreground")
+            icon = _root_ide_package_.br.com.zup.beagle.android.components.PathType.Local("ic_launcher_foreground")
         )
     }
 

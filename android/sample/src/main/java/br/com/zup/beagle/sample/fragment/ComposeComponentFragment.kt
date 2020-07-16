@@ -115,7 +115,10 @@ class ComposeFormName : ComposeComponent() {
     private fun buildFooter() = Container(
         children = listOf(
             (FormSubmit(
-                child = Button("cadastrar", styleId = "primaryButton")
+                child = _root_ide_package_.br.com.zup.beagle.android.components.Button(
+                    "cadastrar",
+                    styleId = "primaryButton"
+                )
             ))
         )
     ).applyStyle(

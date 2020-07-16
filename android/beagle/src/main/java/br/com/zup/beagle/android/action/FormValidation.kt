@@ -19,7 +19,7 @@ package br.com.zup.beagle.android.action
 import android.view.View
 import br.com.zup.beagle.android.components.form.FormInput
 import br.com.zup.beagle.android.components.form.InputWidget
-import br.com.zup.beagle.android.components.form.core.Constants
+import br.com.zup.beagle.android.form.core.Constants
 import br.com.zup.beagle.android.widget.RootView
 
 @Deprecated(Constants.FORM_DEPRECATED_MESSAGE)

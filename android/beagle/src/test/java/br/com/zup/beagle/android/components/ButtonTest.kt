@@ -58,7 +58,7 @@ class ButtonTest : BaseComponentTest() {
 
     private val listener = slot<View.OnClickListener>()
 
-    private lateinit var buttonComponent: Button
+    private lateinit var buttonComponent: _root_ide_package_.br.com.zup.beagle.android.components.Button
 
     override fun setUp() {
         super.setUp()
@@ -80,7 +80,10 @@ class ButtonTest : BaseComponentTest() {
         every { TextViewCompat.setTextAppearance(any(), any()) } just Runs
         every { styleManager.getButtonTypedArray(context, any()) } returns typedArray
 
-        buttonComponent = Button(DEFAULT_TEXT, styleId = DEFAULT_STYLE)
+        buttonComponent = _root_ide_package_.br.com.zup.beagle.android.components.Button(
+            DEFAULT_TEXT,
+            styleId = DEFAULT_STYLE
+        )
     }
 
     @Test

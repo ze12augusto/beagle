@@ -27,7 +27,6 @@ import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
 import io.mockk.runs
-import io.mockk.unmockkAll
 import io.mockk.verify
 import org.junit.Test
 
@@ -38,7 +37,7 @@ class TabViewTest : BaseComponentTest() {
     private val tabLayout: BeagleTabLayout = mockk(relaxed = true)
     private val viewPager: BeaglePageView = mockk()
     private val frameLayoutParams: FrameLayout.LayoutParams = mockk()
-    private val tabItem: TabItem = mockk(relaxed = true)
+    private val tabItem: _root_ide_package_.br.com.zup.beagle.android.components.TabItem = mockk(relaxed = true)
     private val styleManager: StyleManager = mockk(relaxed = true)
 
     private lateinit var tabView: TabView

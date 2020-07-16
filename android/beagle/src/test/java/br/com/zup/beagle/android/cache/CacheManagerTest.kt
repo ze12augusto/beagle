@@ -16,10 +16,6 @@
 
 package br.com.zup.beagle.android.cache
 
-import br.com.zup.beagle.android.cache.BeagleCache
-import br.com.zup.beagle.android.cache.CacheManager
-import br.com.zup.beagle.android.cache.LruCacheStore
-import br.com.zup.beagle.android.cache.TimerCache
 import br.com.zup.beagle.android.networking.ResponseData
 import br.com.zup.beagle.android.setup.BeagleEnvironment
 import br.com.zup.beagle.android.store.StoreHandler

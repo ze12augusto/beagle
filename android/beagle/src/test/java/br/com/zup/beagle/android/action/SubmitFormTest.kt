@@ -23,7 +23,6 @@ import br.com.zup.beagle.android.BaseTest
 import br.com.zup.beagle.android.components.form.SimpleForm
 import br.com.zup.beagle.android.extensions.once
 import br.com.zup.beagle.android.logger.BeagleLoggerProxy
-import br.com.zup.beagle.android.setup.BeagleEnvironment
 import br.com.zup.beagle.android.widget.RootView
 import io.mockk.*
 import org.junit.Test

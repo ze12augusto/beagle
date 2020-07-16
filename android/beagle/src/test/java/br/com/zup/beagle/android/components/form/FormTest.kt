@@ -25,19 +25,18 @@ import br.com.zup.beagle.android.action.Navigate
 import br.com.zup.beagle.android.action.FormValidation
 import br.com.zup.beagle.android.action.ResultListener
 import br.com.zup.beagle.android.components.BaseComponentTest
-import br.com.zup.beagle.android.components.form.core.Constants
-import br.com.zup.beagle.android.components.form.core.FormDataStoreHandler
+import br.com.zup.beagle.android.form.core.Constants
+import br.com.zup.beagle.android.form.core.FormDataStoreHandler
 import br.com.zup.beagle.android.components.form.core.FormResult
 import br.com.zup.beagle.android.components.form.core.FormValidatorController
-import br.com.zup.beagle.android.components.form.core.Validator
-import br.com.zup.beagle.android.components.form.core.ValidatorHandler
+import br.com.zup.beagle.android.form.core.Validator
+import br.com.zup.beagle.android.form.core.ValidatorHandler
 import br.com.zup.beagle.android.components.utils.hideKeyboard
 import br.com.zup.beagle.android.engine.renderer.ViewRendererFactory
 import br.com.zup.beagle.android.extensions.once
 import br.com.zup.beagle.android.logger.BeagleMessageLogs
 import br.com.zup.beagle.android.testutil.RandomData
 import br.com.zup.beagle.android.testutil.getPrivateField
-import br.com.zup.beagle.android.utils.handleEvent
 import br.com.zup.beagle.android.view.BeagleActivity
 import br.com.zup.beagle.android.view.ServerDrivenState
 import io.mockk.Runs
@@ -48,10 +47,8 @@ import io.mockk.mockkConstructor
 import io.mockk.mockkObject
 import io.mockk.mockkStatic
 import io.mockk.slot
-import io.mockk.unmockkAll
 import io.mockk.verify
 import io.mockk.verifyOrder
-import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

@@ -43,7 +43,8 @@ import java.net.URI
 private val FORMS_VALUE = mapOf<String, String>()
 private val ACTION = RandomData.string()
 private val PATH = RandomData.httpUrl()
-private val REQUEST_DATA = RequestData(URI(PATH))
+private val REQUEST_DATA =
+    RequestData(URI(PATH))
 
 @ExperimentalCoroutinesApi
 class FormSubmitterTest : BaseTest() {

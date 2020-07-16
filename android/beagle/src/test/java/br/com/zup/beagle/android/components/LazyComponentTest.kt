@@ -37,7 +37,7 @@ class LazyComponentTest : BaseComponentTest() {
     private val initialState: ServerDrivenComponent = mockk()
     private val beagleView: BeagleView = mockk(relaxed = true)
 
-    private lateinit var lazyComponent: LazyComponent
+    private lateinit var lazyComponent: _root_ide_package_.br.com.zup.beagle.android.components.LazyComponent
 
     override fun setUp() {
         super.setUp()
@@ -45,7 +45,8 @@ class LazyComponentTest : BaseComponentTest() {
         every { anyConstructed<ViewFactory>().makeBeagleView(any()) } returns beagleView
         every { beagleView[0] } returns initialStateView
 
-        lazyComponent = LazyComponent(URL, initialState)
+        lazyComponent =
+            _root_ide_package_.br.com.zup.beagle.android.components.LazyComponent(URL, initialState)
     }
 
     @Test

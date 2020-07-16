@@ -36,8 +36,10 @@ class ImageViewFragment : Fragment() {
         val declarative = Screen(
             child = Container(
                 children = listOf(
-                    Image(
-                        path = PathType.Remote("https://cdn-images-1.medium.com/max/1200/1*kjiNJPB3Y-ZVmjxco_bORA.png")
+                    _root_ide_package_.br.com.zup.beagle.android.components.Image(
+                        path = _root_ide_package_.br.com.zup.beagle.android.components.PathType.Remote(
+                            "https://cdn-images-1.medium.com/max/1200/1*kjiNJPB3Y-ZVmjxco_bORA.png"
+                        )
                     ),
                     Text(text = "Opa!!!")
                 )

@@ -38,7 +38,7 @@ class PageViewTest : BaseComponentTest() {
 
     private val beaglePageView: BeaglePageView = mockk(relaxed = true)
     private val pageIndicatorComponent: PageIndicatorComponent = mockk(relaxed = true)
-    private val children = listOf<ServerDrivenComponent>(mockk<Button>())
+    private val children = listOf<ServerDrivenComponent>(mockk<_root_ide_package_.br.com.zup.beagle.android.components.Button>())
 
     private lateinit var pageView: PageView
 

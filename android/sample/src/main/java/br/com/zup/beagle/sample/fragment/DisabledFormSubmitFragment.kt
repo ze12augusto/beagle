@@ -83,7 +83,10 @@ class DisabledFormSubmitFragment : Fragment() {
 
     private fun makeCharadeFormSubmit(): ServerDrivenComponent {
         return FormSubmit(
-            child = Button(text = "Flag", styleId = "DesignSystem.Button.Orange").applyStyle(
+            child = _root_ide_package_.br.com.zup.beagle.android.components.Button(
+                text = "Flag",
+                styleId = "DesignSystem.Button.Orange"
+            ).applyStyle(
                 style = Style(
                     flex = Flex(
                         alignSelf = AlignSelf.CENTER

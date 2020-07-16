@@ -51,12 +51,12 @@ class LazyComponentFragment : Fragment() {
 
     private fun buildScrollView() = ScrollView(
         children = listOf(
-            Image(
-                PathType.Remote(
+            _root_ide_package_.br.com.zup.beagle.android.components.Image(
+                _root_ide_package_.br.com.zup.beagle.android.components.PathType.Remote(
                     "https://www.petlove.com.br/images/breeds/193436/profile/original/beagle-p.jpg?1532538271"
                 )
             ).applyStyle(Style(cornerRadius = CornerRadius(30.0))),
-            LazyComponent(
+            _root_ide_package_.br.com.zup.beagle.android.components.LazyComponent(
                 path = "http://www.mocky.io/v2/5e4e91c02f00001f2016a8f2",
                 initialState = Text("Loading LazyComponent...")
             )

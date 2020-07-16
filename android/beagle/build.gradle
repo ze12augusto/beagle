@@ -32,7 +32,6 @@ android {
         versionName "${Releases.beagleVersionName}"
 
         testInstrumentationRunner GeneralNames.testInstrumentationRunner
-        consumerProguardFiles GeneralNames.consumerProguard
     }
 
     buildTypes {
@@ -49,28 +48,21 @@ android {
 dependencies {
     implementation AndroidxLibraries.appcompat
     implementation AndroidxLibraries.coreKtx
-    implementation AndroidxLibraries.recyclerView
     implementation AndroidxLibraries.viewModel
     implementation AndroidxLibraries.viewModelExtensions
 
     implementation GeneralLibraries.kotlin
     implementation GeneralLibraries.kotlinCoroutines
 
+    api project(Modules.beagleAndroidUiKit)
     api project(Modules.beagleExtendedSchema)
-    api project(Modules.beagleSchemaKotlinCore)
-
     api project(Modules.beagleAnnotation)
     api project(Modules.beagleAndroidAnnotation)
-
-    implementation GlideLibraries.glide
-    kapt GlideLibraries.glideCompiler
-    kapt project(Modules.beagleAndroidInternalProcessor)
+    api project(Modules.beagleAndroidCommon)
 
     implementation GeneralLibraries.yoga
     implementation GeneralLibraries.soLoader
     implementation GeneralLibraries.jni
-
-    implementation GoogleLibraries.materialDesign
 
     implementation MoshiLibraries.moshi
     implementation MoshiLibraries.kotlin

@@ -54,7 +54,8 @@ class UndefinedViewRendererTest : BaseComponentTest() {
         every { textView.setTextColor(capture(textColorSlot)) } just Runs
         every { textView.setBackgroundColor(capture(backgroundColorSlot)) } just Runs
 
-        undefinedViewRenderer = UndefinedWidget()
+        undefinedViewRenderer =
+            UndefinedWidget()
     }
 
     @Test

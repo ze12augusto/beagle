@@ -17,7 +17,7 @@
 package br.com.zup.beagle.android.components.form.core
 
 import br.com.zup.beagle.android.BaseTest
-import br.com.zup.beagle.android.components.form.core.FormDataStoreHandler
+import br.com.zup.beagle.android.form.core.FormDataStoreHandler
 import org.junit.Test
 import kotlin.test.assertEquals
 
@@ -31,7 +31,8 @@ class FormDataStoreHandlerTest : BaseTest() {
 
     override fun setUp() {
         super.setUp()
-        formDataStoreHandler = FormDataStoreHandler()
+        formDataStoreHandler =
+            FormDataStoreHandler()
     }
 
     @Test

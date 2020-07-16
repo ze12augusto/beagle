@@ -28,7 +28,6 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkObject
 import io.mockk.mockkStatic
-import io.mockk.slot
 import io.mockk.unmockkAll
 import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -436,5 +435,6 @@ class HttpClientDefaultTest {
 
     }
 
-    private fun makeSimpleRequestData() = RequestData(uri)
+    private fun makeSimpleRequestData() =
+        RequestData(uri)
 }

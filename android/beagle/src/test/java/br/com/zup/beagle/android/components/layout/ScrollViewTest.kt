@@ -44,7 +44,7 @@ class ScrollViewTest : BaseComponentTest() {
     private val horizontalScrollView: HorizontalScrollView = mockk(relaxed = true)
     private val context: Context = mockk()
 
-    private val components = listOf<ServerDrivenComponent>(mockk<Button>())
+    private val components = listOf<ServerDrivenComponent>(mockk<_root_ide_package_.br.com.zup.beagle.android.components.Button>())
 
     private val scrollBarEnabled = slot<Boolean>()
     private val style = mutableListOf<Style>()

@@ -93,12 +93,10 @@ public final class RepositoryDefault: Repository {
             return nil
         }
 
-        return dependencies.networkClient.executeRequest(request) { [weak self] result in
-            guard let self = self else { return }
-
+        return dependencies.networkClient.executeRequest(request) { result in
             let mapped = result
                 .flatMapError { .failure(.networkError($0)) }
-                .flatMap { self.handleFetchComponent($0, cachedComponent: cache?.data, url: url) }
+                .flatMap { [unowned self] in self.handleFetchComponent($0, cachedComponent: cache?.data, url: url) }
 
             DispatchQueue.main.async { completion(mapped) }
         }

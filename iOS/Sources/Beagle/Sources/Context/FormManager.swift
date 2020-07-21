@@ -63,8 +63,8 @@ class FormManager {
     
     private func merge(values: inout [String: String], with additionalData: [String: String]?) {
         if let additionalData = additionalData {
-            values.merge(additionalData) { _, new in
-                controller.dependencies.logger.log(Log.form(.keyDuplication(data: additionalData)))
+            values.merge(additionalData) { [weak controller] _, new in
+                controller?.dependencies.logger.log(Log.form(.keyDuplication(data: additionalData)))
                 return new
             }
         }
@@ -72,8 +72,8 @@ class FormManager {
     
     private func mergeWithStoredValues(values: inout [String: String], group: String?) {
         if let group = group, let storedValues = controller.dependencies.formDataStoreHandler.read(group: group) {
-            values.merge(storedValues) { current, _ in
-                controller.dependencies.logger.log(Log.form(.keyDuplication(data: storedValues)))
+            values.merge(storedValues) { [weak controller] current, _ in
+                controller?.dependencies.logger.log(Log.form(.keyDuplication(data: storedValues)))
                 return current
             }
         }

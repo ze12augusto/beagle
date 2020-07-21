@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dependencies.validatorProvider = validator
         dependencies.analytics = AnalyticsMock()
         dependencies.isLoggingEnabled = true
-        
+        dependencies.cacheManager = nil
         Beagle.dependencies = dependencies
         
         registerCustomComponents()

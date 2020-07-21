@@ -50,23 +50,23 @@ final class LayoutManager {
     // MARK: - Private
     
     private func addObservers() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleKeyboardChangeNotification(_:)),
-            name: UIResponder.keyboardWillChangeFrameNotification,
-            object: nil
-        )
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleKeyboardWillHideNotification(_:)),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil
-        )
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(handleKeyboardChangeNotification(_:)),
+//            name: UIResponder.keyboardWillChangeFrameNotification,
+//            object: nil
+//        )
+//        NotificationCenter.default.addObserver(
+//            self,
+//            selector: #selector(handleKeyboardWillHideNotification(_:)),
+//            name: UIResponder.keyboardWillHideNotification,
+//            object: nil
+//        )
     }
     
     private func removeObservers() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+//        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private var contentInsets: UIEdgeInsets {

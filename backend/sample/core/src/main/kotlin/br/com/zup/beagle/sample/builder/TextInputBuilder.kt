@@ -53,14 +53,14 @@ object TextInputBuilder: ScreenBuilder {
         child = Container(
             listOf(
                 createTextInput("Text Input without style!"),
-                createTextInput("Text Input with style!", "DesignSystem.TextInput.Style.Bff")
+                createTextInput("Text Input with style!")
             )
         )
     )
 
     private fun createTextInput(text: String, styleId: String? = null) = Container(
         listOf(
-            Text(text).applyStyle(styleTextInput),
+//            Text(text).applyStyle(styleTextInput),
             TextInput(
                 placeholder = "Your text",
                 styleId = styleId

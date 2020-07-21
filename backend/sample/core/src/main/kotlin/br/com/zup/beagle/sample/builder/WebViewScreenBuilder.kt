@@ -20,33 +20,21 @@ import br.com.zup.beagle.ext.applyFlex
 import br.com.zup.beagle.sample.constants.PATH_URL_WEB_VIEW_ENDPOINT
 import br.com.zup.beagle.widget.action.Alert
 import br.com.zup.beagle.widget.core.Flex
-import br.com.zup.beagle.widget.layout.NavigationBar
-import br.com.zup.beagle.widget.layout.NavigationBarItem
-import br.com.zup.beagle.widget.layout.Screen
-import br.com.zup.beagle.widget.layout.ScreenBuilder
+import br.com.zup.beagle.widget.layout.*
 import br.com.zup.beagle.widget.ui.ImagePath.Local
+import br.com.zup.beagle.widget.ui.Text
 import br.com.zup.beagle.widget.ui.WebView
 
 object WebViewScreenBuilder : ScreenBuilder {
     override fun build() = Screen(
-        navigationBar = NavigationBar(
-            title = "Beagle Web View",
-            showBackButton = true,
-            navigationBarItems = listOf(
-                NavigationBarItem(
-                    text = "",
-                    image = Local.justMobile("informationImage"),
-                    action = Alert(
-                        title = "Web View",
-                        message = "The Web View component is responsible for defining a web view natively " +
-                            "using server driven information",
-                        labelOk = "OK"
-                    )
-                )
+//        navigationBar = NavigationBar(
+//            title = "Beagle Web View",
+//            showBackButton = true
+//        ),
+        child = Container(
+            children = listOf(
+                Text("Hello Beagle")
             )
-        ),
-        child = WebView(url = PATH_URL_WEB_VIEW_ENDPOINT).applyFlex(
-                    flex = Flex(grow = 1.0)
-            )
+        )
     )
 }

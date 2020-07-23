@@ -179,34 +179,33 @@ object ScreenContextBuilder : ScreenBuilder {
         text = "Enviar",
         styleId = "DesignSystem.Button.Context",
         onPress = listOf(
-            Navigate.PushView(Route.Remote(SCREEN_CONTEXT_ENDPOINT)
-//            Confirm(
-//                title = "Address form!",
-//                message = "The data is correct?\n" +
-//                    "Street: @{address.data.street}\n" +
-//                    "Number: @{address.data.number}\n" +
-//                    "Neighborhood: @{address.data.neighborhood}\n" +
-//                    "City: @{address.data.city}\n" +
-//                    "State: @{address.data.state}\n" +
-//                    "Complement: @{address.data.complement}",
-//                onPressOk = Alert(
-//                    title = "Address form",
-//                    message = "The form was successfully!",
-//                    onPressOk = SetContext(
-//                        contextId = "address",
-//                        path = "data",
-//                        value =
-//                        Data(
-//                            zip = "",
-//                            street = "",
-//                            number = "",
-//                            neighborhood = "",
-//                            city = "",
-//                            state = "",
-//                            complement = ""
-//                        )
-//                    )
-//                )
+            Confirm(
+                title = "Address form!",
+                message = "The data is correct?\n" +
+                    "Street: @{address.data.street}\n" +
+                    "Number: @{address.data.number}\n" +
+                    "Neighborhood: @{address.data.neighborhood}\n" +
+                    "City: @{address.data.city}\n" +
+                    "State: @{address.data.state}\n" +
+                    "Complement: @{address.data.complement}",
+                onPressOk = Alert(
+                    title = "Address form",
+                    message = "The form was successfully!",
+                    onPressOk = SetContext(
+                        contextId = "address",
+                        path = "data",
+                        value =
+                        Data(
+                            zip = "",
+                            street = "",
+                            number = "",
+                            neighborhood = "",
+                            city = "",
+                            state = "",
+                            complement = ""
+                        )
+                    )
+                )
             )
         )
     ).applyStyle(

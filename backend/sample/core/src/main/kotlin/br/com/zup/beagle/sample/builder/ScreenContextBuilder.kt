@@ -91,11 +91,11 @@ object ScreenContextBuilder : ScreenBuilder {
                         id = "address",
                         value = Address(
                             data = Data(
-                                zip = "",
-                                street = "",
+                                zip = "3808326",
+                                street = "Street",
                                 number = "",
                                 neighborhood = "",
-                                city = "",
+                                city = "Manaus",
                                 state = "",
                                 complement = ""
                             )
@@ -108,43 +108,43 @@ object ScreenContextBuilder : ScreenBuilder {
 
     private fun createTextInput() = Container(
         children = listOf(
-            createTextInput(
-                textInputPlaceholder = "Street",
-                textInputValue = "@{address.data.street}",
-                contextPath = "data.street"
-            ),
-            createTextInput(
-                textInputPlaceholder = "Number",
-                textInputValue = "@{address.data.number}",
-                contextPath = "data.number",
-                type = TextInputType.NUMBER
-            ),
-            createTextInput(
-                textInputPlaceholder = "Neighborhood",
-                textInputValue = "@{address.data.neighborhood}",
-                contextPath = "data.neighborhood"
-            ),
-            createTextInput(
-                textInputPlaceholder = "City",
-                textInputValue = "@{address.data.city}",
-                contextPath = "data.city"
-            ),
-            createTextInput(
-                textInputPlaceholder = "State",
-                textInputValue = "@{address.data.state}",
-                contextPath = "data.state"
-            ),
-            createTextInput(
-                textInputPlaceholder = "Complement",
-                textInputValue = "@{address.data.complement}",
-                contextPath = "data.complement"
-            )
+//            createTextInput(
+//                textInputPlaceholder = "Street",
+//                textInputValue = "@{address.data.street}",
+//                contextPath = "data.street"
+//            ),
+//            createTextInput(
+//                textInputPlaceholder = "Number",
+//                textInputValue = "@{address.data.number}",
+//                contextPath = "data.number",
+//                type = TextInputType.NUMBER
+//            ),
+//            createTextInput(
+//                textInputPlaceholder = "Neighborhood",
+//                textInputValue = "@{address.data.neighborhood}",
+//                contextPath = "data.neighborhood"
+//            ),
+//            createTextInput(
+//                textInputPlaceholder = "City",
+//                textInputValue = "@{address.data.city}",
+//                contextPath = "data.city"
+//            ),
+//            createTextInput(
+//                textInputPlaceholder = "State",
+//                textInputValue = "@{address.data.state}",
+//                contextPath = "data.state"
+//            ),
+//            createTextInput(
+//                textInputPlaceholder = "Complement",
+//                textInputValue = "@{address.data.complement}",
+//                contextPath = "data.complement"
+//            )
         )
     )
 
     private fun createZip() = TextInput(
         placeholder = "ZIP",
-        value = "@{address.data.zip}",
+        value = "@{address.data.street}\\@{address.data.street}\\\\@{address.data.street}\\\\\\@{address.data.street}\\\\\\\\@{address.data.street}\\\\\\\\\\@{address.data.street}",
         styleId = "DesignSystem.TextInput.Style.Bff",
         type = TextInputType.NUMBER,
         onChange = listOf(

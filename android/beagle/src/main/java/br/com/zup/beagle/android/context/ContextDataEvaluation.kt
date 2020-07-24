@@ -24,6 +24,10 @@ import br.com.zup.beagle.android.utils.getExpressions
 import com.squareup.moshi.Moshi
 import org.json.JSONArray
 import org.json.JSONObject
+import java.lang.IllegalStateException
+import java.lang.reflect.Type
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 internal class ContextDataEvaluation(
     private val jsonPathFinder: JsonPathFinder = JsonPathFinder(),
@@ -72,12 +76,42 @@ internal class ContextDataEvaluation(
     }
 
     private fun evaluateMultipleExpressions(bind: Bind.Expression<*>): Any? {
-        var text = bind.value
-        bind.evaluatedExpressions.forEach {
-            val expressionKey = it.key
-            text = text.replace("@{$expressionKey}", it.value.toString())
+        val regex = "(.*?)(\\\\*)@\\{(([^'\\}]|('([^'\\\\]|\\\\.)*'))*)\\}"
+        var text = ""
+        lateinit var slashes: String
+        lateinit var key: String
+        lateinit var preExpression: String
+        lateinit var fullGroup: String
+
+
+        val pattern = Pattern.compile(regex)
+        val matcher: Matcher = pattern.matcher(bind.value)
+
+        while (matcher.find()) {
+            fullGroup = matcher.group(0) ?: ""
+            preExpression = matcher.group(1) ?: ""
+            key = matcher.group(3) ?: ""
+            slashes = matcher.group(2) ?: ""
+            text += if (slashes.length % 2 == 0) {
+                fullGroup.replace(
+                    oldValue = "${matcher.group(2)}@{$key}",
+                    newValue = normalizeSlashes(slashes) + bind.evaluatedExpressions[key].toString())
+            } else {
+                preExpression + normalizeSlashes(slashes) + "@{$key}"
+            }
+
         }
-        return if(text.isEmpty()) null else text
+        return if (text.isEmpty()) null else text
+    }
+
+    private fun normalizeSlashes(slashes: String): String {
+        var slashesCount = slashes.length / 2
+        var newSlashes = ""
+        while (slashesCount != 0) {
+            newSlashes += "\\"
+            slashesCount--
+        }
+        return newSlashes
     }
 
     private fun evaluateExpression(contextData: ContextData, bind: Bind.Expression<*>, expression: String): Any? {

@@ -81,8 +81,8 @@ internal class ContextDataEvaluation(
         lateinit var slashes: String
         lateinit var key: String
         lateinit var preExpression: String
+        lateinit var posExpression: String
         lateinit var fullGroup: String
-
 
         val pattern = Pattern.compile(regex)
         val matcher: Matcher = pattern.matcher(bind.value)
@@ -99,9 +99,9 @@ internal class ContextDataEvaluation(
             } else {
                 preExpression + normalizeSlashes(slashes) + "@{$key}"
             }
-
+            posExpression = bind.value.substring(matcher.end())
         }
-        return if (text.isEmpty()) null else text
+        return if (text.isEmpty()) null else text + posExpression
     }
 
     private fun normalizeSlashes(slashes: String): String {

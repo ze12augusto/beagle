@@ -24,8 +24,12 @@ import br.com.zup.beagle.android.action.Action
 import br.com.zup.beagle.android.context.Bind
 import br.com.zup.beagle.android.context.ContextComponent
 import br.com.zup.beagle.android.context.ContextData
-import br.com.zup.beagle.android.context.valueOf
+import br.com.zup.beagle.android.utils.generateViewModelInstance
+import br.com.zup.beagle.android.utils.getContextBinding
+import br.com.zup.beagle.android.utils.observeBindChanges
+import br.com.zup.beagle.android.utils.setContextData
 import br.com.zup.beagle.android.view.ViewFactory
+import br.com.zup.beagle.android.view.viewmodel.ScreenContextViewModel
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.android.widget.WidgetView
 import br.com.zup.beagle.annotation.RegisterWidget
@@ -33,70 +37,36 @@ import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.widget.core.ListDirection
 
 @RegisterWidget
-data class ListView(
-    val children: List<ServerDrivenComponent>? = null,
+internal class ListViewTwo(
     override val context: ContextData? = null,
     val onInit: Action? = null,
     val dataSource: Bind<List<Any>>? = null,
     val direction: ListDirection,
-    val template: ServerDrivenComponent? = null,
+    val template: ServerDrivenComponent,
     val onScrollEnd: Action? = null,
     val scrollThreshold: Int? = null
 ) : WidgetView(), ContextComponent {
 
-    @Deprecated(message = "", replaceWith = ReplaceWith("")) //TODO(put message here, implement replaceWith)
-    constructor(
-        children: List<ServerDrivenComponent>,
-        direction: ListDirection
-    ) : this(
-        context = null,
-        children = children,
-        direction = direction
-    )
-
-    constructor(
-        context: ContextData? = null,
-        onInit: Action? = null,
-        dataSource: Bind<List<Any>>,
-        direction: ListDirection,
-        template: ServerDrivenComponent,
-        onScrollEnd: Action? = null,
-        scrollThreshold: Int? = null
-    ) : this(
-        children = null,
-        context = context,
-        onInit = onInit,
-        dataSource = dataSource,
-        direction = direction,
-        template = template,
-        onScrollEnd = onScrollEnd,
-        scrollThreshold = scrollThreshold
-    )
-
     @Transient
     private val viewFactory: ViewFactory = ViewFactory()
 
-    override fun buildView(rootView: RootView): View {
-        if (children.isNullOrEmpty()) {
-            template?.let{
-                return ListViewTwo(
-                    context,
-                    onInit,
-                    dataSource,
-                    direction,
-                    template,
-                    onScrollEnd,
-                    scrollThreshold
-                ).buildView(rootView)
-            }
-        }
+    @Transient
+    private lateinit var contextAdapter: ListViewContextAdapter2
 
+    override fun buildView(rootView: RootView): View {
         val recyclerView = viewFactory.makeRecyclerView(rootView.getContext())
+        val orientation = toRecyclerViewOrientation()
+        contextAdapter = ListViewContextAdapter2(template, viewFactory, orientation, rootView)
         recyclerView.apply {
-            val orientation = toRecyclerViewOrientation()
+            onInit?.execute(rootView, this)
             layoutManager = LinearLayoutManager(context, orientation, false)
-            children?.let{
-                adapter = ListViewRecyclerAdapter(children, viewFactory, orientation, rootView)
+            adapter = contextAdapter
+        }
+        dataSource?.let{
+            observeBindChanges(rootView, recyclerView, it) { value ->
+                value?.let {
+                    contextAdapter.setList(value)
+                }
             }
         }
         return recyclerView
@@ -107,34 +77,55 @@ data class ListView(
     } else {
         RecyclerView.HORIZONTAL
     }
+
+
 }
 
-
-internal class ListViewRecyclerAdapter(
-    private val children: List<ServerDrivenComponent>,
+internal class ListViewContextAdapter2(
+    private val template: ServerDrivenComponent,
     private val viewFactory: ViewFactory,
     private val orientation: Int,
     private val rootView: RootView
-) : RecyclerView.Adapter<ViewHolder>() {
+) : RecyclerView.Adapter<ContextViewHolderTwo>() {
+
+    private var listItems: List<Any>
+
+    init {
+        listItems = ArrayList()
+    }
 
     override fun getItemViewType(position: Int): Int = position
 
-    override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, position: Int): ContextViewHolderTwo {
         val view = viewFactory.makeBeagleFlexView(rootView.getContext()).also {
             val width = if (orientation == RecyclerView.VERTICAL)
                 ViewGroup.LayoutParams.MATCH_PARENT else
                 ViewGroup.LayoutParams.WRAP_CONTENT
             val layoutParams = ViewGroup.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT)
             it.layoutParams = layoutParams
-            it.addServerDrivenComponent(children[position], rootView)
         }
-        return ViewHolder(view)
+        val templateClone = template
+        view.addServerDrivenComponent(templateClone, rootView)
+        view.setContextData(ContextData("item", listItems[position]))
+        rootView.generateViewModelInstance<ScreenContextViewModel>().discoverAllContexts()
+        return ContextViewHolderTwo(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ContextViewHolderTwo, position: Int) {
+        val item = listItems[position]
+        val view = holder.itemView
+//        view.setContextData(ContextData(id = "item", value = item))
+//        view.getContextBinding()?.let { contextBinding ->
+//            rootView.generateViewModelInstance<ScreenContextViewModel>().notifyBindingChanges(contextBinding)
+//        }
     }
 
-    override fun getItemCount(): Int = children.size
+    fun setList(list: List<Any>) {
+        this.listItems = list
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount(): Int = listItems.size
 }
 
-internal class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+internal class ContextViewHolderTwo(itemView: View) : RecyclerView.ViewHolder(itemView)

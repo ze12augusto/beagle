@@ -16,13 +16,16 @@
 
 package br.com.zup.beagle.android.view.viewmodel
 
+import android.view.View
 import androidx.lifecycle.ViewModel
 import br.com.zup.beagle.android.action.Action
 import br.com.zup.beagle.android.action.SetContextInternal
-import br.com.zup.beagle.android.context.Bind
-import br.com.zup.beagle.android.context.ContextData
+import br.com.zup.beagle.android.context.*
+import br.com.zup.beagle.android.context.ContextBinding
 import br.com.zup.beagle.android.context.ContextDataEvaluation
 import br.com.zup.beagle.android.context.ContextDataManager
+import br.com.zup.beagle.android.utils.Observer
+import java.util.*
 
 private data class ImplicitContext(
     val sender: Any,
@@ -35,22 +38,42 @@ internal class ScreenContextViewModel(
     private val contextDataEvaluation: ContextDataEvaluation = ContextDataEvaluation()
 ) : ViewModel() {
 
+    private val viewIds = Stack<Int>()
     private val implicitContextData = mutableListOf<ImplicitContext>()
 
-    fun addContext(contextData: ContextData) {
-        contextDataManager.addContext(contextData)
+    fun resetIds() {
+        viewIds.clear()
     }
 
-    fun updateContext(setContextInternal: SetContextInternal) {
-        contextDataManager.updateContext(setContextInternal)
+    fun generateNewViewId(): Int {
+        val newId = if (viewIds.empty()) {
+            0
+        } else {
+            viewIds.peek() + 1
+        }
+
+        return viewIds.push(newId)
     }
 
-    fun addBindingToContext(bind: Bind.Expression<*>) {
-        contextDataManager.addBindingToContext(bind)
+
+    fun addContext(view: View, contextData: ContextData) {
+        contextDataManager.addContext(view, contextData)
     }
 
-    fun evaluateContexts() {
-        contextDataManager.evaluateContexts()
+    fun updateContext(originView: View, setContextInternal: SetContextInternal) {
+        contextDataManager.updateContext(originView, setContextInternal)
+    }
+
+    fun <T> addBindingToContext(view: View, bind: Bind.Expression<T>, observer: Observer<T>) {
+        contextDataManager.addBinding(view, bind, observer)
+    }
+
+    fun discoverAllContexts() {
+        contextDataManager.discoverAllContexts()
+    }
+
+    fun notifyBindingChanges(contextBinding: ContextBinding) {
+        contextDataManager.notifyBindingChanges(contextBinding)
     }
 
     // Sender is who created the implicit context
@@ -64,12 +87,12 @@ internal class ScreenContextViewModel(
     }
 
     // BindCaller is who owns the Bind Attribute
-    fun evaluateExpressionForImplicitContext(bindCaller: Action, bind: Bind.Expression<*>): Any? {
+    fun evaluateExpressionForImplicitContext(originView: View, bindCaller: Action, bind: Bind.Expression<*>): Any? {
         val contexts = mutableListOf<ContextData>()
 
         findMoreContexts(bindCaller, contexts)
 
-        return evaluateBind(contexts, bind)
+        return evaluateBind(originView, contexts, bind)
     }
 
     private fun findMoreContexts(
@@ -86,10 +109,10 @@ internal class ScreenContextViewModel(
         }
     }
 
-    private fun evaluateBind(implicitContexts: List<ContextData>, bind: Bind.Expression<*>): Any? {
-        val contexts = contextDataManager.getContextsFromBind(bind).toMutableList()
+    private fun evaluateBind(originView: View, implicitContexts: List<ContextData>, bind: Bind.Expression<*>): Any? {
+        val contexts = contextDataManager.getContextsFromBind(originView, bind).toMutableList()
         contexts += implicitContexts
-        return contextDataEvaluation.evaluateBindExpression(contexts, bind)
+        return contextDataEvaluation.evaluateBindExpression(contexts, bind, mutableMapOf())
     }
 
     fun clearContexts(){

@@ -33,47 +33,39 @@ import br.com.zup.beagle.widget.core.ListDirection
  * @param direction define the list direction.
  *
  */
-data class ListView private constructor(
-    val children: List<ServerDrivenComponent> = emptyList(),
-    override val context: ContextData,
-    val onInit: Action,
-    val dataSource: Bind<List<Any>>,
+data class ListView(
+    val children: List<ServerDrivenComponent>? = null,
+    override val context: ContextData? = null,
+    val onInit: Action? = null,
+    val dataSource: Bind<List<Any>>? = null,
     val direction: ListDirection,
-    val template: ServerDrivenComponent,
-    val onScrollEnd: Action,
-    val scrollThreshold: Int
-) : Widget(), ContextComponent {
+    val template: ServerDrivenComponent? = null,
+    val onScrollEnd: Action? = null,
+    val scrollThreshold: Int? = null
+) : ServerDrivenComponent, ContextComponent {
 
-    companion object{}
+    companion object {}
 
-    private class EmptyAction : Action
-
-    private class ServerDrivenComponentEmpty : ServerDrivenComponent
 
     constructor(
         children: List<ServerDrivenComponent>,
         direction: ListDirection
     ) : this(
-        children = emptyList(),
-        context = ContextData("", Any()),
-        onInit = EmptyAction(),
-        dataSource = valueOf(emptyList()),
-        direction = direction,
-        template = ServerDrivenComponentEmpty(),
-        onScrollEnd = EmptyAction(),
-        scrollThreshold = 0
+        context = null,
+        children = children,
+        direction = direction
     )
 
     constructor(
-        context: ContextData,
-        onInit: Action,
-        dataSource: Bind<List<Any>>,
+        context: ContextData? = null,
+        onInit: Action? = null,
+        dataSource: Bind<List<Any>>? = null,
         direction: ListDirection,
         template: ServerDrivenComponent,
-        onScrollEnd: Action,
-        scrollThreshold: Int = 100
+        onScrollEnd: Action? = null,
+        scrollThreshold: Int? = null
     ) : this(
-        children = emptyList(),
+        children = null,
         context = context,
         onInit = onInit,
         dataSource = dataSource,
@@ -82,4 +74,5 @@ data class ListView private constructor(
         onScrollEnd = onScrollEnd,
         scrollThreshold = scrollThreshold
     )
+
 }

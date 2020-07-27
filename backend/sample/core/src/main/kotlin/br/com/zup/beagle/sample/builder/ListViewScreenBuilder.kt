@@ -21,6 +21,8 @@ import br.com.zup.beagle.widget.action.Alert
 import br.com.zup.beagle.ext.applyFlex
 import br.com.zup.beagle.ext.applyStyle
 import br.com.zup.beagle.ext.unitReal
+import br.com.zup.beagle.widget.context.ContextData
+import br.com.zup.beagle.widget.context.expressionOf
 import br.com.zup.beagle.widget.core.EdgeValue
 import br.com.zup.beagle.widget.core.Flex
 import br.com.zup.beagle.widget.core.ListDirection
@@ -54,16 +56,20 @@ object ListViewScreenBuilder : ScreenBuilder {
                 )
             )
         ),
-        child = ScrollView(
-            scrollDirection = ScrollAxis.VERTICAL,
-            children = listOf(
-                getStaticListView(ListDirection.VERTICAL),
-                getStaticListView(ListDirection.HORIZONTAL),
-                getDynamicListView(ListDirection.VERTICAL),
-                getDynamicListView(ListDirection.HORIZONTAL)
+        child = Container(
+            children = listOf(ListView(
+                null,
+                null,
+                expressionOf("@{context}"),
+                ListDirection.HORIZONTAL,
+                Text(expressionOf("@{item.name}")),
+                null,
+                null
+            )
             )
         )
     )
+
 
     private fun getStaticListView(listDirection: ListDirection) = Container(
         children = listOf(

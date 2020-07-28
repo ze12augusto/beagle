@@ -66,6 +66,7 @@ private fun loadView(
     view.loadCompletedListener = {
         viewGroup.addView(view)
         viewModel.discoverAllContexts()
+        viewModel.evaluateContexts()
     }
 }
 

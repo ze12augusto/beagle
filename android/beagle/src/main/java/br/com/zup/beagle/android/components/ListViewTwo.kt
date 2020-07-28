@@ -39,7 +39,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 
 @RegisterWidget
-internal class ListViewTwo(
+internal data class ListViewTwo(
     override val context: ContextData? = null,
     val onInit: Action? = null,
     val dataSource: Bind<List<Any>>? = null,
@@ -55,7 +55,8 @@ internal class ListViewTwo(
     @Transient
     private lateinit var contextAdapter: ListViewContextAdapter2
 
-    private var needToAppendList: AtomicBoolean = AtomicBoolean(false)
+    @Transient
+    private val needToAppendList: AtomicBoolean = AtomicBoolean(false)
 
 
     override fun buildView(rootView: RootView): View {

@@ -22,6 +22,8 @@ import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
+import br.com.zup.beagle.R
+import br.com.zup.beagle.android.components.Text
 import br.com.zup.beagle.android.utils.StyleManager
 import br.com.zup.beagle.android.utils.toAndroidColor
 import br.com.zup.beagle.android.view.ViewFactory
@@ -86,3 +88,7 @@ internal fun View.applyBackgroundFromWindowBackgroundTheme(context: Context) {
         background = ContextCompat.getDrawable(context, typedValue.resourceId)
     }
 }
+
+internal var View.beagleComponent: ServerDrivenComponent?
+    get() = this.getTag(R.id.absolute) as? ServerDrivenComponent
+    set(component) = this.setTag(R.id.absolute, component)

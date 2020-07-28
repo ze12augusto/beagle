@@ -32,6 +32,8 @@ import br.com.zup.beagle.android.components.layout.Screen
 import br.com.zup.beagle.android.context.ContextData
 import br.com.zup.beagle.android.context.expressionOf
 import br.com.zup.beagle.android.utils.toView
+import br.com.zup.beagle.ext.applyFlex
+import br.com.zup.beagle.widget.core.Flex
 import br.com.zup.beagle.widget.core.ListDirection
 
 class ContextListViewFragment : Fragment() {
@@ -59,7 +61,7 @@ class ContextListViewFragment : Fragment() {
             listOf(
                 Genre(
                     id = 0,
-                    name = ""
+                    name = "Olá"
                 )
             )
         ),
@@ -75,7 +77,7 @@ class ContextListViewFragment : Fragment() {
         ),
         dataSource = expressionOf("@{initialContext}"),
         direction = ListDirection.VERTICAL,
-        template = Text(text = "@{item.name}"),
+        template = Text(text = expressionOf("@{item.name}")),
         onScrollEnd = SendRequest(
             url = "https://api.themoviedb.org/3/genre/movie/list?api_key=d272326e467344029e68e3c4ff0b4059",
             method = RequestActionMethod.GET

@@ -16,8 +16,13 @@
 
 package br.com.zup.beagle.android.components
 
+import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.zup.beagle.android.action.Action
@@ -36,6 +41,7 @@ import br.com.zup.beagle.annotation.RegisterWidget
 import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.widget.core.ListDirection
 
+
 @RegisterWidget
 internal class ListViewTwo(
     override val context: ContextData? = null,
@@ -53,22 +59,35 @@ internal class ListViewTwo(
     @Transient
     private lateinit var contextAdapter: ListViewContextAdapter2
 
+    private var list: List<Any> = emptyList()
+
     override fun buildView(rootView: RootView): View {
         val recyclerView = viewFactory.makeRecyclerView(rootView.getContext())
+        onInit?.execute(rootView, recyclerView)
         val orientation = toRecyclerViewOrientation()
-        contextAdapter = ListViewContextAdapter2(template, viewFactory, orientation, rootView)
         recyclerView.apply {
-            onInit?.execute(rootView, this)
-            layoutManager = LinearLayoutManager(context, orientation, false)
-            adapter = contextAdapter
-        }
-        dataSource?.let{
-            observeBindChanges(rootView, recyclerView, it) { value ->
-                value?.let {
-                    contextAdapter.setList(value)
+            dataSource?.let {
+                observeBindChanges(rootView, recyclerView, it) { value ->
+                    value?.let {
+                        when {
+                            value != list -> {
+                                contextAdapter = ListViewContextAdapter2(template, viewFactory, orientation, rootView)
+                                list = value
+                                contextAdapter.setList(list)
+                                adapter = contextAdapter
+                            }
+                        }
+
+                    }
                 }
             }
+            layoutManager = LinearLayoutManager(context, orientation, false)
         }
+
+        recyclerView.viewTreeObserver.addOnGlobalLayoutListener {
+
+        }
+
         return recyclerView
     }
 
@@ -114,10 +133,10 @@ internal class ListViewContextAdapter2(
     override fun onBindViewHolder(holder: ContextViewHolderTwo, position: Int) {
         val item = listItems[position]
         val view = holder.itemView
-//        view.setContextData(ContextData(id = "item", value = item))
-//        view.getContextBinding()?.let { contextBinding ->
-//            rootView.generateViewModelInstance<ScreenContextViewModel>().notifyBindingChanges(contextBinding)
-//        }
+        view.setContextData(ContextData(id = "item", value = item))
+        view.getContextBinding()?.let { contextBinding ->
+            rootView.generateViewModelInstance<ScreenContextViewModel>().notifyBindingChanges(contextBinding)
+        }
     }
 
     fun setList(list: List<Any>) {

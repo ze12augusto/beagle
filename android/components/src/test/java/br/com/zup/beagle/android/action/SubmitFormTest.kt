@@ -19,11 +19,10 @@ package br.com.zup.beagle.android.action
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewParent
-import br.com.zup.beagle.android.BaseTest
 import br.com.zup.beagle.android.components.form.SimpleForm
 import br.com.zup.beagle.android.extensions.once
 import br.com.zup.beagle.android.logger.BeagleLoggerProxy
-import br.com.zup.beagle.android.setup.BeagleEnvironment
+import br.com.zup.beagle.android.utils.BaseTest
 import br.com.zup.beagle.android.widget.RootView
 import io.mockk.*
 import org.junit.Test
@@ -37,7 +36,7 @@ class SubmitFormTest : BaseTest() {
 
     override fun setUp() {
         super.setUp()
-        every { beagleSdk.logger } returns null
+        BeagleLoggerProxy.logger = mockk(relaxUnitFun = true)
         mockkObject(BeagleLoggerProxy)
     }
 

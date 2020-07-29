@@ -37,7 +37,7 @@ import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class StringExtensionsKtTest{
+class DesignSystemStringExtensionsKtTest {
 
     private val colorSlot = slot<String>()
 

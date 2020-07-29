@@ -16,7 +16,6 @@
 
 package br.com.zup.beagle.android.utils
 
-
 import android.graphics.Color
 import br.com.zup.beagle.android.utils.ColorUtils
 import io.mockk.every

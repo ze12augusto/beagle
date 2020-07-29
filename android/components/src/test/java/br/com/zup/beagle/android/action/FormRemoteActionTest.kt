@@ -17,10 +17,10 @@
 package br.com.zup.beagle.android.action
 
 import android.view.View
-import br.com.zup.beagle.android.BaseTest
 import br.com.zup.beagle.android.components.form.core.FormResult
 import br.com.zup.beagle.android.components.form.core.FormSubmitter
 import br.com.zup.beagle.android.extensions.once
+import br.com.zup.beagle.android.utils.BaseTest
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just

@@ -16,23 +16,53 @@
 
 package br.com.zup.beagle.android.utils
 
-import br.com.zup.beagle.android.extensions.once
 import br.com.zup.beagle.android.view.BeagleActivity
-import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
+import io.mockk.mockk
 import io.mockk.verify
-import org.junit.Before
 import org.junit.Test
 
-class BeagleExtensionsTest {
+import org.junit.Assert.assertEquals
 
-    @RelaxedMockK
-    private lateinit var beagleActivity: BeagleActivity
+class BeagleUtilsTest {
 
-    @Before
-    fun setUp() {
-        MockKAnnotations.init(this)
+    private val  beagleActivity: BeagleActivity = mockk(relaxed = true)
+
+    @Test
+    fun toAndroidId_should_return_3546_when_value_is_oi() {
+        // Given
+        val myId = "oi"
+
+        // When
+        val result = myId.toAndroidId()
+
+        // Then
+        assertEquals(3546, result)
+    }
+
+    @Test
+    fun toAndroidId_should_return_3366_when_value_is_OI() {
+        // Given
+        val myId = "OI"
+
+        // When
+        val result = myId.toAndroidId()
+
+        // Then
+        assertEquals(2522, result)
+    }
+
+    @Test
+    fun toAndroidId_should_return_3366_when_value_is_io() {
+        // Given
+        val myId = "io"
+
+        // When
+        val result = myId.toAndroidId()
+
+        // Then
+        assertEquals(3366, result)
     }
 
     @Test

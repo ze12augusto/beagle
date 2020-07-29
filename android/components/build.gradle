@@ -55,7 +55,7 @@ dependencies {
     implementation Dependencies.GlideLibraries.glide
     kapt Dependencies.GlideLibraries.glideCompiler
 
-    implementation project(Dependencies.Modules.coreBeagle)
+    api project(Dependencies.Modules.coreBeagle)
 
     kapt project(Dependencies.Modules.internalProcessor)
 

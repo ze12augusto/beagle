@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.zup.beagle.android.utils
+package br.com.zup.beagle.android.cache
 
 import br.com.zup.beagle.android.testutil.RandomData
 import org.junit.Test

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.zup.beagle.android.utils
+package br.com.zup.beagle.android.manager
 
 import android.content.Context
 import android.content.res.Resources
@@ -32,6 +32,7 @@ import br.com.zup.beagle.android.components.layout.Container
 import br.com.zup.beagle.android.components.utils.applyViewBackgroundAndCorner
 import br.com.zup.beagle.android.extensions.once
 import br.com.zup.beagle.android.setup.DesignSystem
+import br.com.zup.beagle.android.utils.applyViewBackgroundAndCorner
 import br.com.zup.beagle.core.StyleComponent
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs

@@ -48,7 +48,6 @@ internal object ComponentJsonAdapterFactory {
         return factory.withBaseSubType(Widget::class.java)
     }
 
-
     private fun registerWidgets(
         factory: PolymorphicJsonAdapterFactory<ServerDrivenComponent>,
         appName: String,

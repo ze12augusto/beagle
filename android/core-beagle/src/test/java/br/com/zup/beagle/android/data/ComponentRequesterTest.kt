@@ -23,9 +23,7 @@ import br.com.zup.beagle.android.cache.CacheManager
 import br.com.zup.beagle.android.data.serializer.BeagleSerializer
 import br.com.zup.beagle.android.networking.RequestData
 import br.com.zup.beagle.android.networking.ResponseData
-import br.com.zup.beagle.android.testutil.RandomData
 import br.com.zup.beagle.android.view.ScreenRequest
-import br.com.zup.beagle.android.view.mapper.toRequestData
 import br.com.zup.beagle.core.ServerDrivenComponent
 import io.mockk.coEvery
 import io.mockk.coVerifySequence
@@ -71,6 +69,7 @@ class ComponentRequesterTest : BaseTest() {
             serializer,
             cacheManager
         )
+
         mockkStatic("br.com.zup.beagle.android.view.mapper.ScreenRequestMapperKt")
     }
 

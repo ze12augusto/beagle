@@ -17,7 +17,6 @@
 package br.com.zup.beagle.android.processor
 
 import android.view.View
-import br.com.zup.beagle.android.components.form.InputWidget
 import br.com.zup.beagle.android.widget.RootView
 import br.com.zup.beagle.android.widget.WidgetView
 import br.com.zup.beagle.annotation.RegisterWidget
@@ -29,21 +28,6 @@ data class FieldOnlyWidget(
     val b: Long = 123L,
     val c: String = "Hello"
 ) : WidgetView() {
-
-    override fun buildView(rootView: RootView): View {
-        return mockk()
-    }
-}
-
-//@RegisterWidget
-data class CustomInputWidget(val text: String = "") : InputWidget() {
-    override fun onErrorMessage(message: String) {
-        return mockk()
-    }
-
-    override fun getValue(): Any {
-        return mockk()
-    }
 
     override fun buildView(rootView: RootView): View {
         return mockk()

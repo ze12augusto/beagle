@@ -17,10 +17,7 @@
 package br.com.zup.beagle.android.cache
 
 import android.util.LruCache
-import br.com.zup.beagle.android.cache.LruCacheStore
-import br.com.zup.beagle.android.cache.TimerCache
 import br.com.zup.beagle.android.extensions.once
-import br.com.zup.beagle.android.setup.BeagleEnvironment
 import br.com.zup.beagle.android.testutil.RandomData
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
@@ -46,7 +43,7 @@ class LruCacheStoreTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        mockkObject(BeagleEnvironment)
+//        mockkObject(BeagleEnvironment)
 
         cacheStore = LruCacheStore(cache = cachedData)
     }

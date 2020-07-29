@@ -16,23 +16,19 @@
 
 package br.com.zup.beagle.android.cache
 
-import br.com.zup.beagle.android.cache.BeagleCache
-import br.com.zup.beagle.android.cache.CacheManager
-import br.com.zup.beagle.android.cache.LruCacheStore
-import br.com.zup.beagle.android.cache.TimerCache
+import br.com.zup.beagle.android.networking.RequestData
 import br.com.zup.beagle.android.networking.ResponseData
-import br.com.zup.beagle.android.setup.BeagleEnvironment
+import br.com.zup.beagle.android.setup.Cache
 import br.com.zup.beagle.android.store.StoreHandler
 import br.com.zup.beagle.android.store.StoreType
 import br.com.zup.beagle.android.testutil.RandomData
-import br.com.zup.beagle.android.view.ScreenRequest
+import br.com.zup.beagle.android.testutil.getPrivateField
 import io.mockk.MockKAnnotations
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.just
 import io.mockk.mockk
-import io.mockk.mockkObject
 import io.mockk.slot
 import io.mockk.unmockkAll
 import io.mockk.verify
@@ -40,6 +36,7 @@ import io.mockk.verifySequence
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import java.net.URI
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -49,7 +46,8 @@ private val BEAGLE_HASH_KEY = "$URL#hash"
 private val BEAGLE_JSON_KEY = "$URL#json"
 private val BEAGLE_HASH_VALUE = RandomData.string()
 private val BEAGLE_JSON_VALUE = RandomData.string()
-private val SCREEN_REQUEST = ScreenRequest(URL)
+
+private val SCREEN_REQUEST = RequestData(URI(URL))
 private val RESPONSE_BODY = RandomData.string()
 private const val BEAGLE_HASH = "beagle-hash"
 private const val INVALIDATION_TIME: Long = 0
@@ -62,12 +60,13 @@ class CacheManagerTest {
 
     @MockK
     private lateinit var storeHandler: StoreHandler
+
     @MockK
     private lateinit var timerCacheStore: LruCacheStore
-    @MockK
-    private lateinit var beagleEnvironment: BeagleEnvironment
+
     @MockK
     private lateinit var responseData: ResponseData
+
     @MockK
     private lateinit var timerCache: TimerCache
 
@@ -75,22 +74,14 @@ class CacheManagerTest {
 
     @Before
     fun setUp() {
-        mockkObject(BeagleEnvironment)
-
-        every { BeagleEnvironment.beagleSdk.config.cache.memoryMaximumCapacity } returns 15
+        CacheConstant.cache = Cache(memoryMaximumCapacity = 15, enabled = true, maxAge = INVALIDATION_TIME)
 
         MockKAnnotations.init(this)
 
-        cacheManager = CacheManager(
-            storeHandler,
-            beagleEnvironment,
-            timerCacheStore
-        )
+        cacheManager = CacheManager(storeHandler, timerCacheStore)
 
         every { timerCache.json } returns BEAGLE_JSON_VALUE
         every { timerCache.hash } returns BEAGLE_HASH_VALUE
-        every { beagleEnvironment.beagleSdk.config.cache.enabled } returns true
-        every { beagleEnvironment.beagleSdk.config.cache.maxAge } returns INVALIDATION_TIME
         every { timerCacheStore.restore(any()) } returns null
         every { storeHandler.restore(StoreType.DATABASE, any(), any()) } returns mapOf()
         every { responseData.statusCode } returns 200
@@ -98,10 +89,12 @@ class CacheManagerTest {
         every { responseData.headers } returns mapOf()
         every { storeHandler.save(any(), capture(storeHandlerDataSlot)) } just Runs
         every { responseData.data } returns RESPONSE_BODY.toByteArray()
-        every { timerCacheStore.save(
-            cacheKey = capture(cacheKeySlot),
-            timerCache = capture(timerCacheSlot)
-        ) } just Runs
+        every {
+            timerCacheStore.save(
+                cacheKey = capture(cacheKeySlot),
+                timerCache = capture(timerCacheSlot)
+            )
+        } just Runs
     }
 
     @After
@@ -112,23 +105,20 @@ class CacheManagerTest {
     @Test
     fun cache_should_not_initialize_cache_store_when_cache_is_disabled_and_memoryMaximumCapacity_is_zero() {
         // Given
-        every { beagleEnvironment.beagleSdk.config.cache.enabled } returns false
-        every { beagleEnvironment.beagleSdk.config.cache.memoryMaximumCapacity } returns 0
+        CacheConstant.cache = Cache(memoryMaximumCapacity = 0, enabled = false, maxAge = INVALIDATION_TIME)
 
         // When
-        CacheManager(
-            storeHandler,
-            beagleEnvironment
-        )
+        val cacheManager = CacheManager(storeHandler)
+        val lru: LruCacheStore = cacheManager.getPrivateField("timerCacheStore")
 
         // Then
-        verify(exactly = 0) { LruCacheStore.instance }
+        assertNull(lru)
     }
 
     @Test
     fun restoreBeagleCacheForUrl_should_return_null_when_cache_is_disabled() {
         // Given
-        every { beagleEnvironment.beagleSdk.config.cache.enabled } returns false
+        CacheConstant.cache = Cache(memoryMaximumCapacity = 15, enabled = false, maxAge = INVALIDATION_TIME)
 
         // When
         val actual = cacheManager.restoreBeagleCacheForUrl(URL)
@@ -203,7 +193,7 @@ class CacheManagerTest {
         }
 
         // When
-        val actualScreenRequest = cacheManager.screenRequestWithCache(SCREEN_REQUEST, beagleCache)
+        val actualScreenRequest = cacheManager.requestDataWithCache(SCREEN_REQUEST, beagleCache)
 
         // Then
         assertEquals(BEAGLE_HASH_VALUE, actualScreenRequest.headers[BEAGLE_HASH])
@@ -215,7 +205,7 @@ class CacheManagerTest {
         val beagleCache: BeagleCache? = null
 
         // When
-        val actualScreenRequest = cacheManager.screenRequestWithCache(SCREEN_REQUEST, beagleCache)
+        val actualScreenRequest = cacheManager.requestDataWithCache(SCREEN_REQUEST, beagleCache)
 
         // Then
         assertNull(actualScreenRequest.headers[BEAGLE_HASH])
@@ -268,7 +258,7 @@ class CacheManagerTest {
     @Test
     fun handleResponseData_should_not_call_store_cache_if_is_disabled() {
         // Given
-        every { beagleEnvironment.beagleSdk.config.cache.enabled } returns false
+        CacheConstant.cache = Cache(memoryMaximumCapacity = 15, enabled = false, maxAge = INVALIDATION_TIME)
 
         // When
         cacheManager.handleResponseData(URL, null, responseData)

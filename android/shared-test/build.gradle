@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package br.com.zup.beagle.android.store
+import br.com.zup.beagle.Dependencies
 
-import br.com.zup.beagle.android.setup.BeagleEnvironment
+apply plugin: 'kotlin'
 
-internal class StoreHandlerFactory(
-    private val beagleEnvironment: BeagleEnvironment = BeagleEnvironment
-) {
-    fun make(): StoreHandler {
-        return beagleEnvironment.beagleSdk.storeHandler ?: StoreHandlerDefault()
-    }
+dependencies {
+
+    implementation Dependencies.GeneralLibraries.kotlinCoroutines
+
+    // Unit Testing
+    api Dependencies.TestLibraries.junit
+    api Dependencies.TestLibraries.mockk
+    api Dependencies.TestLibraries.kotlinTest
+    api Dependencies.TestLibraries.kotlinCoroutinesTest
 }

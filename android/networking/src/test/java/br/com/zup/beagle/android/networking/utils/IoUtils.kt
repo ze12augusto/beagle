@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package br.com.zup.beagle.android.testutil
+package br.com.zup.beagle.android.networking.utils
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi

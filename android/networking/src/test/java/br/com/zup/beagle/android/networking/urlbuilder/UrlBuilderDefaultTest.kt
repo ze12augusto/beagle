@@ -16,7 +16,7 @@
 
 package br.com.zup.beagle.android.networking.urlbuilder
 
-import br.com.zup.beagle.android.testutil.IoUtils
+import br.com.zup.beagle.android.networking.utils.IoUtils
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -31,7 +31,8 @@ class UrlBuilderDefaultTest {
     fun setUp() {
         urlBuilderDefault = UrlBuilderDefault()
 
-        val jsonFileString = IoUtils.getJsonFromFile("../../common/tests/", "UrlBuilderTestSpec.json")
+        val jsonFileString = IoUtils.getJsonFromFile("../../common/tests/",
+            "UrlBuilderTestSpec.json")
 
         urlBuilders = IoUtils.getDataListFromJson(jsonFileString)
 

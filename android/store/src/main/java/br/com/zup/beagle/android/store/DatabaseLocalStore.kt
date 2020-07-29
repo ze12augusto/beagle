@@ -87,7 +87,8 @@ class ContentValuesFactory {
     fun make(): ContentValues = ContentValues()
 }
 
-internal object BeagleDatabaseManager {
+//TODO REMOVED INTERNAL
+object BeagleDatabaseManager {
 
     private const val DATABASE_NAME = "BeagleDefaultStore.db"
     private const val DATABASE_VERSION = 1

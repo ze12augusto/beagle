@@ -48,6 +48,7 @@ class Dependencies : Plugin<Project> {
         const val coreBeagle = ":core-beagle"
         const val components = ":components"
         const val cache = ":cache"
+        const val sharedTest = ":shared-test"
     }
 
     object Releases {

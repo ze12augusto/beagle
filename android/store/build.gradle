@@ -50,6 +50,9 @@ android {
 
 dependencies {
     implementation project(Dependencies.Modules.logger)
+
+    testImplementation project(Dependencies.Modules.sharedTest)
+
 }
 
 apply from: rootProject.file('../maven-publish.gradle')

@@ -26,6 +26,7 @@ import br.com.zup.beagle.android.context.ContextConstant
 import br.com.zup.beagle.android.data.serializer.BeagleMoshi
 import br.com.zup.beagle.android.designsystem.constant.DesignSystemConstant
 import br.com.zup.beagle.android.factory.logger.BeagleLoggerFactory
+import br.com.zup.beagle.android.factory.store.StoreHandlerFactory
 import br.com.zup.beagle.android.logger.BeagleLogger
 import br.com.zup.beagle.android.logger.BeagleLoggerProxy
 import br.com.zup.beagle.android.navigation.DeepLinkHandler
@@ -33,7 +34,6 @@ import br.com.zup.beagle.android.networking.HttpClient
 import br.com.zup.beagle.android.networking.urlbuilder.UrlBuilder
 import br.com.zup.beagle.android.store.DatabaseContext
 import br.com.zup.beagle.android.store.StoreHandler
-import br.com.zup.beagle.android.store.StoreHandlerFactory
 import br.com.zup.beagle.android.view.BeagleActivity
 import br.com.zup.beagle.android.widget.WidgetView
 import com.facebook.soloader.SoLoader

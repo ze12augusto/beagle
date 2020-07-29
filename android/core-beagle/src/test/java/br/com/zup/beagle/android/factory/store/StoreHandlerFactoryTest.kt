@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
-package br.com.zup.beagle.android.store
+package br.com.zup.beagle.android.factory.store
 
 import android.database.sqlite.SQLiteDatabase
 import br.com.zup.beagle.android.setup.BeagleEnvironment
+import br.com.zup.beagle.android.store.BeagleDatabaseManager
+import br.com.zup.beagle.android.store.StoreHandler
+import br.com.zup.beagle.android.store.StoreHandlerDefault
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import org.junit.After
@@ -74,4 +77,3 @@ class StoreHandlerFactoryTest {
         // Then
         assertEquals(appStoreHandler, storeHandler)
     }
-}

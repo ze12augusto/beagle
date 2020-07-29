@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-package br.com.zup.beagle.android.networking.urlbuilder
+package br.com.zup.beagle.android.factory.networking.urlbuilder
 
 import br.com.zup.beagle.android.BaseTest
+import br.com.zup.beagle.android.networking.urlbuilder.UrlBuilder
+import br.com.zup.beagle.android.networking.urlbuilder.UrlBuilderDefault
 import br.com.zup.beagle.android.setup.BeagleEnvironment
 import io.mockk.every
 import io.mockk.impl.annotations.MockK

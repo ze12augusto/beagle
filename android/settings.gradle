@@ -35,6 +35,7 @@ include ":core-design-system"
 include ":core-beagle"
 include ":cache"
 include ":render-engine"
+include ":shared-test"
 
 project(":schema:kotlin-core").projectDir = file('../schema/kotlin-core')
 project(":common:extended-schema").projectDir = file('../common/extended-schema')

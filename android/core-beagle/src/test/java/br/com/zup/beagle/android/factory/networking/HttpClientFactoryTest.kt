@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package br.com.zup.beagle.android.networking
+package br.com.zup.beagle.android.factory.networking
 
+import br.com.zup.beagle.android.networking.HttpClient
+import br.com.zup.beagle.android.networking.HttpClientDefault
 import br.com.zup.beagle.android.setup.BeagleEnvironment
 import io.mockk.MockKAnnotations
 import io.mockk.every

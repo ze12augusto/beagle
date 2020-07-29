@@ -53,6 +53,10 @@ dependencies {
     implementation Dependencies.GeneralLibraries.kotlinCoroutines
     implementation project(Dependencies.Modules.logger)
 
+    testImplementation Dependencies.MoshiLibraries.moshi
+    testImplementation Dependencies.MoshiLibraries.kotlin
+
+    testImplementation project(Dependencies.Modules.sharedTest)
 }
 
 apply from: rootProject.file('../maven-publish.gradle')

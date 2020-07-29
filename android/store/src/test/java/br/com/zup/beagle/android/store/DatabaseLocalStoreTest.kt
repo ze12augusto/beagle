@@ -20,7 +20,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import br.com.zup.beagle.android.extensions.once
-import br.com.zup.beagle.android.logger.BeagleMessageLogs
+import br.com.zup.beagle.android.store.logger.BeagleStoreLogs
 import br.com.zup.beagle.android.testutil.RandomData
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
@@ -36,10 +36,13 @@ class DatabaseLocalStoreTest {
 
     @MockK
     private lateinit var database: SQLiteDatabase
+
     @MockK
     private lateinit var cursor: Cursor
+
     @MockK
     private lateinit var contentValuesFactory: ContentValuesFactory
+
     @MockK
     private lateinit var contentValues: ContentValues
 
@@ -51,9 +54,9 @@ class DatabaseLocalStoreTest {
 
         databaseLocalStore = DatabaseLocalStore(contentValuesFactory, database)
 
-        mockkObject(BeagleMessageLogs)
+        mockkObject(BeagleStoreLogs)
 
-        every { BeagleMessageLogs.logDataNotInsertedOnDatabase(any(), any()) } just Runs
+        every { BeagleStoreLogs.logDataNotInsertedOnDatabase(any(), any()) } just Runs
         every { contentValuesFactory.make() } returns contentValues
         every { contentValues.put(any(), any<String>()) } just Runs
         every { database.query(any(), any(), any(), any(), any(), any(), any()) } returns cursor
@@ -80,7 +83,7 @@ class DatabaseLocalStoreTest {
         // Then
         val actualTableName = tableNameSlot.captured
         verify(exactly = once()) { database.insert(actualTableName, null, contentValues) }
-        verify(exactly = 0) { BeagleMessageLogs.logDataNotInsertedOnDatabase(key, value) }
+        verify(exactly = 0) { BeagleStoreLogs.logDataNotInsertedOnDatabase(key, value) }
         assertEquals(ScreenEntry.TABLE_NAME, actualTableName)
     }
 
@@ -95,7 +98,7 @@ class DatabaseLocalStoreTest {
         databaseLocalStore.save(key, value)
 
         // Then
-        verify(exactly = once()) { BeagleMessageLogs.logDataNotInsertedOnDatabase(key, value) }
+        verify(exactly = once()) { BeagleStoreLogs.logDataNotInsertedOnDatabase(key, value) }
     }
 
     @Test
@@ -130,15 +133,17 @@ class DatabaseLocalStoreTest {
         val columnsToReturnSlot = slot<Array<String>>()
         val columnsForWhereSlot = slot<String>()
         val valuesForWhereClauseSlot = slot<Array<String>>()
-        every { database.query(
-            capture(tableNameSlot),
-            capture(columnsToReturnSlot),
-            capture(columnsForWhereSlot),
-            capture(valuesForWhereClauseSlot),
-            any(),
-            any(),
-            any()
-        ) } returns cursor
+        every {
+            database.query(
+                capture(tableNameSlot),
+                capture(columnsToReturnSlot),
+                capture(columnsForWhereSlot),
+                capture(valuesForWhereClauseSlot),
+                any(),
+                any(),
+                any()
+            )
+        } returns cursor
 
 
         // When

@@ -18,7 +18,6 @@ package br.com.zup.beagle.android.networking
 
 import br.com.zup.beagle.android.extensions.once
 import br.com.zup.beagle.android.setup.BeagleEnvironment
-import br.com.zup.beagle.android.testutil.CoroutineTestRule
 import br.com.zup.beagle.android.testutil.RandomData
 import io.mockk.MockKAnnotations
 import io.mockk.Runs
@@ -28,7 +27,6 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.mockkObject
 import io.mockk.mockkStatic
-import io.mockk.slot
 import io.mockk.unmockkAll
 import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi

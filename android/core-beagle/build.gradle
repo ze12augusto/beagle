@@ -79,6 +79,9 @@ dependencies {
     implementation project(Dependencies.Modules.coreActions)
     implementation project(Dependencies.Modules.coreRenderEngine)
     implementation project(Dependencies.Modules.coreDesignSystem)
+
+
+    testImplementation project(Dependencies.Modules.sharedTest)
 }
 
 apply from: rootProject.file('../maven-publish.gradle')

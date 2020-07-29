@@ -37,10 +37,10 @@ data class Container(
 ) : WidgetView(), ContextComponent {
 
     @Transient
-    private val viewFactory = ComponentsViewFactory()
+    private val componentsViewFactory = ComponentsViewFactory()
 
     override fun buildView(rootView: RootView): View {
-        val view = viewFactory.makeBeagleFlexView(rootView.getContext(), style ?: Style())
+        val view = componentsViewFactory.makeBeagleFlexView(rootView.getContext(), style ?: Style())
         onInit?.let {
             this@Container.handleEvent(rootView, view, it)
         }

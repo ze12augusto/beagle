@@ -56,7 +56,7 @@ data class Image(
     private val viewMapper: ViewMapper = ViewMapper()
 
     @Transient
-    private val viewFactory = ComponentsViewFactory()
+    private val componentsViewFactory = ComponentsViewFactory()
 
     override fun buildView(rootView: RootView): View {
         val imageView: RoundedImageView = getImageView(rootView)
@@ -83,7 +83,7 @@ data class Image(
         return imageView
     }
 
-    private fun getImageView(rootView: RootView) = viewFactory.makeImageView(rootView.getContext(),
+    private fun getImageView(rootView: RootView) = componentsViewFactory.makeImageView(rootView.getContext(),
         style?.cornerRadius?.radius ?: 0.0).apply {
         scaleType = viewMapper.toScaleType(mode ?: ImageContentMode.FIT_CENTER)
     }

@@ -52,7 +52,7 @@ data class Button(
     )
 
     @Transient
-    private val viewFactory = ComponentsViewFactory()
+    private val componentsViewFactory = ComponentsViewFactory()
 
     @Transient
     private val preFetchHelper: PreFetchHelper = PreFetchHelper()
@@ -65,7 +65,7 @@ data class Button(
             preFetchHelper.handlePreFetch(rootView, it)
         }
 
-        val button = viewFactory.makeButton(rootView.getContext(), styleManager.getButtonStyle(styleId))
+        val button = componentsViewFactory.makeButton(rootView.getContext(), styleManager.getButtonStyle(styleId))
 
         button.setOnClickListener { view ->
             onPress?.let {

@@ -58,6 +58,11 @@ dependencies {
     implementation project(Dependencies.Modules.logger)
     implementation project(Dependencies.Modules.coreActions)
     implementation project(Dependencies.Modules.coreWidgets)
+
+    testImplementation Dependencies.GeneralLibraries.jsonObject
+    testImplementation Dependencies.MoshiLibraries.kotlin
+
+    testImplementation project(Dependencies.Modules.sharedTest)
 }
 
 apply from: rootProject.file('../maven-publish.gradle')

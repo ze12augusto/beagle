@@ -47,25 +47,25 @@ data class TabView(
 ) : WidgetView(), ContextComponent {
 
     @Transient
-    private val viewFactory = ComponentsViewFactory()
+    private val componentsViewFactory = ComponentsViewFactory()
 
     override fun buildView(rootView: RootView): View {
         val containerFlex = Style(flex = Flex(grow = 1.0))
 
-        val container = viewFactory.makeBeagleFlexView(rootView.getContext(), containerFlex)
+        val container = componentsViewFactory.makeBeagleFlexView(rootView.getContext(), containerFlex)
 
         val tabLayout = makeTabLayout(rootView)
 
-        val viewPager = viewFactory.makeViewPager(rootView.getContext()).apply {
+        val viewPager = componentsViewFactory.makeViewPager(rootView.getContext()).apply {
             adapter = ContentAdapter(
-                viewFactory = viewFactory,
+                componentsViewFactory = componentsViewFactory,
                 children = children,
                 rootView = rootView
             )
         }
 
         val containerViewPager =
-            viewFactory.makeBeagleFlexView(rootView.getContext()).apply {
+            componentsViewFactory.makeBeagleFlexView(rootView.getContext()).apply {
                 addView(viewPager)
             }
 
@@ -80,9 +80,9 @@ data class TabView(
 
     private fun makeTabLayout(rootView: RootView): TabLayout {
         val context = rootView.getContext()
-        return viewFactory.makeTabLayout(context, styleManager.getTabViewStyle(styleId)).apply {
+        return componentsViewFactory.makeTabLayout(context, styleManager.getTabViewStyle(styleId)).apply {
             layoutParams =
-                viewFactory.makeFrameLayoutParams(
+                componentsViewFactory.makeFrameLayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     TAB_BAR_HEIGHT
                 )
@@ -156,7 +156,7 @@ data class TabView(
 
 internal class ContentAdapter(
     private val children: List<TabItem>,
-    private val viewFactory: ComponentsViewFactory,
+    private val componentsViewFactory: ComponentsViewFactory,
     private val rootView: RootView
 ) : PagerAdapter() {
 
@@ -165,7 +165,7 @@ internal class ContentAdapter(
     override fun getCount(): Int = children.size
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val view = viewFactory.makeBeagleFlexView(container.context).also {
+        val view = componentsViewFactory.makeBeagleFlexView(container.context).also {
             it.addServerDrivenComponent(children[position].child, rootView)
         }
         container.addView(view)

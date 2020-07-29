@@ -48,14 +48,14 @@ data class SimpleForm(
 ) : WidgetView(), ContextComponent {
 
     @Transient
-    private val viewFactory = ComponentsViewFactory()
+    private val componentsViewFactory = ComponentsViewFactory()
 
     @Transient
     private val preFetchHelper: PreFetchHelper = PreFetchHelper()
 
     override fun buildView(rootView: RootView): View {
         preFetchHelper.handlePreFetch(rootView, onSubmit)
-        return viewFactory.makeBeagleFlexView(rootView.getContext(), style ?: Style())
+        return componentsViewFactory.makeBeagleFlexView(rootView.getContext(), style ?: Style())
             .apply {
                 tag = this@SimpleForm
                 addChildrenForm(this, rootView)

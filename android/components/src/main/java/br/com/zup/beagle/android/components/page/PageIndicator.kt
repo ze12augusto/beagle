@@ -34,12 +34,12 @@ class PageIndicator(
 ) : WidgetView(), PageIndicatorComponent {
 
     @Transient
-    private val viewFactory = ComponentsViewFactory()
+    private val componentsViewFactory = ComponentsViewFactory()
 
     @Transient
     private lateinit var pageIndicator: BeaglePageIndicatorView
 
-    override fun buildView(rootView: RootView) = viewFactory.makePageIndicator(rootView.getContext()).apply {
+    override fun buildView(rootView: RootView) = componentsViewFactory.makePageIndicator(rootView.getContext()).apply {
         pageIndicator = this
         setSelectedColor(Color.parseColor(selectedColor))
         setUnselectedColor(Color.parseColor(unselectedColor))

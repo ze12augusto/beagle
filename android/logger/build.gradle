@@ -50,6 +50,8 @@ android {
 
 dependencies {
 
+
+    testImplementation project(Dependencies.Modules.sharedTest)
 }
 
 apply from: rootProject.file('../maven-publish.gradle')

@@ -20,7 +20,7 @@ import android.graphics.Canvas
 import android.graphics.Path
 import android.graphics.RectF
 
-const val FLOAT_ZERO = 0F
+private const val FLOAT_ZERO = 0F
 
 internal fun Canvas.applyRadius(radius: Float) {
     if (radius > FLOAT_ZERO) {

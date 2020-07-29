@@ -31,10 +31,10 @@ data class LazyComponent(
 ) : WidgetView() {
 
     @Transient
-    private val viewFactory = ComponentsViewFactory()
+    private val componentsViewFactory = ComponentsViewFactory()
 
     override fun buildView(rootView: RootView): View {
-        return viewFactory.makeBeagleView(rootView.getContext()).apply {
+        return componentsViewFactory.makeBeagleView(rootView.getContext()).apply {
             addServerDrivenComponent(initialState, rootView)
             updateView(rootView, path, this[0])
         }

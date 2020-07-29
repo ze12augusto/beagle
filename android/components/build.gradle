@@ -56,9 +56,10 @@ dependencies {
     kapt Dependencies.GlideLibraries.glideCompiler
 
     implementation project(Dependencies.Modules.coreBeagle)
-//    implementation project(Dependencies.Modules.coreDesignSystem)
 
     kapt project(Dependencies.Modules.internalProcessor)
+
+    testImplementation project(Dependencies.Modules.sharedTest)
 }
 
 apply from: rootProject.file('../maven-publish.gradle')

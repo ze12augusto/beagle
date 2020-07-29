@@ -26,6 +26,7 @@ import br.com.zup.beagle.android.widget.WidgetView
 import br.com.zup.beagle.annotation.RegisterWidget
 import br.com.zup.beagle.core.ServerDrivenComponent
 import br.com.zup.beagle.widget.core.ListDirection
+
 @RegisterWidget
 data class ListView(
     val children: List<ServerDrivenComponent>,
@@ -33,14 +34,14 @@ data class ListView(
 ) : WidgetView() {
 
     @Transient
-    private val viewFactory = ComponentsViewFactory()
+    private val componentsViewFactory = ComponentsViewFactory()
 
     override fun buildView(rootView: RootView): View {
-        val recyclerView = viewFactory.makeRecyclerView(rootView.getContext())
+        val recyclerView = componentsViewFactory.makeRecyclerView(rootView.getContext())
         recyclerView.apply {
             val orientation = toRecyclerViewOrientation()
             layoutManager = LinearLayoutManager(context, orientation, false)
-            adapter = ListViewRecyclerAdapter(children, viewFactory, orientation, rootView)
+            adapter = ListViewRecyclerAdapter(children, componentsViewFactory, orientation, rootView)
         }
 
         return recyclerView
@@ -53,10 +54,9 @@ data class ListView(
     }
 }
 
-
 internal class ListViewRecyclerAdapter(
     private val children: List<ServerDrivenComponent>,
-    private val viewFactory: ComponentsViewFactory,
+    private val componentsViewFactory: ComponentsViewFactory,
     private val orientation: Int,
     private val rootView: RootView
 ) : RecyclerView.Adapter<ViewHolder>() {
@@ -64,7 +64,7 @@ internal class ListViewRecyclerAdapter(
     override fun getItemViewType(position: Int): Int = position
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): ViewHolder {
-        val view = viewFactory.makeBeagleFlexView(rootView.getContext()).also {
+        val view = componentsViewFactory.makeBeagleFlexView(rootView.getContext()).also {
             val width = if (orientation == RecyclerView.VERTICAL)
                 ViewGroup.LayoutParams.MATCH_PARENT else
                 ViewGroup.LayoutParams.WRAP_CONTENT

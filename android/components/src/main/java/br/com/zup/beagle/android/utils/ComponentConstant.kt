@@ -19,5 +19,5 @@ package br.com.zup.beagle.android.utils
 import br.com.zup.beagle.android.manager.StyleManager
 
 object ComponentConstant  {
-    internal val styleManager = StyleManager()
+    internal var styleManager = StyleManager()
 }

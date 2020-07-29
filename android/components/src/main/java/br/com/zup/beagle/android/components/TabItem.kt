@@ -30,10 +30,10 @@ data class TabItem(
 ) : WidgetView() {
 
     @Transient
-    private val viewFactory = ComponentsViewFactory()
+    private val componentsViewFactory = ComponentsViewFactory()
 
     override fun buildView(rootView: RootView): View {
-        return viewFactory.makeBeagleFlexView(rootView.getContext()).also {
+        return componentsViewFactory.makeBeagleFlexView(rootView.getContext()).also {
             it.addServerDrivenComponent(child, rootView)
         }
     }

@@ -17,13 +17,8 @@
 package br.com.zup.beagle.android.components.utils
 
 import android.content.Context
-import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat
-import br.com.zup.beagle.android.manager.StyleManager
-import br.com.zup.beagle.android.utils.ComponentConstant.styleManager
-import br.com.zup.beagle.android.view.ComponentsViewFactory
 
 internal fun View.hideKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

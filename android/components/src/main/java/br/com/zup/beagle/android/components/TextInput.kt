@@ -79,7 +79,7 @@ data class TextInput(
     )
 
     @Transient
-    private val viewFactory = ComponentsViewFactory()
+    private val componentsViewFactory = ComponentsViewFactory()
 
     @Transient
     private lateinit var textInputView: EditText
@@ -87,7 +87,7 @@ data class TextInput(
     @Transient
     private var textWatcher: TextWatcher? = null
 
-    override fun buildView(rootView: RootView): View = viewFactory.makeInputText(
+    override fun buildView(rootView: RootView): View = componentsViewFactory.makeInputText(
         rootView.getContext(),
         styleManager.getInputTextStyle(styleId)
     ).apply {

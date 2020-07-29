@@ -25,10 +25,10 @@ import br.com.zup.beagle.core.ServerDrivenComponent
 abstract class ComposeComponent : WidgetView() {
 
     @Transient
-    private val viewFactory = ComponentsViewFactory()
+    private val componentsViewFactory = ComponentsViewFactory()
 
     override fun buildView(rootView: RootView): View {
-        return viewFactory.makeBeagleFlexView(rootView.getContext()).apply {
+        return componentsViewFactory.makeBeagleFlexView(rootView.getContext()).apply {
             addServerDrivenComponent(build(), rootView)
         }
     }

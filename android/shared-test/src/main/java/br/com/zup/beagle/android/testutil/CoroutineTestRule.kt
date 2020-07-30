@@ -16,6 +16,7 @@
 
 package br.com.zup.beagle.android.testutil
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -25,7 +26,7 @@ import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
 @ExperimentalCoroutinesApi
-class CoroutineTestRule(private val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()) : TestWatcher() {
+class CoroutineTestRule(private val dispatcher: CoroutineDispatcher = TestCoroutineDispatcher()) : TestWatcher() {
 
     override fun starting(description: Description?) {
         super.starting(description)

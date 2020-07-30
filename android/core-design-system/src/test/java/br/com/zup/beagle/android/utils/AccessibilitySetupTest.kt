@@ -18,7 +18,6 @@ package br.com.zup.beagle.android.utils
 
 import android.view.View
 import android.widget.TextView
-import br.com.zup.beagle.android.components.utils.AccessibilitySetup
 import br.com.zup.beagle.core.AccessibilityComponent
 import io.mockk.MockKAnnotations
 import io.mockk.Runs

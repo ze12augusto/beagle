@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package br.com.zup.beagle.android.mockdata
+package br.com.zup.beagle.android.networking.fake
 
-import br.com.zup.beagle.android.data.serializer.makeButtonJson
 import br.com.zup.beagle.android.networking.HttpMethod
 import br.com.zup.beagle.android.networking.RequestData
 import br.com.zup.beagle.android.networking.ResponseData
@@ -35,3 +34,10 @@ fun makeRequestData() = RequestData(
     headers = mapOf("Authorization" to RandomData.string()),
     body = makeButtonJson()
 )
+
+fun makeButtonJson() = """
+    {
+        "_beagleComponent_": "beagle:button",
+        "text": "Test"
+    }
+"""

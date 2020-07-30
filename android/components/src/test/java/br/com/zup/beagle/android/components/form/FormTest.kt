@@ -34,7 +34,7 @@ import br.com.zup.beagle.android.components.form.core.ValidatorHandler
 import br.com.zup.beagle.android.components.utils.hideKeyboard
 import br.com.zup.beagle.android.engine.renderer.ViewRendererFactory
 import br.com.zup.beagle.android.extensions.once
-import br.com.zup.beagle.android.logger.BeagleMessageLogs
+import br.com.zup.beagle.android.logger.ComponentsMessageLogs
 import br.com.zup.beagle.android.testutil.RandomData
 import br.com.zup.beagle.android.testutil.getPrivateField
 import br.com.zup.beagle.android.utils.handleEvent
@@ -94,8 +94,8 @@ class FormTest : BaseComponentTest() {
         mockkConstructor(FormValidation::class)
 
         Constants.shared = formDataStoreHandler
-        every { BeagleMessageLogs.logFormInputsNotFound(any()) } just Runs
-        every { BeagleMessageLogs.logFormSubmitNotFound(any()) } just Runs
+        every { ComponentsMessageLogs.logFormInputsNotFound(any()) } just Runs
+        every { ComponentsMessageLogs.logFormSubmitNotFound(any()) } just Runs
         every { formDataStoreHandler.getAllValues(any()) } returns HashMap()
         every { formDataStoreHandler.put(any(), any(), any()) } just Runs
         every { rootView.getContext() } returns beagleActivity

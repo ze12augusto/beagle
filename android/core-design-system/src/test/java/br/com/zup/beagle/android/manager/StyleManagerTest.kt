@@ -24,26 +24,22 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.View
-import br.com.zup.beagle.R
-import br.com.zup.beagle.android.BaseTest
-import br.com.zup.beagle.android.components.Button
-import br.com.zup.beagle.android.components.Text
-import br.com.zup.beagle.android.components.layout.Container
-import br.com.zup.beagle.android.components.utils.applyViewBackgroundAndCorner
+import br.com.zup.beagle.android.core.design.system.R
 import br.com.zup.beagle.android.extensions.once
+import br.com.zup.beagle.android.fake.Button
+import br.com.zup.beagle.android.fake.Text
 import br.com.zup.beagle.android.setup.DesignSystem
 import br.com.zup.beagle.android.utils.applyViewBackgroundAndCorner
 import br.com.zup.beagle.core.StyleComponent
-import io.mockk.every
+import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.mockk
-import io.mockk.mockkStatic
-import io.mockk.verify
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class StyleManagerTest : BaseTest() {
+class StyleManagerTest {
 
     @InjectMockKs
     private lateinit var styleManager: StyleManager
@@ -74,13 +70,19 @@ class StyleManagerTest : BaseTest() {
 
     private var textAppearanceInt: Int = 0
 
-    override fun setUp() {
-        super.setUp()
-        mockkStatic("br.com.zup.beagle.android.components.utils.ViewExtensionsKt")
-        every { beagleSdk.designSystem } returns mockk()
+    @Before
+    fun setUp() {
+        MockKAnnotations.init(this)
+
+        mockkStatic("br.com.zup.beagle.android.utils.ViewExtensionsKt")
         every { view.background } returns mockk()
         every { designSystem.textStyle(any()) } returns textAppearanceInt
         every { context.obtainStyledAttributes(any<Int>(), any()) } returns mockk()
+    }
+
+    @After
+    fun tearDown() {
+        unmockkAll()
     }
 
     @Test
@@ -114,7 +116,7 @@ class StyleManagerTest : BaseTest() {
     @Test
     fun test_getBackgroundColor_when_text_not_is_color_drawable() {
         //Given
-        serverDrivenComponent = Text("")
+        serverDrivenComponent = Text()
         every { context.obtainStyledAttributes(any<Int>(), any()) } returns typedArray
 
         //When
@@ -127,7 +129,7 @@ class StyleManagerTest : BaseTest() {
     @Test
     fun test_getBackgroundColor_when_button_has_a_color_drawable_background() {
         //Given
-        serverDrivenComponent = Button("")
+        serverDrivenComponent = Button()
         every { context.obtainStyledAttributes(any<Int>(), any()) } returns typedArray
         every { view.background } returns colorDrawable
         every { colorDrawable.color } returns Color.WHITE
@@ -142,7 +144,7 @@ class StyleManagerTest : BaseTest() {
     @Test
     fun test_getBackgroundColor_when_Button_not_is_color_drawable() {
         //Given
-        serverDrivenComponent = Button("")
+        serverDrivenComponent = Button()
         every { context.obtainStyledAttributes(any<Int>(), any()) } returns typedArray
 
         //When
@@ -155,7 +157,7 @@ class StyleManagerTest : BaseTest() {
     @Test
     fun test_getBackgroundColor_when_view_has_a_color_drawable_background() {
         //Given
-        serverDrivenComponent = Container(mockk())
+        serverDrivenComponent = Text()
         every { colorDrawable.color } returns Color.BLACK
         every { view.background } returns colorDrawable
 
@@ -169,7 +171,7 @@ class StyleManagerTest : BaseTest() {
     @Test
     fun test_getBackgroundColor_when_view_has_not_a_color_drawable_background() {
         //Given
-        serverDrivenComponent = Container(mockk())
+        serverDrivenComponent = Text()
         every { view.background } returns drawable
 
         //When

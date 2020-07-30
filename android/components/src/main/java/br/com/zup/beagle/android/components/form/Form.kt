@@ -33,7 +33,7 @@ import br.com.zup.beagle.android.components.form.core.FormDataStoreHandler
 import br.com.zup.beagle.android.components.form.core.FormResult
 import br.com.zup.beagle.android.components.form.core.FormValidatorController
 import br.com.zup.beagle.android.components.form.core.ValidatorHandler
-import br.com.zup.beagle.android.logger.BeagleMessageLogs
+import br.com.zup.beagle.android.logger.ComponentsMessageLogs
 import br.com.zup.beagle.android.setup.BeagleEnvironment
 import br.com.zup.beagle.android.utils.handleEvent
 import br.com.zup.beagle.android.view.BeagleActivity
@@ -79,11 +79,11 @@ data class Form(
         }
 
         if (formInputs.size == 0) {
-            BeagleMessageLogs.logFormInputsNotFound(onSubmit.toString())
+            ComponentsMessageLogs.logFormInputsNotFound(onSubmit.toString())
         }
 
         if (formSubmitView == null) {
-            BeagleMessageLogs.logFormSubmitNotFound(onSubmit.toString())
+            ComponentsMessageLogs.logFormSubmitNotFound(onSubmit.toString())
         }
 
         return view
@@ -178,7 +178,7 @@ data class Form(
                 inputWidget.onErrorMessage(formInput.errorMessage ?: "")
             }
         } ?: run {
-            BeagleMessageLogs.logFormValidatorNotFound(validator)
+            ComponentsMessageLogs.logFormValidatorNotFound(validator)
         }
     }
 

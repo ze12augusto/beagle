@@ -23,6 +23,9 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.View
+import br.com.zup.beagle.android.abstract.Button
+import br.com.zup.beagle.android.abstract.TabView
+import br.com.zup.beagle.android.abstract.Text
 import br.com.zup.beagle.android.core.design.system.R
 import br.com.zup.beagle.android.designsystem.constant.DesignSystemConstant
 import br.com.zup.beagle.android.setup.DesignSystem
@@ -38,9 +41,10 @@ class StyleManager(
         if (view.background == null) {
             view.applyViewBackgroundAndCorner(Color.TRANSPARENT, component)
         } else when (component) {
-//            is Text -> applyStyleId(view, component)
-//            is Button -> applyStyleId(view, component)
-//            is TabView -> applyStyleId(view, component)
+            //TODO this need to be refactored in the next versions
+            is Text -> applyStyleId(view, component)
+            is Button -> applyStyleId(view, component)
+            is TabView -> applyStyleId(view, component)
             else -> {
                 val colorInt = fetchDrawableColor(view.background)
                 view.applyViewBackgroundAndCorner(colorInt, component)

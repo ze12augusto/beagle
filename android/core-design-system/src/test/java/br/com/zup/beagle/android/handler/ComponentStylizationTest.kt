@@ -17,38 +17,47 @@
 package br.com.zup.beagle.android.handler
 
 import android.view.View
-import br.com.zup.beagle.android.utils.BaseTest
-import br.com.zup.beagle.android.components.Text
 import br.com.zup.beagle.android.extensions.once
-import br.com.zup.beagle.android.utils.StyleManager
+import br.com.zup.beagle.android.manager.StyleManager
+import br.com.zup.beagle.android.utils.AccessibilitySetup
+import br.com.zup.beagle.android.utils.styleManagerFactory
 import br.com.zup.beagle.android.utils.toAndroidId
-import io.mockk.Runs
-import io.mockk.every
+import br.com.zup.beagle.core.IdentifierComponent
+import br.com.zup.beagle.core.ServerDrivenComponent
+import io.mockk.*
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.just
-import io.mockk.slot
-import io.mockk.verify
+import org.junit.After
+import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class ComponentStylizationTest : BaseTest() {
+class ComponentStylizationTest {
 
     @RelaxedMockK
     private lateinit var accessibilitySetup: AccessibilitySetup
+
     @RelaxedMockK
     private lateinit var view: View
+
     @RelaxedMockK
-    private lateinit var widget: Text
+    private lateinit var widget: IdentifierComponent
+
     @RelaxedMockK
     private lateinit var styleManager: StyleManager
 
     @InjectMockKs
-    private lateinit var componentStylization: ComponentStylization<Text>
+    private lateinit var componentStylization: ComponentStylization<ServerDrivenComponent>
 
-    override fun setUp() {
-        super.setUp()
+    @Before
+    fun setUp() {
+        MockKAnnotations.init(this)
         styleManagerFactory = styleManager
+    }
+
+    @After
+    fun tearDown() {
+        unmockkAll()
     }
 
     @Test
@@ -65,6 +74,6 @@ class ComponentStylizationTest : BaseTest() {
 
         // THEN
         assertEquals(widgetId.toAndroidId(), slotId.captured)
-        verify (exactly = once()) { accessibilitySetup.applyAccessibility(view, widget) }
+        verify(exactly = once()) { accessibilitySetup.applyAccessibility(view, widget) }
     }
 }

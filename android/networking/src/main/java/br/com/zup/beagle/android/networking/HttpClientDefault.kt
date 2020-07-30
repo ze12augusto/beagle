@@ -28,7 +28,6 @@ import java.net.HttpURLConnection
 typealias OnSuccess = (responseData: ResponseData) -> Unit
 typealias OnError = (responseData: ResponseData) -> Unit
 
-
 //TODO REMOVED INTERNAL
 class HttpClientDefault : HttpClient, CoroutineScope {
 

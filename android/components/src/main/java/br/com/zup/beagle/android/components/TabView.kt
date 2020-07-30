@@ -24,6 +24,7 @@ import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import br.com.zup.beagle.android.abstract.TabView
 import br.com.zup.beagle.android.context.ContextComponent
 import br.com.zup.beagle.android.context.ContextData
 import br.com.zup.beagle.android.setup.BeagleEnvironment
@@ -44,7 +45,7 @@ data class TabView(
     val children: List<TabItem>,
     val styleId: String? = null,
     override val context: ContextData? = null
-) : WidgetView(), ContextComponent {
+) : WidgetView(), ContextComponent, TabView {
 
     @Transient
     private val componentsViewFactory = ComponentsViewFactory()

@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package br.com.zup.beagle.android.logger
+package br.com.zup.beagle.android.factory.logger
 
+import br.com.zup.beagle.android.logger.BeagleLogger
+import br.com.zup.beagle.android.logger.BeagleLoggerDefault
 import br.com.zup.beagle.android.setup.BeagleEnvironment
 import io.mockk.MockKAnnotations
 import io.mockk.every

@@ -14,39 +14,9 @@
  * limitations under the License.
  */
 
-@file:Suppress("TooManyFunctions")
-
 package br.com.zup.beagle.android.logger
 
-//import br.com.zup.beagle.core.ServerDrivenComponent
-
-//TODO REMOVED INTERNAL
-object BeagleMessageLogs {
-
-
-    fun logDeserializationError(json: String, ex: Exception) {
-        val message = "Exception thrown while trying to deserialize the following json: $json"
-        BeagleLoggerProxy.error(message, ex)
-    }
-
-/*    fun logViewFactoryNotFound(component: ServerDrivenComponent) {
-        val message = """
-            Did you miss to create a WidgetViewFactory for Widget ${component::class.java.simpleName}
-        """.trimIndent()
-        BeagleLoggerProxy.warning(message)
-    }*/
-
-    fun logViewFactoryNotFound(component: Any) {
-        val message = """
-            Did you miss to create a WidgetViewFactory for Widget ${component::class.java.simpleName}
-        """.trimIndent()
-        BeagleLoggerProxy.warning(message)
-    }
-
-    fun logActionBarAlreadyPresentOnView(ex: Exception) {
-        BeagleLoggerProxy.error("SupportActionBar is already present", ex)
-    }
-
+object ComponentsMessageLogs  {
     fun logFormValidatorNotFound(validator: String) {
         BeagleLoggerProxy.warning("Validation with name '$validator' were not found!")
     }

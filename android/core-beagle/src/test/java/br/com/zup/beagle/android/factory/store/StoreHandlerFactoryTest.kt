@@ -77,3 +77,5 @@ class StoreHandlerFactoryTest {
         // Then
         assertEquals(appStoreHandler, storeHandler)
     }
+
+}

@@ -17,7 +17,7 @@
 package br.com.zup.beagle.android.networking
 
 import br.com.zup.beagle.android.extensions.once
-import br.com.zup.beagle.android.setup.BeagleEnvironment
+import br.com.zup.beagle.android.testutil.CoroutineTestRule
 import br.com.zup.beagle.android.testutil.RandomData
 import io.mockk.MockKAnnotations
 import io.mockk.Runs
@@ -25,7 +25,6 @@ import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.just
 import io.mockk.mockk
-import io.mockk.mockkObject
 import io.mockk.mockkStatic
 import io.mockk.unmockkAll
 import io.mockk.verify
@@ -47,6 +46,7 @@ import kotlin.test.fail
 
 private val BYTE_ARRAY_DATA = byteArrayOf()
 private const val STATUS_CODE = 200
+
 
 @ExperimentalCoroutinesApi
 class HttpClientDefaultTest {
@@ -71,7 +71,6 @@ class HttpClientDefaultTest {
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        mockkObject(BeagleEnvironment)
 
         urlRequestDispatchingDefault = HttpClientDefault()
 
@@ -96,6 +95,7 @@ class HttpClientDefaultTest {
         unmockkAll()
     }
 
+    //TODO THIS NEED DON'T PASSED
     @Test
     fun execute_should_be_executed_successfully() = runBlockingTest {
         // Given

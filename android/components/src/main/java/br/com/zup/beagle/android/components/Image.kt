@@ -24,7 +24,7 @@ import android.widget.ImageView
 import br.com.zup.beagle.android.context.Bind
 import br.com.zup.beagle.android.context.valueOf
 import br.com.zup.beagle.android.data.formatUrl
-import br.com.zup.beagle.android.logger.BeagleMessageLogs
+import br.com.zup.beagle.android.logger.ComponentsMessageLogs
 import br.com.zup.beagle.android.mapper.ViewMapper
 import br.com.zup.beagle.android.setup.BeagleEnvironment
 import br.com.zup.beagle.android.utils.observeBindChanges
@@ -68,7 +68,7 @@ data class Image(
                             try {
                                 setImageResource(it)
                             } catch (ex: Exception) {
-                                BeagleMessageLogs.errorWhileTryingToSetInvalidImage(pathType.mobileId, ex)
+                                ComponentsMessageLogs.errorWhileTryingToSetInvalidImage(pathType.mobileId, ex)
                             }
                         }
                     }

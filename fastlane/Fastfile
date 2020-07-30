@@ -107,14 +107,15 @@ platform :backend do
 
   desc "Pull Request verification"
   lane :pull_request_verification do
+    sh "bash ./sonar-properties.sh"
     gradle(project_dir: "backend", task: "detekt")
     gradle(project_dir: "backend", tasks:
         [
           "assemble",
           "jacocoTestReport",
+          "sonarqube"
         ]
     )
-    run_codecov(platform: 'backend')
   end
 
   desc "Sync Spring BFF sample to Micronaut BFF sample"

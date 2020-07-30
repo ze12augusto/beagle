@@ -41,7 +41,7 @@ jobs:
                 env:
                     sonar-cache-key: sonar-cache
                     sonar-path: ~/.sonar
-                 with:
+                with:
                     path: ${{ env.sonar-path }}
                     key: ${{ runner.os }}-build-${{ env.sonar-cache-key }}-${{ hashFiles('backend/buildSrc/**') }}                                       
             -   name: Run pr check

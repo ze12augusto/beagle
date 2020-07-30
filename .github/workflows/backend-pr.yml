@@ -36,9 +36,16 @@ jobs:
                 with:
                     path: ${{ env.gradle-path }}
                     key: ${{ runner.os }}-build-${{ env.gradle-cache-key }}-${{ hashFiles('backend/buildSrc/**') }}
+            -   name: Cache sonar dependences
+                uses: actions/cache@v2
+                env:
+                    sonar-cache-key: sonar-cache
+                    sonar-path: ~/.sonar
+                 with:
+                    path: ${{ env.sonar-path }}
+                    key: ${{ runner.os }}-build-${{ env.sonar-cache-key }}-${{ hashFiles('backend/buildSrc/**') }}                                       
             -   name: Run pr check
                 env:
-                    GITHUB_USER: ${{ secrets.NAME_REPO_TOKEN }}
                     GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
-                    CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+                    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
                 run: bundle exec fastlane backend pull_request_verification

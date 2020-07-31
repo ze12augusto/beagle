@@ -16,6 +16,8 @@ jobs:
         runs-on: macos-latest
         steps:
             -   uses: actions/checkout@v2
+                with:
+                    fetch-depth: 0            
 
             -   name: Cache fastlane dependences
                 uses: actions/cache@v2

@@ -6,9 +6,9 @@ platform :android do
 
   desc "Pull Request verification"
   lane :pull_request_verification do
-    gradle(project_dir: "android", task: "detekt lintDebug jacocoTestReport")
+    sh "bash ./sonar-properties.sh"
+    gradle(project_dir: "android", task: "detekt lintDebug jacocoTestReport sonarqube")
     gradle(project_dir: "android", task: "sample:assembleDebug sample:assembleDebugAndroidTest")
-    run_codecov(platform: 'android')
   end
 
 end

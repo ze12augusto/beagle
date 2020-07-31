@@ -73,6 +73,12 @@ project(":schema") {
     }
 }
 
+project(":preview") {
+    sonarqube {
+        skipProject = true
+    }
+}
+
 project(":common") {
     sonarqube {
         skipProject = true

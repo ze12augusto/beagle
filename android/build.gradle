@@ -67,6 +67,12 @@ project(":sample") {
     }
 }
 
+project(":schema") {
+    sonarqube {
+        skipProject = true
+    }
+}
+
 project(":common") {
     sonarqube {
         skipProject = true

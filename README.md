@@ -18,9 +18,6 @@
   <a href="https://sonarcloud.io/dashboard?id=ze12augusto_beagle">
     <img src="https://sonarcloud.io/api/project_badges/measure?project=ze12augusto_beagle&metric=coverage" />
   </a>
-  <a href="https://github.com/ZupIT/beagle/actions?query=workflow%3A%22Beagle+Release%22">
-    <img src="https://github.com/ZupIT/beagle/workflows/Beagle%20Release/badge.svg" alt="Current GIthub Actionbuild status." />
-  </a>
   <a href="https://github.com/ZupIT/beagle/blob/master/CONTRIBUTING.md">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
   </a>
